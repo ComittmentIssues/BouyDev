@@ -1,0 +1,1 @@
+{"cpu":{"name":"Arduino/Genuino Uno","com_name":"COM6","fqbn":"arduino:avr:uno","flavour":"default"},"included_libs":[{"name":"OneWire","version":"2.3.4"}],"secrets":[]}
