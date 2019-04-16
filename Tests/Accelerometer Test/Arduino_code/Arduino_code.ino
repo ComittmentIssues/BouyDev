@@ -1,3 +1,4 @@
+
 #include <Adafruit_FXOS8700.h>
 #include <Adafruit_FXAS21002C.h>
 #include<Wire.h>
@@ -47,7 +48,7 @@ void loop()
 {
   //sample for 20mins continuous
   int count = 0;
-  sampleTime = 20*60*1000UL; //convert to ms
+  sampleTime = 1*60*1000UL; //convert to ms
   //Sample @10Hz (0.1 s)
   
   startTime = millis();  
