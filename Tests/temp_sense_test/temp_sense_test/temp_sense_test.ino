@@ -1,6 +1,7 @@
+
+
 // DallasTemperature - Version: Latest 
 #include <DallasTemperature.h>
-
 // OneWire - Version: 2.3.4
 #include <OneWire.h>
 
@@ -8,7 +9,9 @@
 int numsense;
 OneWire oneWire(OWBUS);
 DallasTemperature sensors(&oneWire);
-
+ unsigned long Tstart;
+ unsigned long Tstop;
+ unsigned long Tsample;
 void setup()
 {
   Serial.begin(115200);
@@ -33,12 +36,28 @@ double getTemp()
 }
 void loop()
 {
-  //sample at 10Hz
-  double tempC = getTemp();
-  char buff[50];
-  char strtemp[6];
-  dtostrf(tempC, 4, 2, strtemp);
-  sprintf(buff,"The Temperature is %s °C\n",strtemp);
-  Serial.print(buff);
-  delay(100);
+  //sample at 1/750 ms
+  //sample continuous for Tsample Seconds
+  Tsample = 20*60000UL;
+  Tstart = millis();
+  unsigned long Telapsed = millis() - Tstart;
+  while(Telapsed < Tsample)
+  {
+    double tempC = getTemp();
+    char buff[50];
+    char strtemp[6];
+    dtostrf(tempC, 4, 2, strtemp);
+    sprintf(buff,"The Temperature is %s °C\n",strtemp);
+    Serial.print(buff);    
+    Telapsed = millis() - Tstart;
+  }
+  Serial.println("Test Complete");
+  Serial.print("Duration:");Serial.print(Telapsed);Serial.print("ms");
+  waitloop();
+}
+
+void waitloop()
+{
+  while(1);
+  
 }
