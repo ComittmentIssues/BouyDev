@@ -1,0 +1,67 @@
+/*
+ * GPS_Parser.h
+ *
+ *  Created on: Jun 8, 2019
+ *      Author: Jamie
+ */
+
+#ifndef GPS_PARSER_H_
+#define GPS_PARSER_H_
+
+typedef enum{
+	GPDTM = "GPDTM",
+	GPGPS = 1,
+	GPGGA = 2,
+	GPGLL = 3,
+	GPGLQ = 4,
+	GPGNQ = 5,
+	GPGNS = 6,
+	GPGPQ = 7,
+	GPGRS = 8,
+	GPGSA = 9,
+	GPGST = 10,
+	GPGSV = 11,
+	GPTXT = 12,
+	GPVTG = 13,
+	GPZDA = 14,
+}NMEA_t;
+
+typedef uint8_t* NMEA_ptr;
+typedef struct {
+	uint8_t integer;
+	uint8_t decimal;
+}GPSData_t;
+
+typedef struct {
+	uint16_t deg;
+	uint8_t  min;
+	GPSData_t secs;
+}Coordinate_t;
+
+typedef struct{
+	uint8_t day;
+	uint8_t month;
+	uint16_t year;
+}Date_t;
+
+typedef struct{
+	uint8_t seconds;
+	uint8_t minutes;
+	uint16_t hours;
+}Time_t;
+
+typedef struct{
+	Coordinate_t latitude;
+	Coordinate_t longitude;
+	Date_t date;
+	Time_t time;
+	uint8_t num_sats;
+	uint8_t PDOP;
+
+}GPS_InitStruct;
+
+//Function Decleration
+void GPS_getNMEA_message(char * string,NMEA_ptr msg );
+
+
+#endif /* GPS_PARSER_H_ */

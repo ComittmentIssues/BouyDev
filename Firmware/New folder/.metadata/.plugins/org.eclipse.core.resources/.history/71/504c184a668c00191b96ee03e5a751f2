@@ -1,0 +1,15 @@
+/*
+ * GPS_Parser.c
+ *
+ *  Created on: Jun 8, 2019
+ *      Author: Jamie
+ */
+
+#include"GPS_Parser.h"
+#include <string.h>
+
+GPS_getNMEA_message(char * data,char* msg )
+{
+	uint8_t length = sizeof(data)/sizeof(*data);
+
+}

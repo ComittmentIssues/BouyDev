@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;Test_GPS_F4/src/GPS_Parser&apos; to &apos;GPS_Parser.h&apos;" description="Rename resource &apos;GPS_Parser&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/GPS_Parser" name="GPS_Parser.h" stamp="1560005412650" updateReferences="true"/>
+</session>

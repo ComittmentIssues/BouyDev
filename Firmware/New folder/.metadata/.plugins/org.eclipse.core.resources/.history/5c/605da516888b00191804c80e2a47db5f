@@ -1,0 +1,38 @@
+/*
+ * SD_Card.h
+ *
+ *  Created on: Jun 9, 2019
+ *      Author: Jamie
+ */
+
+#include "stm32f4xx.h"
+#include "tm_stm32f4_gpio.h"
+#ifndef SD_CARD_H_
+#define SD_CARD_H_
+
+#define SD_CARD_CS GPIO_Pin_5;
+#define SD_SPI SPI1
+#define SD_GPIO_PORT GPIOB
+//SET IDLE
+#define CMD0        0
+#define CMD0_ARG    0x00000000
+#define CMD0_CRC    0x94
+//SEND IF
+#define CMD8        8
+#define CMD8_ARG    0x0000001AA
+#define CMD8_CRC    0x86
+// REQUEST OCR
+#define CMD58       58
+#define CMD58_ARG   0x00000000
+#define CMD58_CRC   0x00
+
+void init_SD_CS(void);
+uint8_t init_SDCARD(void);
+void SD_SET_CS(FunctionalState en);
+//init functions
+void SD_SET_SPI(void);
+void SD_COMMAND(uint8_t cmd,uint32_t arg,uint8_t crc);
+uint8_t read_R1(void);
+void read_R7(uint8_t* R7);
+
+#endif /* SD_CARD_H_ */
