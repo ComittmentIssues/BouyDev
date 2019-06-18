@@ -1,0 +1,188 @@
+/*
+ * Iridium.c
+ *
+ *  Created on: Jun 11, 2019
+ *      Author: Jamie
+ */
+
+#include "Iridium.h"
+#include "stdio.h"
+#include "string.h"
+#include "stdlib.h"
+#include "Delay.h"
+void init_Iridium_USART(void)
+{
+	GPIO_InitTypeDef GPIO_InitStruct;
+	USART_InitTypeDef USART3_InitStruct;
+	NVIC_InitTypeDef NVIC_InitStruct;
+	/* ENABLE RCC */
+	Iridium_GPIO_PeriphClockCommand(Iridium_GPIO_RCCPeriph,ENABLE);
+	Iridium_USART_PeriphClockCommand(Iridium_USART_RCCPeriph,ENABLE);
+
+	/* Configure GPIO to alternate function Open Drain Pull UP */
+	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_InitStruct.GPIO_Pin = (Iridium_USART_RX | Iridium_USART_TX);
+	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_100MHz;
+	GPIO_Init(Iridium_GPIO,&GPIO_InitStruct);
+	//AF Mapping
+	GPIO_PinAFConfig(Iridium_GPIO,Iridium_USART_RXsrc,Iridium_GPIO_AF);
+	GPIO_PinAFConfig(Iridium_GPIO,Iridium_USART_TXsrc,Iridium_GPIO_AF);
+
+	/* Configure USART	*/
+	USART3_InitStruct.USART_Mode = USART_Mode_Tx | USART_Mode_Rx;
+	USART3_InitStruct.USART_WordLength = USART_WordLength_8b;
+	USART3_InitStruct.USART_StopBits = USART_StopBits_1;
+	USART3_InitStruct.USART_Parity = USART_Parity_No;
+	USART3_InitStruct.USART_BaudRate = Iridium_Baudrate;
+	USART3_InitStruct.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+	USART_Init(Iridium_USART, &USART3_InitStruct);
+	/* Configure NVIC for interrupt */
+	NVIC_InitStruct.NVIC_IRQChannel = Iridium_USART_IRQn;
+	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
+	NVIC_Init(&NVIC_InitStruct);
+	USART_ITConfig(Iridium_USART,USART_IT_RXNE,ENABLE);
+
+	USART_Cmd(Iridium_USART,ENABLE);
+}
+
+/*configure Control pins */
+void init_Control_Pins(void)
+{
+	//using port B
+	Iridium_GPIO_PeriphClockCommand(RCC_AHB1Periph_GPIOB,ENABLE);
+	GPIO_InitTypeDef GPIO_InitStruct;
+	/*Wake up Pin*/
+	GPIO_InitStruct.GPIO_Pin = Iridium_Wakeup_Pin;
+	GPIO_InitStruct.GPIO_Mode =GPIO_Mode_OUT;
+	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_100MHz;
+	GPIO_Init(Iridium_GPIO,&GPIO_InitStruct);
+	GPIO_WriteBit(Iridium_GPIO,Iridium_Wakeup_Pin,RESET);
+	/* Network availiable */
+	/*
+	 * 	3.3V Digital
+	 *	Available = high
+	 *	Not available= low
+	 */
+	GPIO_InitTypeDef GPIO_NETAV;
+	GPIO_NETAV.GPIO_Pin = Iridium_NetAv_Pin;
+	GPIO_NETAV.GPIO_Mode =GPIO_Mode_IN;
+	GPIO_NETAV.GPIO_PuPd = GPIO_PuPd_DOWN;
+	GPIO_NETAV.GPIO_Speed = GPIO_Speed_100MHz;
+
+	GPIO_Init(Iridium_GPIO,&GPIO_NETAV);
+
+	//place device into sleep mode
+}
+/* Function to Reset the data buffer and pointer*/
+
+uint8_t init_Iridium_Module(void)
+{
+	init_Iridium_USART();
+	init_Control_Pins();
+	init_Rx_Buff();
+	//wait for module to fully power out
+	uint8_t data[3] = "AT\r";
+	transmit_Data(data,3);
+	//timeout after 60 seconds of no activity
+	Delay_begin_Timeout(60000);
+	while(IR_Rx_done != 1)
+	{
+		if(timeout_flag)
+		{
+			timeout_flag = 0;
+
+			//TODO: abort sequence
+			return -1;
+		}
+	}
+	Delay_Disable();
+	char* msg = get_AT_response(3);
+	return 0;
+}
+
+void init_Rx_Buff(void)
+{
+	Iridium_Buff_Index = 0;
+	for (int i = 0; i < Iridium_RX_Buffsize; ++i)
+	{
+		Iridium_Rx_Buff[i] = 0;
+	}
+}
+
+void transmit_Data(uint8_t* tx_buff,size_t len)
+{
+	//TODO: timeout and error checking
+	/* get size of pointer*/
+	for (int i = 0; i < len; ++i)
+	{
+		USART_SendData(Iridium_USART,*(tx_buff++));
+		while(!USART_GetFlagStatus(Iridium_USART,USART_FLAG_TXE));
+	}
+}
+
+char* get_data_from_buff(void)
+{
+	IR_Rx_done = 0;
+	char* temp = malloc(Iridium_Buff_Index+1);
+	memcpy(temp,Iridium_Rx_Buff,Iridium_Buff_Index+1);
+	init_Rx_Buff();
+
+	return temp;
+}
+
+/*
+ * Retrieve the Iridium response only from Rx buffer
+ */
+char* get_AT_response(size_t msg_Size)
+{
+	//clear flag
+	IR_Rx_done = 0;
+	size_t size = (Iridium_Buff_Index - msg_Size);
+	char* temp = malloc(size);
+	for (uint8_t i = 0; i < size; ++i)
+	{
+
+		temp[i] = Iridium_Rx_Buff[msg_Size+i];
+
+	}
+	return temp;
+}
+void Iridium_USART_IRQHandler(void)
+{
+	// set RX_done flag to 0
+	/* get info*/
+
+	uint16_t byte = Iridium_USART->DR;
+	/* Add to buffer and increment pointer*/
+	if(Iridium_Buff_Index < Iridium_RX_Buffsize)
+	{
+			Iridium_Rx_Buff[Iridium_Buff_Index] = (uint8_t)byte;
+			if((Iridium_Rx_Buff[Iridium_Buff_Index] == 0xA)&&(Iridium_Rx_Buff[Iridium_Buff_Index] == 0xA))
+			{
+				//verbose message already started
+				if(IR_RxV_st == 1)
+				{
+					IR_Rx_done = 1;
+					IR_RxV_st = 0;
+					USART_ITConfig(Iridium_USART,USART_IT_RXNE,DISABLE);
+				}else
+				{
+					IR_RxV_st = 1;
+				}
+			}
+			Iridium_Buff_Index++;
+	}
+
+
+	USART_ClearITPendingBit(Iridium_USART,USART_IT_RXNE);
+}
+
+
+
+
+

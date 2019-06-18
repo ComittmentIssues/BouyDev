@@ -34,3 +34,7 @@
 1560321964500	Delete resource 'Test_Iridium_F4/src/attributes.h'
 1560323480752	Delete resource 'Test_Iridium_F4/Utilities/STM32F4-Discovery/stm32f4_discovery_audio_codec.c'
 1560323484080	Delete resource 'Test_Iridium_F4/Utilities/STM32F4-Discovery/stm32f4_discovery_audio_codec.h'
+1560519940813	Delete resource 'Test_Iridium_F4/src/dwt_delay.h'
+1560519947623	Delete resource 'Test_Iridium_F4/src/dwt_delay.c'
+1560594471143	Delete resource 'Test_Iridium_F4/src/delay.h'
+1560594475803	Delete resource 'Test_Iridium_F4/src/delay.c'

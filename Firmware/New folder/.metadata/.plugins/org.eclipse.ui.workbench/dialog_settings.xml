@@ -16,12 +16,14 @@
 		<item value="org.eclipse.ui.wizards.import.FileSystem" key="ImportExportPage.STORE_SELECTED_IMPORT_WIZARD_ID"/>
 		<list key="ImportExportPage.STORE_EXPANDED_IMPORT_CATEGORIES">
 			<item value="org.eclipse.ui.Basic"/>
+			<item value="org.eclipse.cdt.ui.importWizardCategory"/>
 		</list>
 	</section>
 	<section name="FileSystemImportWizard">
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID"/>
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
 		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Users\user\Documents\University\dwt_delay-master"/>
 			<item value="C:\Users\user\Documents\University\Masters\Code\STM32F4_Resources\SD Card Resources"/>
 			<item value="C:\Users\user\Documents\University\Masters\Code\STM32F4_Resources\defines"/>
 			<item value="C:\Users\user\Documents\University\Masters\Code\STM32F4_Resources\tm_stm32f4_usart"/>

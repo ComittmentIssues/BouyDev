@@ -32,11 +32,15 @@ SOFTWARE.
 #include "stm32f4_discovery.h"
 #include "Iridium.h"
 #include "string.h"
+#include "Delay.h"
 /* Private macro */
 #define length(x) sizeof(x)/sizeof(*x)
 /* Private variables */
 /* Private function prototypes */
 /* Private functions */
+void test1(void);
+void test2(void);
+void test3(void);
 
 /**
 **===========================================================================
@@ -47,7 +51,7 @@ SOFTWARE.
 */
 int main(void)
 {
-	int i = 0;
+
 
   /**
   *  IMPORTANT NOTE!
@@ -61,39 +65,265 @@ int main(void)
 
   /* TODO - Add your application code here */
 
-  init_Iridium_USART();
-  //init_Control_Pins();
-  //GPIO_WriteBit(Iridium_GPIO,Iridium_Wakeup_Pin,SET);
-  init_Rx_Buff();
-  /* turn off flow control*/
-  uint8_t tx[] = "AT&K0\r";
-  transmit_Data(tx,length(tx)-1);
-  while(!IR_Rx_done);
-  char* resp = get_data_from_buff();
+	init_Control_Pins();
+	STM_EVAL_LEDInit(LED3);
+	STM_EVAL_LEDInit(LED4);
+	STM_EVAL_LEDInit(LED5);
+	STM_EVAL_LEDInit(LED6);
+	init_Delay();
+	test1();
 
-  //send message //
-  uint8_t msg[] = "AT+SBDWT=Hello World!\r";
-  USART_ITConfig(Iridium_USART,USART_IT_RXNE,ENABLE);
-  transmit_Data(msg,length(msg)-1);
-  while(!IR_Rx_done);
-  resp = get_data_from_buff();
-
-
-  uint8_t tx1[] = "AT+SBDIX\r";
-   USART_ITConfig(Iridium_USART,USART_IT_RXNE,ENABLE);
-   transmit_Data(tx1,length(tx1)-1);
-   while(!IR_Rx_done);
-   resp = get_data_from_buff();
-  /* */
-
-
- /* Test the transmission string*/
 
   while (1)
   {
 
+
   }
   return 0;
 }
+/*
+ * Test: First on to acknowledgement
+ */
+void test1(void)
+{
+	/*
+	 * TEST CASE 1: Wake up to acknowledgement
+	 *
+	 * Procedure:
+	 	 * Power on the device. Wait 60 seconds
+	 	 * initialise module and get return code
+	 	 * if time out occurs - repeat, wait
+	 	 *
+	 */
+	uint32_t delay = 10000;
+	Delay_begin_Timeout(delay);
+	Delay_Enable();
+	while(timeout_flag == 0);
+	timeout_flag= 0;
+	Delay_Disable();
+	int8_t flag;
+	int i = 0;
+	for (; i < 256; ++i)
+	{
+		flag = init_Iridium_Module();
+		if(flag == 0)
+		{
+			STM_EVAL_LEDOn(LED6);
+			break;
+		}
+		if(flag == -2)
+		{
+			STM_EVAL_LEDOn(LED5);
+			deinit_Iridium_Module();
+		}
+		//10 seconds delay
+		delay = 10000;
+		Delay_begin_Timeout(delay);
+		Delay_Enable();
+		while(timeout_flag == 0);
+		timeout_flag = 0;
+	}
+	//send message
+	//repeat a few times
+	char* msg = "Ping\r";
+	delay = 10000;
+	uint8_t sent;
+	for (int i = 0; i < 5; ++i)
+	{
+		flag = send_ASCII_Message(msg);
+		if(flag == 0)
+		{
+			STM_EVAL_LEDOn(LED4);
+			sent = 1;
+			break;
+		}
+	}
+	if(sent)
+	{
+		//create SBD session with adaptive retry
+		delay = 5000;
+		for (int i = 0; i < 3; ++i)
+		{
+			flag = create_SBD_Session();
+			if((flag == 0))
+			{
+				STM_EVAL_LEDOn(LED3);
+				break;
+
+			}
+			if((flag ==-2))
+			{
+				//set flag to transmit when network becomes available
+				Wait_for_network = 1;
+			}
+			if(i == 1)
+			{
+				delay = 30000;
+			}else if(i ==2)
+			{
+				delay = 5*60000;
+			}
+			Delay_begin_Timeout(delay);
+			Delay_Enable();
+			while(timeout_flag == 0);
+			timeout_flag = 0;
+		}
+	}
+
+}
 
 
+void test2(void)
+{
+/*
+ * send 3 messages
+ */
+		int8_t flag;
+		int i = 0;
+		for (; i < 256; ++i)
+		{
+			flag = init_Iridium_Module();
+			if(flag == 0)
+			{
+				STM_EVAL_LEDOn(LED6);
+				break;
+			}
+			if(flag == -2)
+			{
+				STM_EVAL_LEDOn(LED5);
+				deinit_Iridium_Module();
+			}
+			//10 seconds delay
+			delay = 10000;
+			Delay_begin_Timeout(delay);
+			Delay_Enable();
+			while(timeout_flag == 0);
+			timeout_flag = 0;
+		}
+		//send message
+		//repeat a few times
+		char* msg = "Lat= 25,36,34.6,N Long = 16,32,54.6,E 13/12/1995 13:52:16 6 6\r";
+		delay = 10000;
+		uint8_t sent;
+		for (int i = 0; i < 5; ++i)
+		{
+			flag = send_ASCII_Message(msg);
+			if(flag == 0)
+			{
+				STM_EVAL_LEDOn(LED4);
+				sent = 1;
+				break;
+			}
+		}
+		if(sent)
+		{
+			//create SBD session with adaptive retry
+			delay = 5000;
+			for (int i = 0; i < 3; ++i)
+			{
+				flag = create_SBD_Session();
+				if((flag == 0)||(flag ==-2))
+				{
+					break;
+					STM_EVAL_LEDOn(LED3);
+				}
+				if(i == 1)
+				{
+					delay = 30000;
+				}else if(i ==2)
+				{
+					delay = 5*60000;
+				}
+				Delay_begin_Timeout(delay);
+				Delay_Enable();
+				while(timeout_flag == 0);
+				timeout_flag = 0;
+			}
+		}
+		msg = "Lat= 13,32,54.6,E Long = 23,14,54.2,E 3/2/2005 23:13:16 6 6\r";
+		delay = 15000;
+		Delay_begin_Timeout(delay);
+		Delay_Enable();
+		while(timeout_flag == 0);
+		timeout_flag = 0;
+		sent = 0;
+				for (int i = 0; i < 5; ++i)
+				{
+					flag = send_ASCII_Message(msg);
+					if(flag == 0)
+					{
+						STM_EVAL_LEDOn(LED4);
+						sent = 1;
+						break;
+					}
+				}
+				if(sent)
+				{
+					//create SBD session with adaptive retry
+					delay = 5000;
+					for (int i = 0; i < 3; ++i)
+					{
+						flag = create_SBD_Session();
+						if((flag == 0)||(flag ==-2))
+						{
+							break;
+							STM_EVAL_LEDOn(LED3);
+						}
+						if(i == 1)
+						{
+							delay = 30000;
+						}else if(i ==2)
+						{
+							delay = 5*60000;
+						}
+						Delay_begin_Timeout(delay);
+						Delay_Enable();
+						while(timeout_flag == 0);
+						timeout_flag = 0;
+					}
+				}
+				msg = "Lat= 13,32,54.6,E Long = 23,14,54.2,E 3/2/2005 23:13:16 6 6\r";
+				Delay_begin_Timeout(delay);
+				Delay_Enable();
+				while(timeout_flag == 0);
+				timeout_flag = 0;
+				sent = 0;
+								for (int i = 0; i < 5; ++i)
+								{
+									flag = send_ASCII_Message(msg);
+									if(flag == 0)
+									{
+										STM_EVAL_LEDOn(LED4);
+										sent = 1;
+										break;
+									}
+								}
+								if(sent)
+								{
+									//create SBD session with adaptive retry
+									delay = 5000;
+									for (int i = 0; i < 3; ++i)
+									{
+										flag = create_SBD_Session();
+										if((flag == 0)||(flag ==-2))
+										{
+											break;
+											STM_EVAL_LEDOn(LED3);
+										}
+										if(i == 1)
+										{
+											delay = 30000;
+										}else if(i ==2)
+										{
+											delay = 5*60000;
+										}
+										Delay_begin_Timeout(delay);
+										Delay_Enable();
+										while(timeout_flag == 0);
+										timeout_flag = 0;
+									}
+								}
+}
+/*
+ *  send 3 messages of various sizes
+ */

@@ -1,0 +1,21 @@
+/*
+ * Delay.h
+ *
+ *  Created on: Jun 16, 2019
+ *      Author: Jamie
+ */
+
+#include "stm32f4xx.h"
+#include "stm32f4xx_tim.h"
+#define Delay_Timer TIM2
+#define RCC_DelayPeriphClockCmd RCC_APB1PeriphClockCmd
+#define RCC_Delay Periph RCC_APB1Periph_TIM2
+
+
+uint32_t ticks;
+#ifndef DELAY_H_
+#define DELAY_H_
+
+
+
+#endif /* DELAY_H_ */

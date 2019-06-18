@@ -1,0 +1,33 @@
+/*
+ * Delay.c
+ *
+ *  Created on: Jun 16, 2019
+ *      Author: Jamie
+ */
+
+#include "Delay.h"
+
+void init_Delay(void)
+{
+	RCC_DelayPeriphClockCmd(RCC_Delay_Periph,ENABLE);
+
+	TIM_TimeBaseInitTypeDef timerInitStructure; //create a 1ms delaay
+
+	timerInitStructure.TIM_Prescaler = 3999;
+	timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
+	timerInitStructure.TIM_Period = 9;
+	timerInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+	timerInitStructure.TIM_RepetitionCounter = 0;
+	TIM_TimeBaseInit(TIM2, &timerInitStructure);
+	TIM_Cmd(TIM2, ENABLE);
+
+	TIM_ITConfig(TIM2, TIM_IT_Update, ENABLE);
+	NVIC_InitTypeDef nvicStructure;
+    nvicStructure.NVIC_IRQChannel = TIM2_IRQn;
+	nvicStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	nvicStructure.NVIC_IRQChannelSubPriority = 1;
+	nvicStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&nvicStructure);
+	//enable interrupts
+}
+

@@ -1,0 +1,14 @@
+/*
+ * Delay.c
+ *
+ *  Created on: Jun 16, 2019
+ *      Author: Jamie
+ */
+
+#include "Delay.h"
+
+void init_Delay(void)
+{
+	RCC_DelayPeriphClockCmd(RCC_Delay Periph, ENABLE);
+}
+
