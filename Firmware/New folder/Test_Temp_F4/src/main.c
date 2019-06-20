@@ -28,12 +28,27 @@ SOFTWARE.
 */
 
 /* Includes */
+#include <defines.h>
+#include <stdlib.h>
+#include <tm_stm32f4_delay.h>
 #include "stm32f4xx.h"
 #include "stm32f4_discovery.h"
-
+#include <string.h>
+#include <stdio.h>
+#include "../Temp_sensor/tm_stm32f4_ds18b20.h"
+#include "../Temp_sensor/tm_stm32f4_onewire.h"
+#include "memory.h"
+#include "../src/fatfs/ff.h"
 /* Private macro */
 /* Private variables */
+char buff[40];
+float temp;
+uint8_t device[8];
+TM_OneWire_t oneWire;
+FATFS FatFs;
 /* Private function prototypes */
+void init_temp_sensor(void);
+void ftoa(float f);
 /* Private functions */
 
 /**
@@ -45,54 +60,99 @@ SOFTWARE.
 */
 int main(void)
 {
-  int i = 0;
+	  /* Initialize LEDs */
+	  STM_EVAL_LEDInit(LED3); STM_EVAL_LEDInit(LED4); STM_EVAL_LEDInit(LED5); STM_EVAL_LEDInit(LED6);
+	  init_temp_sensor();
 
-  /**
-  *  IMPORTANT NOTE!
-  *  The symbol VECT_TAB_SRAM needs to be defined when building the project
-  *  if code has been located to RAM and interrupts are used. 
-  *  Otherwise the interrupt table located in flash will be used.
-  *  See also the <system_*.c> file and how the SystemInit() function updates 
-  *  SCB->VTOR register.  
-  *  E.g.  SCB->VTOR = 0x20000000;  
-  */
 
-  /* TODO - Add your application code here */
 
-  /* Initialize LEDs */
-  STM_EVAL_LEDInit(LED3);
-  STM_EVAL_LEDInit(LED4);
-  STM_EVAL_LEDInit(LED5);
-  STM_EVAL_LEDInit(LED6);
+	  /* SD Card Check */
+	  /* FATFS */
+	  FATFS file_system;
+	  FIL file_pointer;
+	  UINT bytes_written;
+	  FRESULT f_err_code = 0;
+	  file_flag.log_enabled = 1;
+	  file_flag.file_opened = 0;
+	  file_flag.filename_ok = PASS;
 
-  /* Turn on LEDs */
-  STM_EVAL_LEDOn(LED3);
-  STM_EVAL_LEDOn(LED4);
-  STM_EVAL_LEDOn(LED5);
-  STM_EVAL_LEDOn(LED6);
+	  char status = 0;
+	  char filename[13] = "test_sd.bin\0";
+	  for (int i = 0; i < 50 ;i++)mydata[i] = 0xFA;
+	  while(status != SD_CARD_OK)
+	  {
+		  status = check_memory(&file_system,&file_pointer,f_err_code);
+
+	  }
+	 if (status == SD_CARD_OK){STM_EVAL_LEDOn(LED4);}
+
+	 /* SD card write procedure*/
+	 /*
+	  * Sample temp sensor, store in SD card, repeat 5 times
+	  */
+	for (int i = 0; i < 5; ++i) {
+		TM_DS18B20_Start(&oneWire,device);
+		while(!TM_DS18B20_AllDone(&oneWire));
+		TM_DS18B20_Read(&oneWire,device,&temp);
+		ftoa(temp); //store in buffer
+
+		status = write_to_memory(&file_system,&file_pointer,f_err_code,filename,&bytes_written,buff,strlen(buff),&file_flag);
+		while (status != (SD_CARD_OK| LOGGING_ON))
+		{
+			  status = write_to_memory(&file_system,&file_pointer,f_err_code,filename,&bytes_written,buff,strlen(buff),&file_flag);
+
+		}
+		STM_EVAL_LEDToggle(LED3);
+		Delayms(100);
+
+	}
+	file_flag.log_enabled = 0;
+	if(file_flag.log_enabled == 0)
+	{
+		status = write_to_memory(&file_system,&file_pointer,f_err_code,filename,&bytes_written,mydata,sizeof(mydata),&file_flag);
+		f_mount(0,0);
+		STM_EVAL_LEDOn(LED5);
+	}
+
+ /* TODO - Add your application code here */
+
 
   /* Infinite loop */
-  while (1)
-  {
-	i++;
-  }
+
+
+
+ while(1)
+ {
+
+ }
 }
 
+void init_temp_sensor(void)
+{
 
+	  SystemInit();
+	  TM_DELAY_Init();
+	  TM_OneWire_Init(&oneWire, GPIOD, GPIO_Pin_6);
+	  /* Check for devices on oneWire bus*/
+	  uint8_t devices = TM_OneWire_First(&oneWire);
+	  if(devices)
+	  {
+		  STM_EVAL_LEDOn(LED3);
+		  TM_OneWire_GetFullROM(&oneWire, device);
+	  }
+}
+
+void ftoa(float f)
+{
+	//get int;
+	int num = (int)f;
+	f -= (float)num;
+	int dec = f*1000;
+	sprintf(buff,"%d.%d\n\r",num,dec);
+
+}
 /*
  * Callback used by stm32f4_discovery_audio_codec.c.
  * Refer to stm32f4_discovery_audio_codec.h for more info.
  */
-void EVAL_AUDIO_TransferComplete_CallBack(uint32_t pBuffer, uint32_t Size){
-  /* TODO, implement your code here */
-  return;
-}
 
-/*
- * Callback used by stm324xg_eval_audio_codec.c.
- * Refer to stm324xg_eval_audio_codec.h for more info.
- */
-uint16_t EVAL_AUDIO_GetSampleCallBack(void){
-  /* TODO, implement your code here */
-  return -1;
-}
