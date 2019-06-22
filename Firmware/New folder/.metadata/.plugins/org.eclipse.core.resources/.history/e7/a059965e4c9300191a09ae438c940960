@@ -1,0 +1,271 @@
+/*
+ * GPS.c
+ *
+ *  Created on: Jun 20, 2019
+ *      Author: Jamie
+ */
+
+
+#include "GPS.h"
+#include "string.h"
+
+void USART_transmit_string(unsigned char* data)
+{
+	uint16_t length = sizeof(data)/sizeof(data[0]);
+
+	for (int i = 0; i < length; i++)
+	{
+		USART_transmit_byte(*data++);
+	}
+
+}
+void init_USART_GPS(void)
+{
+
+		//init GPIOB for AF
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB,ENABLE);
+		GPIO_InitTypeDef GPIO_InitStruct;
+		GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
+		GPIO_InitStruct.GPIO_Pin = (GPIO_USART1_RX | GPIO_USART1_TX);
+		GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
+		GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
+		GPIO_InitStruct.GPIO_Speed = GPIO_Speed_100MHz;
+		GPIO_Init(GPIOB,&GPIO_InitStruct);
+		//AF MAPPing
+		GPIO_PinAFConfig(GPIOB,GPIO_USART1_RX_SRC,GPIO_AF_USART1);
+		GPIO_PinAFConfig(GPIOB,GPIO_USART1_TX_SRC,GPIO_AF_USART1);
+
+		//USART CONFIG
+		RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1,ENABLE);
+		USART_InitTypeDef USART_InitStructure;
+		USART_InitStructure.USART_Mode = USART_Mode_Tx | USART_Mode_Rx;
+		USART_InitStructure.USART_WordLength = USART_WordLength_8b;
+		USART_InitStructure.USART_StopBits = USART_StopBits_1;
+		USART_InitStructure.USART_Parity = USART_Parity_No;
+		USART_InitStructure.USART_BaudRate = GPS_BAUDRATE;
+		USART_InitStructure.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
+		USART_Init(USART1, &USART_InitStructure);
+
+		//configure USART for idle interrupt
+		NVIC_InitTypeDef NVIC_InitStructure;
+		NVIC_InitStructure.NVIC_IRQChannel = USART1_IRQn;
+		NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x0;
+		NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x0;
+		NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+		NVIC_Init(&NVIC_InitStructure);
+		USART_ITConfig(USART1, USART_IT_IDLE, ENABLE);
+		//enable USART
+		USART_Cmd(USART1,ENABLE);
+
+		//DMA init
+#ifdef STM32_GNSS_USE_DMA
+		DMA_InitTypeDef DMA_InitStructure;
+		USART_DMACmd(USART1, USART_DMAReq_Rx, ENABLE);
+		RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_DMA2,ENABLE);
+
+		/* De-initialize DMA RX & TX Stream */
+			DMA_DeInit(DMA2_Stream2);
+			while (DMA_GetCmdStatus(DMA2_Stream2 ) != DISABLE) { ; }
+			DMA_DeInit(DMA2_Stream7);
+			while (DMA_GetCmdStatus(DMA2_Stream7 ) != DISABLE) { ; }
+			DMA_DeInit(DMA2_Stream0); //DMA2 Stream 0 for memory streaming
+			while (DMA_GetCmdStatus(DMA2_Stream0) != DISABLE){;}
+
+		/* CONFIGURE DMA STREAM on DMA 2
+		 *  Stream 2: RX
+		 *  Stream 7: TX
+		 *  Stream 0: MEM
+		 */
+			/* shared DMA configuration values */
+				DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)(&(USART1->DR));
+				DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+				DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+				DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
+
+				DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)DMA_RX_Buffer; //feeds into buffer direct
+				DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+				DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+				DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
+
+				DMA_InitStructure.DMA_Channel = DMA_Channel_4;
+				DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+				DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
+				DMA_InitStructure.DMA_Priority = DMA_Priority_VeryHigh;
+				DMA_InitStructure.DMA_BufferSize = DMA_RX_BUFFER_SIZE;
+
+				DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
+				DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_Full;
+
+				DMA_Init(DMA2_Stream2, &DMA_InitStructure);
+
+				// enable the interrupt in the NVIC
+				NVIC_InitStructure.NVIC_IRQChannel = DMA2_Stream2_IRQn;
+				NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x00;
+				NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x01;
+				NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+				NVIC_Init(&NVIC_InitStructure);
+				DMA_ITConfig(DMA2_Stream2, DMA_IT_TC, ENABLE);
+#ifdef STM32_GMEM_USE_DMA
+	/* UART - MEM */
+	/* shared DMA configuration values */
+	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)DMA_RX_Buffer;
+	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Enable;
+	DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
+
+	DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)GNSS_LOG_Buffer;
+	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+	DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
+
+	DMA_InitStructure.DMA_Channel = DMA_Channel_4;
+	DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+	DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToMemory;
+	DMA_InitStructure.DMA_Priority = DMA_Priority_VeryHigh;
+	DMA_InitStructure.DMA_BufferSize = GNSS_LOG_BUFFER_SIZE;
+
+	DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
+	DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_Full;
+
+	DMA_Init(DMA2_Stream0, &DMA_InitStructure);
+
+	// enable the interrupt in the NVIC
+	NVIC_InitStructure.NVIC_IRQChannel = DMA2_Stream0_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0x00;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x01;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	DMA_ITConfig(DMA2_Stream0, DMA_IT_TC, ENABLE);
+
+#endif
+DMA_Cmd(DMA2_Stream2, ENABLE);
+while (DMA_GetCmdStatus(DMA2_Stream2 ) != ENABLE) { ; }
+#endif
+
+}
+/* Communication Commands */
+
+void deinit_USART_GPS(void)
+{
+	GPIO_InitTypeDef GPIO_InitStructure;
+
+	USART_DeInit(USART1);
+	USART_Cmd(USART1, DISABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, DISABLE);
+
+	/* All SPI-Pins to input with weak internal pull-downs */
+	GPIO_InitStructure.GPIO_Pin = GPIO_USART1_RX|GPIO_USART1_TX;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN;
+	GPIO_Init(GPIOB, &GPIO_InitStructure);
+}
+void USART_transmit_byte(uint8_t byte)
+{
+	USART1->DR = (uint16_t)byte;
+	while(USART_GetFlagStatus(USART1,USART_FLAG_TXE) != SET);
+}
+
+unsigned char USART_receive_byte(void)
+{
+	while(USART_GetFlagStatus(USART1,USART_FLAG_RXNE) != SET);
+	return (uint8_t)USART_ReceiveData(USART1);
+
+}
+/* USART BUFFER FUNCTIONS*/
+static void zero_dma_gnss_memory(void)
+{
+		for (int i = 0; i < DMA_RX_BUFFER_SIZE; i++)
+		{
+			DMA_RX_Buffer[i] = 0;
+		}
+}
+
+static void zero_gnss_memory(void)
+	{
+		for (int i = 0; i < GNSS_LOG_BUFFER_SIZE; i++){
+			GNSS_LOG_Buffer[i] = 0;
+		}
+	}
+
+
+
+
+/* IRQ HANDLERS*/
+/*
+ * called when USART has finished receiving
+ * disables the stream
+ */
+void USART1_IRQHandler(void)
+{
+	//idle line detection
+	if(USART_GetFlagStatus(USART1,USART_FLAG_IDLE) != RESET)
+	{
+		//clear reg
+		RX_COMPLETE_FLAG = 0;
+		volatile uint32_t tmp;
+		tmp = USART_GetITStatus(USART1, USART_IT_IDLE);
+		tmp = USART_ReceiveData(USART1);
+		(void)tmp;
+
+		DMA_Cmd(DMA2_Stream2,DISABLE);
+		while(DMA_GetCmdStatus(DMA2_Stream2) != DISABLE);
+
+	}
+
+}
+
+/* UART-MEM IRQ HANDLER */
+#ifdef STM32_GNSS_USE_DMA
+void DMA2_Stream2_IRQHandler(void)
+{
+	//check transfer complete flag
+	if(DMA_GetFlagStatus(DMA2_Stream2,DMA_FLAG_TCIF2) == SET)
+	{
+
+		//set log to off
+		RX_COMPLETE_FLAG = 0;
+		//get data that still needs to be transferred
+		gnss_length = DMA_RX_BUFFER_SIZE - DMA_GetCurrDataCounter(DMA2_Stream2);
+		//zero_gnss_memory();
+
+		//clear USART-DMA Transfer bit
+		DMA_ClearITPendingBit(DMA2_Stream2, DMA_IT_TCIF2);
+
+		/* Enable DMA transfer to memory */
+		#ifdef STM32_GMEM_USE_DMA
+		DMA_Cmd(DMA2_Stream0, ENABLE);
+		while (DMA_GetCmdStatus(DMA2_Stream0) != ENABLE) { ; }
+
+		#else
+		DMA_Cmd(DMA2_Stream2, ENABLE);
+		while (DMA_GetCmdStatus(DMA_Stream_USART_GNSS_RX ) != ENABLE) { ; }
+		#endif
+	}
+
+}
+#endif
+/* MEM _ MEM IRQ HANDLER */
+#ifdef STM32_GMEM_USE_DMA
+void DMA2_Stream0_IRQHandler (void)
+{
+	/* Test on DMA Stream Transfer Complete interrupt */
+	if (DMA_GetFlagStatus(DMA2_Stream0, DMA_FLAG_TCIF0) != RESET)
+	{
+
+		RX_COMPLETE_FLAG = 1;
+		// transfer message to buffer
+		memccpy(GNSS_LOG_Buffer,DMA_RX_Buffer,strlen((char*)DMA_RX_Buffer),1);
+		/* Clear DMA Stream Transfer Complete interrupt pending bit */
+		DMA_ClearITPendingBit(DMA2_Stream0, DMA_IT_TCIF0);
+
+		/* Enable DMA transfer */
+		DMA_Cmd(DMA2_Stream2, ENABLE);
+		while (DMA_GetCmdStatus(DMA2_Stream2 ) != ENABLE);
+
+	}
+}
+#endif
+
+//==========================================================================
+
+
+//==========================================================================

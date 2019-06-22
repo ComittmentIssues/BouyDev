@@ -15,3 +15,7 @@
 1560936985793	Delete resource 'Test_Temp_F4/SD_Card'
 1560937218355	Delete resource 'Test_Temp_F4/src/tm_stm32f4_timer_properties.c'
 1560937231986	Delete resource 'Test_Temp_F4/src/tm_stm32f4_timer_properties.h'
+1561025463325	Delete resource 'Test_GPS_F4/src/Iridium.c'
+1561025467493	Delete resource 'Test_GPS_F4/src/Iridium.h'
+1561056089293	Delete resource 'Test_GPS_F4/src/minmea.c'
+1561056095616	Delete resource 'Test_GPS_F4/src/minmea.h'

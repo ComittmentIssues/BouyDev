@@ -1,0 +1,42 @@
+/*
+ * GPS.h
+ *
+ *  Created on: Jun 20, 2019
+ *      Author: Jamie
+ */
+
+#ifndef GPS_H_
+#define GPS_H_
+
+#include "stm32f4xx.h"
+#include "stm32f4_discovery.h"
+
+//INIT DEFS
+#define GPIO_USART1_RX  GPIO_Pin_6
+#define GPIO_USART1_TX  GPIO_Pin_7
+#define GPIO_USART1_RX_SRC GPIO_PinSource6
+#define GPIO_USART1_TX_SRC GPIO_PinSource7
+#define GPS_BAUDRATE  9600
+#define STM32_GNSS_USE_DMA
+#define STM32_GMEM_USE_DMA
+
+//USART BUFFERS
+#define DMA_RX_BUFFER_SIZE          2000
+#define GNSS_LOG_BUFFER_SIZE		2000
+uint8_t DMA_RX_Buffer[DMA_RX_BUFFER_SIZE];
+uint8_t GNSS_LOG_Buffer[GNSS_LOG_BUFFER_SIZE];
+volatile int RX_COMPLETE_FLAG;
+volatile int gnss_length;
+/* Private macro */
+/* Private variables */
+/* Private function prototypes */
+void init_USART_GPS(void);
+void USART_transmit_byte(uint8_t byte);
+void USART_transmit_string(unsigned char*);
+unsigned char USART_receive_byte(void);
+static void zero_dma_gnss_memory(void);
+static void zero_gnss_memory(void);
+uint8_t transmit_message(uint8_t* message);
+
+
+#endif /* GPS_H_ */

@@ -1,0 +1,131 @@
+/*
+ * GPS.c
+ *
+ *  Created on: Jun 20, 2019
+ *      Author: Jamie
+ */
+
+
+# include "GPS.h"
+
+
+
+/* IRQ HANDLERS*/
+/*
+ * called when USART has finished receiving
+ * disables the stream
+ */
+void USART1_IRQHandler(void)
+{
+	//idle line detection
+	if(USART_GetFlagStatus(USART1,USART_FLAG_IDLE) != RESET)
+	{
+		//clear reg
+		RX_COMPLETE_FLAG = 0;
+		volatile uint32_t tmp;
+		tmp = USART_GetITStatus(USART1, USART_IT_IDLE);
+		tmp = USART_ReceiveData(USART1);
+		(void)tmp;
+
+		DMA_Cmd(DMA2_Stream2,DISABLE);
+		while(DMA_GetCmdStatus(DMA2_Stream2) != DISABLE);
+
+	}
+
+}
+
+/* UART-MEM IRQ HANDLER */
+#ifdef STM32_GNSS_USE_DMA
+void DMA2_Stream2_IRQHandler(void)
+{
+	//check transfer complete flag
+	if(DMA_GetFlagStatus(DMA2_Stream2,DMA_FLAG_TCIF2) == SET)
+	{
+
+		//set log to off
+		RX_COMPLETE_FLAG = 0;
+		//get data that still needs to be transferred
+		gnss_length = DMA_RX_BUFFER_SIZE - DMA_GetCurrDataCounter(DMA2_Stream2);
+		//zero_gnss_memory();
+
+		//clear USART-DMA Transfer bit
+		DMA_ClearITPendingBit(DMA2_Stream2, DMA_IT_TCIF2);
+
+		/* Enable DMA transfer to memory */
+		#ifdef STM32_GMEM_USE_DMA
+		DMA_Cmd(DMA2_Stream0, ENABLE);
+		while (DMA_GetCmdStatus(DMA2_Stream0) != ENABLE) { ; }
+
+		#else
+		DMA_Cmd(DMA2_Stream2, ENABLE);
+		while (DMA_GetCmdStatus(DMA_Stream_USART_GNSS_RX ) != ENABLE) { ; }
+		#endif
+	}
+
+}
+#endif
+/* MEM _ MEM IRQ HANDLER */
+#ifdef STM32_GMEM_USE_DMA
+void DMA2_Stream0_IRQHandler (void)
+{
+	/* Test on DMA Stream Transfer Complete interrupt */
+	if (DMA_GetFlagStatus(DMA2_Stream0, DMA_FLAG_TCIF0) != RESET)
+	{
+
+		RX_COMPLETE_FLAG = 1;
+		/* Clear DMA Stream Transfer Complete interrupt pending bit */
+		DMA_ClearITPendingBit(DMA2_Stream0, DMA_IT_TCIF0);
+
+		/* Enable DMA transfer */
+		DMA_Cmd(DMA2_Stream2, ENABLE);
+		while (DMA_GetCmdStatus(DMA2_Stream2 ) != ENABLE);
+
+	}
+}
+#endif
+
+//==========================================================================
+
+uint8_t transmit_message(uint8_t* message)
+{
+	//first clear buffer
+	zero_dma_gnss_memory();
+	//transmit and wait for ok command
+	uint8_t msg[] = {'A','T','\r'};
+	uint8_t size = sizeof(msg)/sizeof(*msg);
+	for (int var = 0; var < size; var++)
+	  	  {
+	  		USART_transmit_byte(msg[var]);
+	  	  }
+	//check response in buffer
+	while(!RX_COMPLETE_FLAG){};
+	zero_dma_gnss_memory();
+	//Disable flow control
+	uint8_t flow[] = "AT&k0";
+	size = sizeof(flow)/sizeof(*flow);
+	for (int var = 0; var < size; var++)
+	{
+		 USART_transmit_byte(flow[var]);
+	}
+	USART_transmit_byte(0x0D);
+	while(!RX_COMPLETE_FLAG){};
+	RX_COMPLETE_FLAG = 0;
+	//transmit Message
+	uint8_t cmd[] ="AT+SBDWT=";
+	size = sizeof(cmd)/sizeof(*cmd);
+	for (int var = 0; var < size; var++)
+	{
+		 USART_transmit_byte(cmd[var]);
+	}
+	for (int var = 0; var < sizeof(message); ++var)
+	{
+		USART_transmit_byte(message[var]);
+	}
+	USART_transmit_byte(0xD);
+	while(!RX_COMPLETE_FLAG){};
+	RX_COMPLETE_FLAG = 0;
+	return 0;
+}
+
+
+//==========================================================================
