@@ -40,27 +40,15 @@ SOFTWARE.
 #include "../Temp_sensor/tm_stm32f4_onewire.h"
 #include "memory.h"
 #include "../src/fatfs/ff.h"
-/* private structs*/
-typedef struct{
-
-	Coord_t coord;
-	uint16_t Etime;
-	Diagnostic_t diag;
-	float temp;
-	float battery_voltage;
-} Packet;
 /* Private macro */
-#define Temp_GPIO GPIOD
-#define One_Wire_Pin GPIO_PIN_6
 /* Private variables */
 char buff[40];
 float temp;
 uint8_t device[8];
 TM_OneWire_t oneWire;
 FATFS FatFs;
-Packet packet;
 /* Private function prototypes */
-uint8_t init_temp_sensor(void);
+void init_temp_sensor(void);
 void ftoa(float f);
 /* Private functions */
 
@@ -76,7 +64,7 @@ int main(void)
 	  /* Initialize LEDs */
 	  STM_EVAL_LEDInit(LED3); STM_EVAL_LEDInit(LED4); STM_EVAL_LEDInit(LED5); STM_EVAL_LEDInit(LED6);
 	  init_temp_sensor();
-	  init_USART_GPS();
+
 
 
 
@@ -90,41 +78,25 @@ int main(void)
 
  while(1)
  {
-	 //wait for full packet
-	 if(packet_full == 7)
-	 {
-		 packet.Etime = eTime;
-		 packet.battery_voltage = 3.3;
-		 packet.coord = GPS_coord;
-		 packet.diag = diag;
-	 }
 
  }
 }
 
-uint8_t init_temp_sensor(void)
+void init_temp_sensor(void)
 {
 
 	  SystemInit();
 	  TM_DELAY_Init();
-	  TM_OneWire_Init(&oneWire, Temp_GPIO, GPIO_Pin_6);
+	  TM_OneWire_Init(&oneWire, GPIOD, GPIO_Pin_6);
 	  /* Check for devices on oneWire bus*/
 	  uint8_t devices = TM_OneWire_First(&oneWire);
 	  if(devices)
 	  {
 		  STM_EVAL_LEDOn(LED3);
 		  TM_OneWire_GetFullROM(&oneWire, device);
-		  return 0;
 	  }
-	  return 1;
 }
 
-void get_Temp(float* temp)
-{
-	TM_DS18B20_Start(&oneWire,device);
-	while(!TM_DS18B20_AllDone(&oneWire));
-	TM_DS18B20_Read(&oneWire,device,temp);
-}
 void ftoa(float f)
 {
 	//get int;
