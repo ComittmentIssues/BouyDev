@@ -49,6 +49,7 @@ void test3(void);
 **
 **===========================================================================
 */
+
 int main(void)
 {
 
@@ -65,20 +66,20 @@ int main(void)
 
   /* TODO - Add your application code here */
 
-	init_Control_Pins();
 	STM_EVAL_LEDInit(LED3);
 	STM_EVAL_LEDInit(LED4);
 	STM_EVAL_LEDInit(LED5);
 	STM_EVAL_LEDInit(LED6);
+
 	init_Delay();
-	test1();
+	test3();
 
-
-  while (1)
-  {
-
-
-  }
+	while(1)
+	{
+		Delay_begin_Timeout(500);
+			while(!timeout);
+			STM_EVAL_LEDToggle(LED6);
+	}
   return 0;
 }
 /*
@@ -95,12 +96,6 @@ void test1(void)
 	 	 * if time out occurs - repeat, wait
 	 	 *
 	 */
-	uint32_t delay = 10000;
-	Delay_begin_Timeout(delay);
-	Delay_Enable();
-	while(timeout_flag == 0);
-	timeout_flag= 0;
-	Delay_Disable();
 	int8_t flag;
 	int i = 0;
 	for (; i < 256; ++i)
@@ -120,8 +115,7 @@ void test1(void)
 		delay = 10000;
 		Delay_begin_Timeout(delay);
 		Delay_Enable();
-		while(timeout_flag == 0);
-		timeout_flag = 0;
+		while(timeout == 0);
 	}
 	//send message
 	//repeat a few times
@@ -165,8 +159,8 @@ void test1(void)
 			}
 			Delay_begin_Timeout(delay);
 			Delay_Enable();
-			while(timeout_flag == 0);
-			timeout_flag = 0;
+			while(timeout == 0);
+
 		}
 	}
 
@@ -197,8 +191,7 @@ void test2(void)
 			delay = 10000;
 			Delay_begin_Timeout(delay);
 			Delay_Enable();
-			while(timeout_flag == 0);
-			timeout_flag = 0;
+			while(timeout== 0);
 		}
 		//send message
 		//repeat a few times
@@ -236,16 +229,16 @@ void test2(void)
 				}
 				Delay_begin_Timeout(delay);
 				Delay_Enable();
-				while(timeout_flag == 0);
-				timeout_flag = 0;
+				while(timeout== 0);
+
 			}
 		}
 		msg = "Lat= 13,32,54.6,E Long = 23,14,54.2,E 3/2/2005 23:13:16 6 6\r";
 		delay = 15000;
 		Delay_begin_Timeout(delay);
 		Delay_Enable();
-		while(timeout_flag == 0);
-		timeout_flag = 0;
+		while(timeout == 0);
+		timeout= 0;
 		sent = 0;
 				for (int i = 0; i < 5; ++i)
 				{
@@ -278,15 +271,15 @@ void test2(void)
 						}
 						Delay_begin_Timeout(delay);
 						Delay_Enable();
-						while(timeout_flag == 0);
-						timeout_flag = 0;
+						while(timeout== 0);
+
 					}
 				}
 				msg = "Lat= 13,32,54.6,E Long = 23,14,54.2,E 3/2/2005 23:13:16 6 6\r";
 				Delay_begin_Timeout(delay);
 				Delay_Enable();
-				while(timeout_flag == 0);
-				timeout_flag = 0;
+				while(timeout == 0);
+				timeout = 0;
 				sent = 0;
 								for (int i = 0; i < 5; ++i)
 								{
@@ -319,11 +312,46 @@ void test2(void)
 										}
 										Delay_begin_Timeout(delay);
 										Delay_Enable();
-										while(timeout_flag == 0);
-										timeout_flag = 0;
+										while(timeout== 0);
+
 									}
 								}
 }
-/*
- *  send 3 messages of various sizes
- */
+
+void test3(void)
+{
+	int flag;
+	int i = 0;
+	for (; i < 256; ++i)
+		{
+			flag = init_Iridium_Module();
+			if(flag == 0)
+			{
+				STM_EVAL_LEDOn(LED6);
+				break;
+			}
+			if(flag == -1)
+			{
+				STM_EVAL_LEDToggle(LED5);
+				deinit_Iridium_Module();
+			}
+				//10 seconds delay
+			Delay_begin_Timeout(10000);
+			while(!timeout);
+
+		}
+		uint8_t message[] = {25,16,23,53};
+		if(send_Binary_Message(message,length(message))== 0)
+		{
+			Delay_begin_Timeout(3000);
+			while(!timeout);
+			STM_EVAL_LEDOn(LED4);
+			int8_t flag = create_SBD_Session();
+			if(flag == -2)
+			{
+				Wait_for_network = 1;
+				NVIC_EnableIRQ(EXTI0_IRQn);
+			}
+		}
+}
+

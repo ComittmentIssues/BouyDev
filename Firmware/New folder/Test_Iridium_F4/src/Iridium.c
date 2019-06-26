@@ -6,19 +6,18 @@
  */
 
 #include "Iridium.h"
-#include "stdio.h"
-#include "string.h"
-#include "stdlib.h"
-#include "Delay.h"
-#include "stm32f4xx_exti.h"
-#include "stm32f4xx_syscfg.h"
-#include "stm32f4_discovery.h"
+
 void init_Iridium_USART(void)
 {
 	GPIO_InitTypeDef GPIO_InitStruct;
 	USART_InitTypeDef USART3_InitStruct;
 	NVIC_InitTypeDef NVIC_InitStruct;
 	/* ENABLE RCC */
+	//clear flags
+	IR_Rx_done = 0;
+	status_Received = 0;
+	bin_message_received = 0;
+	Wait_for_network = 0;
 	Iridium_GPIO_PeriphClockCommand(Iridium_GPIO_RCCPeriph,ENABLE);
 	Iridium_USART_PeriphClockCommand(Iridium_USART_RCCPeriph,ENABLE);
 
@@ -41,15 +40,93 @@ void init_Iridium_USART(void)
 	USART3_InitStruct.USART_BaudRate = Iridium_Baudrate;
 	USART3_InitStruct.USART_HardwareFlowControl = USART_HardwareFlowControl_None;
 	USART_Init(Iridium_USART, &USART3_InitStruct);
+
 	/* Configure NVIC for interrupt */
 	NVIC_InitStruct.NVIC_IRQChannel = Iridium_USART_IRQn;
 	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
 	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 1;
 	NVIC_Init(&NVIC_InitStruct);
-
+	USART_ITConfig(Iridium_USART, USART_IT_IDLE,ENABLE);
 	USART_Cmd(Iridium_USART,ENABLE);
 
+
+#ifdef IRIDIUM_Periph_Use_DMA
+	DMA_InitTypeDef DMA_InitStructure;
+	USART_DMACmd(Iridium_USART,USART_DMAReq_Rx,ENABLE);
+
+#ifdef IRIDIUM_MEM_Use_DMA
+	DMA_AHB1PeriphClockCmd(DMA2_AHB1Periph,ENABLE);
+#endif
+	DMA_AHB1PeriphClockCmd(DMA_AHB1Periph,ENABLE);
+
+	/* De-initialize DMA RX & TX Stream */
+	DMA_DeInit(Iridium_DMA_RX_Stream);
+	while (DMA_GetCmdStatus(Iridium_DMA_RX_Stream ) != DISABLE) { ; }
+	DMA_DeInit(Iridium_DMA_MEM_Stream);
+	while (DMA_GetCmdStatus(Iridium_DMA_MEM_Stream) != DISABLE) { ; }
+
+	DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)(&(Iridium_USART->DR));
+	DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+	DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Disable;
+	DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
+
+	DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)(Iridium_Rx_Buff);
+	DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+	DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+	DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
+
+	DMA_InitStructure.DMA_Channel = Iridium_DMA_RX_Channel;
+	DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+	DMA_InitStructure.DMA_DIR = DMA_DIR_PeripheralToMemory;
+	DMA_InitStructure.DMA_Priority = DMA_Priority_VeryHigh;
+	DMA_InitStructure.DMA_BufferSize = Iridium_RX_Buffsize;
+
+	DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
+	DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_Full;
+	DMA_Init(Iridium_DMA_RX_Stream, &DMA_InitStructure);
+
+	// enable the interrupt in the NVIC
+	NVIC_InitStruct.NVIC_IRQChannel = DMA_USART_RX_IRQn;
+	NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 0x00;
+	NVIC_InitStruct.NVIC_IRQChannelSubPriority = 0x01;
+	NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStruct);
+	DMA_ITConfig(Iridium_DMA_RX_Stream, DMA_IT_TC, ENABLE);
+#ifdef IRIDIUM_MEM_Use_DMA
+
+			DMA_InitStructure.DMA_PeripheralBaseAddr = (uint32_t)(Iridium_Rx_Buff);
+			DMA_InitStructure.DMA_PeripheralDataSize = DMA_PeripheralDataSize_Byte;
+			DMA_InitStructure.DMA_PeripheralInc = DMA_PeripheralInc_Enable;
+			DMA_InitStructure.DMA_PeripheralBurst = DMA_PeripheralBurst_Single;
+
+			DMA_InitStructure.DMA_Memory0BaseAddr = (uint32_t)message_buff;
+			DMA_InitStructure.DMA_MemoryDataSize = DMA_MemoryDataSize_Byte;
+			DMA_InitStructure.DMA_MemoryInc = DMA_MemoryInc_Enable;
+			DMA_InitStructure.DMA_MemoryBurst = DMA_MemoryBurst_Single;
+
+			DMA_InitStructure.DMA_Channel = Iridium_DMA_MEM_Channel;
+			DMA_InitStructure.DMA_Mode = DMA_Mode_Normal;
+			DMA_InitStructure.DMA_DIR = DMA_DIR_MemoryToMemory;
+			DMA_InitStructure.DMA_Priority = DMA_Priority_VeryHigh;
+			DMA_InitStructure.DMA_BufferSize = Iridium_message_Buffsize;
+
+			DMA_InitStructure.DMA_FIFOMode = DMA_FIFOMode_Disable;
+			DMA_InitStructure.DMA_FIFOThreshold = DMA_FIFOThreshold_Full;
+
+			DMA_Init(Iridium_DMA_MEM_Stream, &DMA_InitStructure);
+
+			// enable the interrupt in the NVIC
+			NVIC_InitStruct.NVIC_IRQChannel = DMA_USART_MEM_IRQn;
+			NVIC_InitStruct.NVIC_IRQChannelPreemptionPriority = 00;
+			NVIC_InitStruct.NVIC_IRQChannelSubPriority = 01;
+			NVIC_InitStruct.NVIC_IRQChannelCmd = ENABLE;
+			NVIC_Init(&NVIC_InitStruct);
+			DMA_ITConfig(Iridium_DMA_MEM_Stream, DMA_IT_TC, ENABLE);
+#endif
+	DMA_Cmd(Iridium_DMA_RX_Stream, ENABLE);
+	while (DMA_GetCmdStatus(Iridium_DMA_RX_Stream) != ENABLE);
+#endif
 }
 
 /*configure Control pins */
@@ -57,6 +134,8 @@ void init_Control_Pins(void)
 {
 	//using port B
 	Iridium_GPIO_PeriphClockCommand(RCC_AHB1Periph_GPIOB,ENABLE);
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
+
 	GPIO_InitTypeDef GPIO_InitStruct;
 	/*Wake up Pin*/
 	GPIO_InitStruct.GPIO_Pin = Iridium_Wakeup_Pin;
@@ -65,36 +144,38 @@ void init_Control_Pins(void)
 	GPIO_InitStruct.GPIO_Speed = GPIO_Speed_100MHz;
 	GPIO_Init(Iridium_GPIO,&GPIO_InitStruct);
 	GPIO_WriteBit(Iridium_GPIO,Iridium_Wakeup_Pin,RESET);
-	/* Network availiable */
+	/* Network available */
 	/*
 	 * 	3.3V Digital
 	 *	Available = high
 	 *	Not available= low
 	 */
 	GPIO_InitTypeDef GPIO_NETAV;
-	GPIO_NETAV.GPIO_Pin = Iridium_NetAv_Pin;
+	GPIO_NETAV.GPIO_Pin = GPIO_Pin_0;
 	GPIO_NETAV.GPIO_Mode =GPIO_Mode_IN;
+	GPIO_NETAV.GPIO_OType = GPIO_OType_PP;
 	GPIO_NETAV.GPIO_PuPd = GPIO_PuPd_DOWN;
 	GPIO_NETAV.GPIO_Speed = GPIO_Speed_100MHz;
-
 	GPIO_Init(Iridium_GPIO,&GPIO_NETAV);
 
+	SYSCFG_EXTILineConfig(EXTI_PortSourceGPIOB,EXTI_PinSource0);
 	//configure NetAv pin to EXTI line
 	EXTI_InitTypeDef EXTI_InitStruct;
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_SYSCFG, ENABLE);
 
-	EXTI_InitStruct.EXTI_Line = NetAv_EXTI_Line;
+	EXTI_InitStruct.EXTI_Line = EXTI_Line0;
 	EXTI_InitStruct.EXTI_LineCmd = ENABLE;
 	EXTI_InitStruct.EXTI_Mode =EXTI_Mode_Interrupt;
 	EXTI_InitStruct.EXTI_Trigger = EXTI_Trigger_Rising; //when high
 	EXTI_Init(&EXTI_InitStruct);
-	SYSCFG_EXTILineConfig(NetAv_EXTIPortsource,NetAv_EXTIPinSource);
 	NVIC_InitTypeDef  NVIC_InitStructure;
-	NVIC_InitStructure.NVIC_IRQChannel = NetAv_EXTI_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannel = EXTI0_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x01;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0x00;
 	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_DisableIRQ(EXTI0_IRQn);
 	NVIC_Init(&NVIC_InitStructure);
+
+
 
 }
 /* Function to Reset the data buffer and pointer*/
@@ -105,32 +186,20 @@ int8_t init_Iridium_Module(void)
 	init_Control_Pins();
 	init_Rx_Buff();
 	//wait for module to fully power out
-	char* msg = send_ATcmd("AT\r",1000);
-	if(strcmp(msg,(char*)"OK") != 0)
+	uint8_t flag = send_ATcmd("AT\r",1000);
+	if(flag == -2)
 	{
-
-		if(strcmp(msg,(char*)"TIMEOUT") == 0)
-		{
-			//no response received
-			free(msg);
-			return -2;
-		}
-		if(strcmp(msg,(char*)"ERROR") == 0)
-		{
-			//message recieved but not understood
-			free(msg);
-			return -3;
-		}else
-		{
-			//garbage
-			free(msg);
-			return -4;
-		}
+		//timeout
+		return flag;
 	}
-	free(msg);
-	//check signal strength
+	if(strcmp((char*)temp_buff,"OK") ==0)
+	{
+		//VALID RESPONSE
+		return 0;
+	}
+	//INVALID RESPONSE
+	return -1;
 
-	return 0;
 }
 
 void deinit_Iridium_Module(void)
@@ -153,7 +222,7 @@ void deinit_Iridium_Module(void)
 
 void init_Rx_Buff(void)
 {
-	Iridium_Buff_Index = 0;
+	Iridium_data_length = 0;
 	for (int i = 0; i < Iridium_RX_Buffsize; ++i)
 	{
 		Iridium_Rx_Buff[i] = 0;
@@ -166,7 +235,24 @@ void transmit_Data(char* tx_buff,size_t len)
 	/* get size of pointer*/
 	for (int i = 0; i < len; ++i)
 	{
+
 		USART_SendData(Iridium_USART,*(tx_buff++));
+		Delay_begin_Timeout(100);
+		while(!USART_GetFlagStatus(Iridium_USART,USART_FLAG_TXE))
+		{
+			if(timeout)
+			{
+				break;
+			}
+		}
+	}
+}
+
+void transmit_bin_Data(uint8_t* buff,size_t len)
+{
+	for (int i = 0; i < len; ++i)
+	{
+		USART_SendData(Iridium_USART,*(buff++));
 		while(!USART_GetFlagStatus(Iridium_USART,USART_FLAG_TXE));
 	}
 }
@@ -193,47 +279,33 @@ void transmit_Data(char* tx_buff,size_t len)
 		 	 *Number of bytes received
 		 *Count of mobile terminated SBD messages waiting at the GSS to be transferred to the ISU.
 		 	 */
-uint8_t create_SBD_Session(void)
+int8_t create_SBD_Session(void)
 {
 	/* Initiate SBD session */
-	char* cmd = send_ATcmd("AT+SBDIX\r",50000);
-
+	session_flag = 1;
+	int8_t flag = send_ATcmd("AT+SBDIX\r",50000);
 		//error = wait a few seconds then try again
-	if(strcmp(cmd,(char*)"TIMEOUT\0") == 0)
+	if(flag == -2)
 	{
 		//timeout
-		free(cmd);
 		return -1;
 	}
-	/*check status of message received*/
-	//parse message into status
-	get_status(cmd);
-
-	if(SBDIX_status[0] > 2)
+	//check SBD session
+	switch(SBDIX_status[0])
 	{
-		/*
-		 * if network unavailable, wait for active network and try again
-		 */
-		if(SBDIX_status[0] == 32)
+	case 0:
+	case 1:
+	case 2:
+		if(strcmp((char*)temp_buff,"OK") == 0)
 		{
-			//network unavailable
-			return -2;
+			break;
 		}
-		else
-		{
-			//failiure to send
-			//wait 3 seconds try again
-			//wait longer if still fail
-			return -3;
-		}
+		return -1;
+	case 32:
+		return -2;
+	default:
+		return -3;
 	}
-
-
-
-	/* flush MO queue*/
-	cmd = send_ATcmd("AT+SBDD0\r",50000);
-	free(cmd);
-	/**/
 	return 0;
 }
 
@@ -284,62 +356,76 @@ void clear_Status(void)
 /*
  * Retrieve the Iridium response only from Rx buffer
  */
-char* get_AT_response(size_t msg_Size)
+char* get_AT_response(void)
 {
 	//clear flag
-	IR_Rx_done = 0;
-	//find start of verbose message
-	size_t size = 0;
-	for (int i = 0; i < Iridium_Buff_Index; ++i)
+	char* tmp = (char*)Iridium_Rx_Buff;
+	if(status_Received== 1)
 	{
-		if(Iridium_Rx_Buff[i] == '\r')
-		{
-			msg_Size = size+1;
-			size = Iridium_Buff_Index - msg_Size -4;
-			break;
-		}
-		size++;
+		//get transmission status
+		tmp+=2;
+		bin_message_received = *tmp;
+		status_Received = 0;
+		tmp+=2;
 	}
-	//create a null character to terminate string copy
-	Iridium_Rx_Buff[Iridium_Buff_Index-2 ] = '\0';
-	char* temp_ptr = (char*)&Iridium_Rx_Buff[msg_Size+2];
-	strcpy(message_buff,temp_ptr);
+	tmp = strtok((char*)Iridium_Rx_Buff,"\r\n");
+	if(strlen(tmp) == 0)
+	{
+		return NULL;
+	}
+	if(session_flag == 1)
+	{
+		//SBD session: update status buffer
+		clear_Status();
+		char* msg = strtok(NULL,"\r\n");
+		get_status(tmp);
+		tmp = msg;
+		session_flag = 0;
+	}else
+	{
+		tmp = strtok(NULL,"\r\n");
+	}
+	init_message_buff();
+	memcpy(temp_buff,tmp,strlen(tmp));
 	init_Rx_Buff();
-	return message_buff;
+	return temp_buff;
+}
 
+void init_message_buff()
+{
+	for (int i = 0; i < Iridium_message_Buffsize; ++i)
+	{
+		message_buff[i] = 0;
+		temp_buff[i] =0;
+	}
 }
 /*
  * Sends an AT command over USART
  * returns the response
  */
-char* send_ATcmd(char* cmd,uint32_t delay)
+int8_t send_ATcmd(char* cmd,uint32_t delay)
 {
-	Delay_begin_Timeout(delay);
 	transmit_Data(cmd,strlen(cmd));
 	//timeout after 60 seconds of no activity
-	Delay_Enable();
-	USART_ITConfig(Iridium_USART,USART_IT_RXNE,ENABLE);
-
-	while(IR_Rx_done != 1)
+	Delay_begin_Timeout(delay);
+	while((IR_Rx_done != 1))
 	{
-		if(timeout_flag)
+		if(timeout)
 		{
-			timeout_flag = 0;
+			timeout= 0;
 			//Disable Interrupt
-			USART_ITConfig(Iridium_USART,USART_IT_RXNE,DISABLE);
-			return (char*)"TIMEOUT";
+			return -2;
 		}
 	}
-	//disable
-	USART_ITConfig(Iridium_USART,USART_IT_RXNE,DISABLE);
-	return get_AT_response(strlen(cmd));
+	IR_Rx_done = 0;
+	return 0;
 }
 
 uint8_t send_ASCII_Message(char* msg)
 {
 	/* Set Flow control off*/
-	char* cmd = send_ATcmd("AT&K0\r",100);
-	if(strcmp(cmd,(char*)"OK") != 0)
+	int8_t flag = send_ATcmd("AT&K0\r",100);
+	if(flag == -2)
 	{
 		if(strcmp(msg,(char*)"TIMEOUT")==0)
 		{
@@ -347,14 +433,15 @@ uint8_t send_ASCII_Message(char* msg)
 		}
 		else return -2;
 	}
-	free(cmd);
-	/* create message string*/
+
+	/*create message string*/
 	size_t len = strlen(msg)+strlen("AT+SBDWT=\r");
+	char* cmd = (char*)message_buff;
 	char atarr[len];
 	memset(atarr,0,len);
 	strcat(atarr,"AT+SBDWT=");
 	strcat(atarr,msg);
-	cmd = send_ATcmd(atarr,10000);
+	send_ATcmd(atarr,10000);
 	if(strcasecmp(cmd,(char*)"OK") !=0)
 	{
 		if(strcmp(msg,(char*)"TIMEOUT")==0)
@@ -375,60 +462,177 @@ uint8_t send_ASCII_Message(char* msg)
 	return 0;
 }
 
+uint8_t send_Binary_Message(uint8_t *msg, uint16_t size)
+{
+
+	/* Set Flow control off*/
+	int8_t flag = send_ATcmd("AT&K0\r",1000);
+	if(flag != 0)
+	{
+		//Timeout
+		return -2;
+	}else
+	{
+		if(strcmp((char*)temp_buff,"OK") != 0)
+		{
+			//Error message
+			return -3;
+		}
+	}
+	/* Tell Iridium data is binary*/
+	char atarr [12];
+	sprintf(atarr,"AT+SBDWB=%d\r",size);
+	send_ATcmd(atarr,1000);
+	//check for ready message
+	char* imsg= (char*)temp_buff;
+	imsg = strtok((char*)temp_buff,"\r\n");
+	uint8_t msg_ready = 0;
+	while(imsg != NULL)
+	{
+		if(strcmp((char*)msg,"READY"))
+		{
+			msg_ready = 1;
+			break;
+		}
+		imsg = strtok(NULL,"\r\n");
+	}
+	if(!msg_ready)
+	{
+		return -3;
+	}
+
+	/* create message string*/
+	uint16_t temp = calculate_checkSum(msg,size);
+	uint8_t check_sum[3]  = {(uint8_t)(temp&0xFF00),(uint8_t)temp&0xFF,0x0d};
+	//transmit message
+	transmit_bin_Data(msg,size);
+	transmit_bin_Data(check_sum,3);
+	//wait for response
+	status_Received = 1;
+	while(IR_Rx_done != 1);
+	IR_Rx_done= 0;
+	switch ((bin_message_received-48)) {
+		case 0:
+			//check if status ok
+			if(strcmp((char*)temp_buff,"OK") != 0)
+			{
+				return -3;
+			}
+			break;
+		case 1:
+			//timeout
+			return -1;
+		case 2:
+			//invalid checksum
+			return -4;
+		default:
+			break;
+	}
+	//begin SBDIX session
+	return 0;
+}
+
+uint16_t calculate_checkSum(uint8_t* messagebuff, uint8_t size)
+{
+	size_t sum = 0;
+	for (int i = 0; i < size; ++i)
+	{
+		sum+= messagebuff[i];
+	}
+	//return last 16 bits
+	return (uint16_t)(sum & 0xFFFF);
+}
+
+//==========================================================================
 /** IRQ HANDLERS **/
 void Iridium_USART_IRQHandler(void)
 {
-	// set RX_done flag to 0
-	/* get info*/
-
-	uint16_t byte = Iridium_USART->DR;
-	/* Add to buffer and increment pointer*/
-	if(Iridium_Buff_Index < Iridium_RX_Buffsize)
+	//TODO: USART pin handler
+	if (USART_GetFlagStatus(Iridium_USART,USART_FLAG_IDLE) != RESET)
 	{
-			Iridium_Rx_Buff[Iridium_Buff_Index] = (uint8_t)byte;
-			if((Iridium_Rx_Buff[Iridium_Buff_Index] == 0xA)&&(Iridium_Rx_Buff[Iridium_Buff_Index] == 0xA))
+		/* Clear USART registers */
+		volatile uint32_t tmp;
+		tmp = USART_GetITStatus(Iridium_USART, USART_IT_IDLE);
+		tmp = USART_ReceiveData(Iridium_USART);
+		(void)tmp;
+		/* Disable DMA RX Stream */
+		DMA_Cmd(Iridium_DMA_RX_Stream, DISABLE);
+		while (DMA_GetCmdStatus(Iridium_DMA_RX_Stream) != DISABLE) { ; }
+	}
+}
+
+#ifdef IRIDIUM_Periph_Use_DMA
+void DMA_USART_RX_IRQHandler(void)
+{
+	/* Test on DMA Stream Transfer Complete interrupt */
+		if (DMA_GetFlagStatus(Iridium_DMA_RX_Stream, DMA_FLAG_TCIF1) != RESET)
+		{
+			Iridium_data_length = Iridium_RX_Buffsize - DMA_GetCurrDataCounter(Iridium_DMA_RX_Stream);
+
+			/* Clear DMA Stream Transfer Complete interrupt pending bit */
+			DMA_ClearITPendingBit(Iridium_DMA_RX_Stream, DMA_IT_TCIF1);
+
+			/* Enable DMA transfer */
+			#ifdef IRIDIUM_MEM_Use_DMA
+			DMA_Cmd(Iridium_DMA_MEM_Stream, ENABLE);
+			while (DMA_GetCmdStatus(Iridium_DMA_MEM_Stream ) != ENABLE) { ; }
+
+			#else
+			DMA_Cmd(Iridium_DMA_RX_Stream, ENABLE);
+			while (DMA_GetCmdStatus(Iridium_DMA_RX_Stream) != ENABLE) { ; }
+			#endif
+		}
+}
+#endif
+
+#ifdef IRIDIUM_MEM_Use_DMA
+void DMA_USART_MEM_IRQHandler(void)
+{
+	if (DMA_GetFlagStatus(Iridium_DMA_MEM_Stream, DMA_FLAG_TCIF0) != RESET)
+		{
+
+			//set flag
+
+			if(session_flag)
 			{
-				//verbose message already started
-				if(IR_RxV_st == 1)
+				if(strlen((char*)Iridium_Rx_Buff)> 9)
 				{
 					IR_Rx_done = 1;
-					IR_RxV_st = 0;
-					USART_ITConfig(Iridium_USART,USART_IT_RXNE,DISABLE);
-				}else
-				{
-					IR_RxV_st = 1;
+					//Get Message
+					get_AT_response();
 				}
+			}else
+			{
+				IR_Rx_done = 1;
+				//Get Message
+				get_AT_response();
 			}
-			Iridium_Buff_Index++;
-	}else
-	{
-		//if buffer is full, end transmission
-		IR_Rx_done = 1;
-		IR_RxV_st = 0;
-		USART_SendBreak(Iridium_USART);
-		USART_ITConfig(Iridium_USART,USART_IT_RXNE,DISABLE);
-	}
-
-
-	USART_ClearITPendingBit(Iridium_USART,USART_IT_RXNE);
+			/* Enable DMA transfer */
+			DMA_Cmd(Iridium_DMA_RX_Stream, ENABLE);
+			while (DMA_GetCmdStatus(Iridium_DMA_RX_Stream) != ENABLE) { ; }
+			/* Clear DMA Stream Transfer Complete interrupt pending bit */
+			DMA_ClearITPendingBit(Iridium_DMA_MEM_Stream, DMA_IT_TCIF0);
+		}
 }
+#endif
 
-void NetAV_EXTI_IRQHandler(void)
+void   EXTI0_IRQHandler(void)
 {
-	if(EXTI_GetITStatus(NetAv_EXTI_Line) == SET)
+	if(EXTI_GetITStatus(EXTI_Line0) != RESET)
 	{
+		//check flag
 		if(Wait_for_network)
 		{
-			if(create_SBD_Session() == 0)
+			int8_t flag = create_SBD_Session();
+			if(flag == 0)
 			{
-				Wait_for_network = 0;
 				STM_EVAL_LEDOn(LED3);
+				NVIC_DisableIRQ(EXTI0_IRQn);
 			}
+
 		}
+		EXTI_ClearITPendingBit(EXTI_Line0);
 	}
-	 EXTI_ClearITPendingBit(NetAv_EXTI_Line);
 }
-
-
 
 
