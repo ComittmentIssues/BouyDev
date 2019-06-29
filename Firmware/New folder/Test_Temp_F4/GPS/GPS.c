@@ -175,14 +175,14 @@ unsigned char USART_receive_byte(void)
 
 //==========================================================================
 /* USART BUFFER FUNCTIONS*/
-static void zero_dma_gnss_memory(void)
+void zero_dma_gnss_memory(void)
 {
 		for (int i = 0; i < DMA_RX_BUFFER_SIZE; i++)
 		{
 			DMA_RX_Buffer[i] = 0;
 		}
 }
-static void zero_gnss_memory(void)
+void zero_gnss_memory(void)
 	{
 		for (int i = 0; i < GNSS_LOG_BUFFER_SIZE; i++){
 			GNSS_LOG_Buffer[i] = 0;

@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;Delay.c, Delay.h, Iridium.c, Iridium.h&apos; to &apos;src&apos;" description="Move 4 resources to &apos;src&apos;" destination="src" element1="Iridium/Delay.c" element2="Iridium/Delay.h" element3="Iridium/Iridium.c" element4="Iridium/Iridium.h" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="4" stamp="1561582237255" updateReferences="true"/>
+</session>

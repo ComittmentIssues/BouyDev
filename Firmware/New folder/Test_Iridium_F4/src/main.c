@@ -76,9 +76,18 @@ int main(void)
 
 	while(1)
 	{
-		Delay_begin_Timeout(500);
-			while(!timeout);
-			STM_EVAL_LEDToggle(LED6);
+		if(Wait_for_network)
+		{
+			uint8_t flag = GPIO_ReadInputDataBit(GPIOB,GPIO_Pin_0);
+			if(flag == 1)
+			{
+				if(create_SBD_Session() == 0)
+				{
+					STM_EVAL_LEDOn(LED3);
+					Wait_for_network = 0;
+				}
+			}
+		}
 	}
   return 0;
 }
@@ -350,7 +359,6 @@ void test3(void)
 			if(flag == -2)
 			{
 				Wait_for_network = 1;
-				NVIC_EnableIRQ(EXTI0_IRQn);
 			}
 		}
 }

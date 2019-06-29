@@ -29,6 +29,8 @@ SOFTWARE.
 
 /* Includes */
 #include <defines.h>
+#include <Delay.h>
+#include <Iridium.h>
 #include <stdlib.h>
 #include <tm_stm32f4_delay.h>
 #include "stm32f4xx.h"
@@ -38,13 +40,12 @@ SOFTWARE.
 #include "../GPS/GPS.h"
 #include "../Temp_sensor/tm_stm32f4_ds18b20.h"
 #include "../Temp_sensor/tm_stm32f4_onewire.h"
-#include "memory.h"
-#include "../src/fatfs/ff.h"
+
 /* private structs*/
 typedef struct{
 
 	Coord_t coord;
-	uint16_t Etime;
+	uint32_t Etime;
 	Diagnostic_t diag;
 	float temp;
 	float battery_voltage;
@@ -54,14 +55,26 @@ typedef struct{
 #define One_Wire_Pin GPIO_PIN_6
 /* Private variables */
 char buff[40];
+uint8_t logbuff[26];
 float temp;
 uint8_t device[8];
 TM_OneWire_t oneWire;
-FATFS FatFs;
 Packet packet;
+/* Flags*/
+uint8_t devices;
+uint8_t  TX_ready;
+uint8_t SBD_ready;
+uint8_t msg_timeout;
+static const Packet empty;
 /* Private function prototypes */
 uint8_t init_temp_sensor(void);
 void ftoa(float f);
+void get_Temp(float* temp);
+int32_t float_to_int(float f);
+void to_binary_format(Packet packet);
+void clear_packet(void);
+void test_Packet(void);
+
 /* Private functions */
 
 /**
@@ -73,33 +86,94 @@ void ftoa(float f);
 */
 int main(void)
 {
-	  /* Initialize LEDs */
-	  STM_EVAL_LEDInit(LED3); STM_EVAL_LEDInit(LED4); STM_EVAL_LEDInit(LED5); STM_EVAL_LEDInit(LED6);
-	  init_temp_sensor();
-	  init_USART_GPS();
+	test_Packet();
+	to_binary_format(packet);
 
+	while(1)
+	{
 
-
-
- /* TODO - Add your application code here */
-
-
-  /* Infinite loop */
-
-
-
- while(1)
- {
-	 //wait for full packet
-	 if(packet_full == 7)
-	 {
-		 packet.Etime = eTime;
-		 packet.battery_voltage = 3.3;
-		 packet.coord = GPS_coord;
-		 packet.diag = diag;
-	 }
-
- }
+	}
+//	  /* Initialize LEDs */
+//	  STM_EVAL_LEDInit(LED3); STM_EVAL_LEDInit(LED4); STM_EVAL_LEDInit(LED5); STM_EVAL_LEDInit(LED6);
+//	  init_Delay();
+//	  init_temp_sensor();
+//	  init_USART_GPS();
+//	  TX_ready = 0;
+//	  /* initialise Iridium Module */
+//	  for (int i = 0; i < 10; ++i)
+//	  {
+//		  uint8_t ir_flag = init_Iridium_Module();
+//		if (ir_flag ==0 )
+//		{
+//			STM_EVAL_LEDOn(LED3);
+//			break;
+//		}else
+//		{
+//			deinit_Iridium_Module();
+//		}
+//		Delay_begin_Timeout(3000);
+//		while(!timeout);
+//		STM_EVAL_LEDToggle(LED3);
+//	  }
+//
+//
+//
+//  /* Infinite loop */
+//
+//
+//
+// while(1)
+// {
+//	 //wait for full packet
+//	 if((!TX_ready)&&(packet_full == 7))
+//	 {
+//		 packet.Etime = eTime;
+//		 packet.battery_voltage = 3.3;
+//		 packet.coord = GPS_coord;
+//		 packet.diag = diag;
+//		 if(devices)
+//		 {
+//			 float temp;
+//			 get_Temp(&temp);
+//			 packet.temp = temp;
+//		 }
+//		 to_binary_format(packet);
+//		 STM_EVAL_LEDOff(LED3);
+//		 TX_ready = 1;
+//	 }
+//	 if((TX_ready&&msg_timeout)||(TX_ready&&!msg_timeout))
+//	 {
+//		 int8_t flag =  send_Binary_Message(logbuff,length(logbuff));
+//		 if(flag == 0)
+//		 {
+//			 //set flag for transmission
+//			 SBD_ready = 1;
+//			 msg_timeout = 0;
+//			 STM_EVAL_LEDOn(LED4);
+//		 }if(flag == -2)
+//		 {
+//			msg_timeout = 1;
+//			STM_EVAL_LEDOn(LED3);
+//		}
+//	 }
+//	 if(SBD_ready&&network_available)
+//	 {
+//		 int8_t flag = create_SBD_Session();
+//		 if(flag == -2)
+//		 {
+//			 //delay for 3 seconds
+//			 Delay_begin_Timeout(30000);
+//		 }else
+//		 {
+//			 	 STM_EVAL_LEDOn(LED6);
+//			 	 clear_packet();
+//			 	 TX_ready = 0;
+//			 	 SBD_ready = 0;
+//		 }
+//	 }
+//
+//
+// }
 }
 
 uint8_t init_temp_sensor(void)
@@ -109,7 +183,7 @@ uint8_t init_temp_sensor(void)
 	  TM_DELAY_Init();
 	  TM_OneWire_Init(&oneWire, Temp_GPIO, GPIO_Pin_6);
 	  /* Check for devices on oneWire bus*/
-	  uint8_t devices = TM_OneWire_First(&oneWire);
+	  devices = TM_OneWire_First(&oneWire);
 	  if(devices)
 	  {
 		  STM_EVAL_LEDOn(LED3);
@@ -135,58 +209,78 @@ void ftoa(float f)
 
 }
 
-void SDCardRoutine(void)
+void to_binary_format(Packet packet)
 {
-	  /* SD Card Check */
-		  /* FATFS */
-		  FATFS file_system;
-		  FIL file_pointer;
-		  UINT bytes_written;
-		  FRESULT f_err_code = 0;
-		  file_flag.log_enabled = 1;
-		  file_flag.file_opened = 0;
-		  file_flag.filename_ok = PASS;
+	logbuff[0] = 1; // ID
+	logbuff[1] = (packet.Etime&0xFF000000)>>24;
+	logbuff[2] = (packet.Etime&0x00FF0000)>>16;
+	logbuff[3] = (packet.Etime&0x0000FF00)>>8;
+	logbuff[4] = (packet.Etime&0x000000FF);
+	/* Add coordinates bytes 1 - 5 = lat, bytes 6 - 10 = long*/
+	union
+	{
+		float a;
+		unsigned char bytes[4];
+	} coord_int;
+	coord_int.a = packet.coord.lat;
+	for (int i = 5; i < 9; ++i)
+	{
+		logbuff[i] = coord_int.bytes[i-5];
+	}
+	coord_int.a = packet.coord.longi;
 
-		  char status = 0;
-		  char filename[13] = "test_sd.bin\0";
-		  for (int i = 0; i < 50 ;i++)mydata[i] = 0xFA;
-		  while(status != SD_CARD_OK)
-		  {
-			  status = check_memory(&file_system,&file_pointer,f_err_code);
+	for (int i = 9; i < 13; ++i)
+	{
+			logbuff[i] =  coord_int.bytes[i-9];
+	}
+	/* break time down into MSB and LSB and store as as 2 unsigned bytes in big endian */
 
-		  }
-		 if (status == SD_CARD_OK){STM_EVAL_LEDOn(LED4);}
+	//convert HDOP,VDOP, PDOP to 2 bytes big endian
+	logbuff[13] = packet.diag.HDOP.digit;
+	logbuff[14] = packet.diag.HDOP.precision;
+	logbuff[15] = packet.diag.VDOP.digit;
+	logbuff[16] = packet.diag.VDOP.precision;
+	logbuff[17] = packet.diag.PDOP.digit;
+	logbuff[18] = packet.diag.PDOP.precision;
+	logbuff[19] = (packet.diag.num_sats);
+	logbuff[19] = logbuff[19]<<2;
+	logbuff[19] |= packet.diag.fix_type;
 
-		 /* SD card write procedure*/
-		 /*
-		  * Sample temp sensor, store in SD card, repeat 5 times
-		  */
-		for (int i = 0; i < 5; ++i) {
-			TM_DS18B20_Start(&oneWire,device);
-			while(!TM_DS18B20_AllDone(&oneWire));
-			TM_DS18B20_Read(&oneWire,device,&temp);
-			ftoa(temp); //store in buffer
+	/*Temperature - 2 bytes (dec), (precision ) - 2 decimal places */
+	if(devices)
+	{
+		logbuff[20] = (uint8_t)(packet.temp);
+		logbuff[21] = (uint8_t)(packet.temp*100+0.5); //adding 0.5 to account for offsets
+	}
+	/* Battery Conversion: 2 bytes */
+	logbuff[22] = (uint8_t)(packet.battery_voltage);
+	logbuff[23] = (uint8_t)(packet.battery_voltage*100+0.5);
 
-			status = write_to_memory(&file_system,&file_pointer,f_err_code,filename,&bytes_written,buff,strlen(buff),&file_flag);
-			while (status != (SD_CARD_OK| LOGGING_ON))
-			{
-				  status = write_to_memory(&file_system,&file_pointer,f_err_code,filename,&bytes_written,buff,strlen(buff),&file_flag);
-
-			}
-			STM_EVAL_LEDToggle(LED3);
-			Delayms(100);
-
-		}
-		file_flag.log_enabled = 0;
-		if(file_flag.log_enabled == 0)
-		{
-			status = write_to_memory(&file_system,&file_pointer,f_err_code,filename,&bytes_written,mydata,sizeof(mydata),&file_flag);
-			f_mount(0,0);
-			STM_EVAL_LEDOn(LED5);
-		}
 }
-/*
- * Callback used by stm32f4_discovery_audio_codec.c.
- * Refer to stm32f4_discovery_audio_codec.h for more info.
- */
+
+void clear_packet(void)
+{
+	for (int i = 0; i < length(logbuff); ++i)
+	{
+		logbuff[i]=0;
+	}
+}
+
+void test_Packet(void)
+{
+	packet.Etime = 1561633695;
+	Coord_t coord = {-33.95839,18.45991369};
+	packet.coord = coord;
+	DOP_t pdop = {10,2};
+	DOP_t vdop = {3,24};
+	DOP_t hdop = {21,21};
+	packet.diag.HDOP = hdop;
+	packet.diag.PDOP = pdop;
+	packet.diag.VDOP = vdop;
+	packet.diag.fix_type = 3;
+	packet.diag.num_sats = 12;
+	packet.battery_voltage = 3.3;
+	packet.temp = -23.43;
+}
+
 

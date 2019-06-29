@@ -115,6 +115,8 @@ extern "C" {
 #define ONEWIRE_CMD_MATCHROM			0x55
 #define ONEWIRE_CMD_SKIPROM				0xCC
 
+/*device available flag */
+uint8_t devices;
 /**
  * @}
  */

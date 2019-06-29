@@ -19,6 +19,7 @@
 		<item value="false" key="WizardFileSystemResourceExportPage1.STORE_RESOLVE_LINKED_RESOURCES_ID"/>
 		<item value="false" key="WizardFileSystemResourceExportPage1.STORE_CREATE_STRUCTURE_ID"/>
 		<list key="WizardFileSystemResourceExportPage1.STORE_DESTINATION_NAMES_ID">
+			<item value="C:\Users\user\Desktop\Iridium"/>
 			<item value="C:\Users\user\Desktop\GPS"/>
 		</list>
 	</section>
@@ -37,6 +38,7 @@
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_CREATE_CONTAINER_STRUCTURE_ID"/>
 		<item value="false" key="WizardFileSystemResourceImportPage1.STORE_OVERWRITE_EXISTING_RESOURCES_ID"/>
 		<list key="WizardFileSystemResourceImportPage1.STORE_SOURCE_NAMES_ID">
+			<item value="C:\Users\user\Desktop\Iridium"/>
 			<item value="C:\Users\user\Desktop\GPS"/>
 			<item value="C:\Users\user\Documents\University\Libraries\GPS\minmea-master"/>
 			<item value="C:\Users\user\Desktop\tasks\SD Card\stm32f4_sd\micro_sd_c_src\src"/>
