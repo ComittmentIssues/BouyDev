@@ -426,7 +426,7 @@ uint8_t Parse_GLL(char* GLLstring)
 {
 	/* Extract latitude*/
 	uint8_t flag = 0;
-	GLLstring+= 6;
+	GLLstring+= 7;
 	char* temp = GLLstring;
 	uint8_t count = 0;
 	while(*GLLstring++ != ',')

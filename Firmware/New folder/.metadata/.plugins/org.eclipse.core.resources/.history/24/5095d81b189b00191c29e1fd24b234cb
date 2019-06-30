@@ -144,7 +144,6 @@ int main(void)
 			 //set flag for transmission
 			 SBD_ready = 1;
 			 msg_timeout = 0;
-			 TX_ready = 0;
 			 STM_EVAL_LEDOn(LED4);
 			 STM_EVAL_LEDOff(LED3);
 		 }if(flag == -2)
@@ -164,7 +163,7 @@ int main(void)
 			 Delay_begin_Timeout(3000);
 		 }else
 		 {
-			 	flag = send_ATcmd("AT+SBDD0\r",1000);
+			 	 flag = send_ATcmd("AT+SBDD0\r",1000);
 			 	 STM_EVAL_LEDOn(LED6);
 			 	 clear_packet();
 			 	 TX_ready = 0;

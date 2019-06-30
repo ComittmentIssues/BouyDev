@@ -8779,3 +8779,29 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 !MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.concurrent.RequestMonitor@8ad50): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
 !SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-06-30 10:54:14.214
 !MESSAGE Interrupt failed.
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2019-06-30 11:18:25.401
+!MESSAGE Failed to execute MI command:
+target extended-remote localhost:61234
+
+Error message from debugger back end:
+localhost:61234: The system tried to join a drive to a directory on a joined drive.
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2019-06-30 11:18:43.738
+!MESSAGE Failed to execute MI command:
+target extended-remote localhost:61234
+
+Error message from debugger back end:
+localhost:61234: The system tried to join a drive to a directory on a joined drive.
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2019-06-30 11:19:22.966
+!MESSAGE Failed to execute MI command:
+target extended-remote localhost:61234
+
+Error message from debugger back end:
+localhost:61234: The system tried to join a drive to a directory on a joined drive.
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-06-30 11:24:46.532
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@ffddc0): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-06-30 11:24:46.532
+!MESSAGE Interrupt failed.
