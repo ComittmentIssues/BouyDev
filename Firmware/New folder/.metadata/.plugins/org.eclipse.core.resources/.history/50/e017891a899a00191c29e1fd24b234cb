@@ -74,7 +74,6 @@ int32_t float_to_int(float f);
 void to_binary_format(Packet packet);
 void clear_packet(void);
 void test_Packet(void);
-void de_init_peripherals(void);
 
 /* Private functions */
 
@@ -87,99 +86,94 @@ void de_init_peripherals(void);
 */
 int main(void)
 {
+	test_Packet();
+	to_binary_format(packet);
 
-	  /* Initialize LEDs */
-	  STM_EVAL_LEDInit(LED3); STM_EVAL_LEDInit(LED4); STM_EVAL_LEDInit(LED5); STM_EVAL_LEDInit(LED6);
-	  init_Delay();
-	  init_temp_sensor();
-	  init_USART_GPS();
-	  TX_ready = 0;
-	  /* initialise Iridium Module */
-	  for (int i = 0; i < 10; ++i)
-	  {
-		  uint8_t ir_flag = init_Iridium_Module();
-		if (ir_flag ==0 )
-		{
-			STM_EVAL_LEDOn(LED3);
-			break;
-		}else
-		{
-			deinit_Iridium_Module();
-		}
-		Delay_begin_Timeout(3000);
-		while(!timeout);
-		STM_EVAL_LEDToggle(LED3);
-	  }
+	while(1)
+	{
 
-
-
-  /* Infinite loop */
-
-
-
- while(1)
- {
-	 //wait for full packet
-	 if((!TX_ready)&&(packet_full == 7))
-	 {
-		 packet.Etime = eTime;
-		 packet.battery_voltage = 3.3;
-		 packet.coord = GPS_coord;
-		 packet.diag = diag;
-		 if(devices)
-		 {
-			 float temp;
-			 get_Temp(&temp);
-			 packet.temp = temp;
-		 }
-		 to_binary_format(packet);
-		 STM_EVAL_LEDOff(LED3);
-		 TX_ready = 1;
-	 }
-	 if((TX_ready&&msg_timeout)||(TX_ready&&!msg_timeout))
-	 {
-		 int8_t flag =  send_Binary_Message(logbuff,length(logbuff));
-		 if(flag == 0)
-		 {
-			 //set flag for transmission
-			 SBD_ready = 1;
-			 msg_timeout = 0;
-			 STM_EVAL_LEDOn(LED4);
-			 STM_EVAL_LEDOff(LED3);
-		 }if(flag == -2)
-		 {
-			msg_timeout = 1;
-			STM_EVAL_LEDOn(LED3);
-			STM_EVAL_LEDOff(LED4);
-		}
-	 }
-	 if(SBD_ready&&network_available)
-	 {
-		 int8_t flag = create_SBD_Session();
-		 if(flag == -2)
-		 {
-			 //delay for 3 seconds
-			 STM_EVAL_LEDToggle(LED5);
-			 Delay_begin_Timeout(3000);
-		 }else
-		 {
-			 	 flag = send_ATcmd("AT+SBDD0\r",1000);
-			 	 STM_EVAL_LEDOn(LED6);
-			 	 clear_packet();
-			 	 TX_ready = 0;
-			 	 SBD_ready = 0;
-			 	 de_init_peripherals();
-		 }
-	 }
-	 else
-	 {
-		 Delay_begin_Timeout(500);
-		 while(timeout != 1);
-		 STM_EVAL_LEDToggle(LED4);
-	 }
-
-
- }
+	}
+//	  /* Initialize LEDs */
+//	  STM_EVAL_LEDInit(LED3); STM_EVAL_LEDInit(LED4); STM_EVAL_LEDInit(LED5); STM_EVAL_LEDInit(LED6);
+//	  init_Delay();
+//	  init_temp_sensor();
+//	  init_USART_GPS();
+//	  TX_ready = 0;
+//	  /* initialise Iridium Module */
+//	  for (int i = 0; i < 10; ++i)
+//	  {
+//		  uint8_t ir_flag = init_Iridium_Module();
+//		if (ir_flag ==0 )
+//		{
+//			STM_EVAL_LEDOn(LED3);
+//			break;
+//		}else
+//		{
+//			deinit_Iridium_Module();
+//		}
+//		Delay_begin_Timeout(3000);
+//		while(!timeout);
+//		STM_EVAL_LEDToggle(LED3);
+//	  }
+//
+//
+//
+//  /* Infinite loop */
+//
+//
+//
+// while(1)
+// {
+//	 //wait for full packet
+//	 if((!TX_ready)&&(packet_full == 7))
+//	 {
+//		 packet.Etime = eTime;
+//		 packet.battery_voltage = 3.3;
+//		 packet.coord = GPS_coord;
+//		 packet.diag = diag;
+//		 if(devices)
+//		 {
+//			 float temp;
+//			 get_Temp(&temp);
+//			 packet.temp = temp;
+//		 }
+//		 to_binary_format(packet);
+//		 STM_EVAL_LEDOff(LED3);
+//		 TX_ready = 1;
+//	 }
+//	 if((TX_ready&&msg_timeout)||(TX_ready&&!msg_timeout))
+//	 {
+//		 int8_t flag =  send_Binary_Message(logbuff,length(logbuff));
+//		 if(flag == 0)
+//		 {
+//			 //set flag for transmission
+//			 SBD_ready = 1;
+//			 msg_timeout = 0;
+//			 STM_EVAL_LEDOn(LED4);
+//		 }if(flag == -2)
+//		 {
+//			msg_timeout = 1;
+//			STM_EVAL_LEDOn(LED3);
+//		}
+//	 }
+//	 if(SBD_ready&&network_available)
+//	 {
+//		 int8_t flag = create_SBD_Session();
+//		 if(flag == -2)
+//		 {
+//			 //delay for 3 seconds
+//			 Delay_begin_Timeout(30000);
+//		 }else
+//		 {
+//			 	 STM_EVAL_LEDOn(LED6);
+//			 	 clear_packet();
+//			 	 TX_ready = 0;
+//			 	 SBD_ready = 0;
+//		 }
+//	 }
+//
+//
+// }
 }
 
 uint8_t init_temp_sensor(void)
@@ -271,25 +265,11 @@ void clear_packet(void)
 		logbuff[i]=0;
 	}
 }
-void de_init_peripherals()
-{
-	deinit_Iridium_Module();
-	deinit_USART_GPS();
-	//loop infinite
-	STM_EVAL_LEDOff(LED3);STM_EVAL_LEDOff(LED4);STM_EVAL_LEDOff(LED5);STM_EVAL_LEDOff(LED6);
-	while(1)
-	{
-		for (int i = 0; i < 4; ++i)
-		{
-			STM_EVAL_LEDToggle(i);
-			Delay_begin_Timeout(200);
-		}
-	}
-}
+
 void test_Packet(void)
 {
 	packet.Etime = 1561633695;
-	Coord_t coord = {4717.11634,00833.91297};
+	Coord_t coord = {-33.95839,18.45991369};
 	packet.coord = coord;
 	DOP_t pdop = {10,2};
 	DOP_t vdop = {3,24};
@@ -302,4 +282,5 @@ void test_Packet(void)
 	packet.battery_voltage = 3.3;
 	packet.temp = -23.43;
 }
+
 

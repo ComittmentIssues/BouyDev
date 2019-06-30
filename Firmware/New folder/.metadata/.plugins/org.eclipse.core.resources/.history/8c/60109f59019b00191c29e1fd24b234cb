@@ -75,7 +75,6 @@ uint8_t packet_full; //0bx x x x	x T D C		//T = successfully recorded coordinate
 
 /* Private function prototypes */
 void init_USART_GPS(void);
-void deinit_USART_GPS(void);
 void USART_transmit_byte(uint8_t byte);
 void USART_transmit_string(unsigned char*);
 unsigned char USART_receive_byte(void);

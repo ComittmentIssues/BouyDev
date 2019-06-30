@@ -168,7 +168,7 @@ int main(void)
 			 	 clear_packet();
 			 	 TX_ready = 0;
 			 	 SBD_ready = 0;
-			 	 de_init_peripherals();
+			 	 deini
 		 }
 	 }
 	 else
@@ -302,4 +302,5 @@ void test_Packet(void)
 	packet.battery_voltage = 3.3;
 	packet.temp = -23.43;
 }
+
 

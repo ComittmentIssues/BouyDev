@@ -88,8 +88,7 @@ int16_t SBDIX_status[6];
 uint8_t IR_Rx_done;
 uint8_t status_Received;
 uint8_t bin_message_received;
-uint8_t network_available
-;
+uint8_t network_available;
 uint8_t session_flag;
 
 /*Private functions*/

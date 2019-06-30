@@ -74,7 +74,6 @@ int32_t float_to_int(float f);
 void to_binary_format(Packet packet);
 void clear_packet(void);
 void test_Packet(void);
-void de_init_peripherals(void);
 
 /* Private functions */
 
@@ -168,7 +167,6 @@ int main(void)
 			 	 clear_packet();
 			 	 TX_ready = 0;
 			 	 SBD_ready = 0;
-			 	 de_init_peripherals();
 		 }
 	 }
 	 else
@@ -302,4 +300,5 @@ void test_Packet(void)
 	packet.battery_voltage = 3.3;
 	packet.temp = -23.43;
 }
+
 

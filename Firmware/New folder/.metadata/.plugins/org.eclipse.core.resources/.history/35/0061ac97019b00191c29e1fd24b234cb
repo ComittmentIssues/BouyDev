@@ -74,7 +74,6 @@ int32_t float_to_int(float f);
 void to_binary_format(Packet packet);
 void clear_packet(void);
 void test_Packet(void);
-void de_init_peripherals(void);
 
 /* Private functions */
 
@@ -145,12 +144,10 @@ int main(void)
 			 SBD_ready = 1;
 			 msg_timeout = 0;
 			 STM_EVAL_LEDOn(LED4);
-			 STM_EVAL_LEDOff(LED3);
 		 }if(flag == -2)
 		 {
 			msg_timeout = 1;
 			STM_EVAL_LEDOn(LED3);
-			STM_EVAL_LEDOff(LED4);
 		}
 	 }
 	 if(SBD_ready&&network_available)
@@ -159,8 +156,7 @@ int main(void)
 		 if(flag == -2)
 		 {
 			 //delay for 3 seconds
-			 STM_EVAL_LEDToggle(LED5);
-			 Delay_begin_Timeout(3000);
+			 Delay_begin_Timeout(30000);
 		 }else
 		 {
 			 	 flag = send_ATcmd("AT+SBDD0\r",1000);
@@ -168,7 +164,6 @@ int main(void)
 			 	 clear_packet();
 			 	 TX_ready = 0;
 			 	 SBD_ready = 0;
-			 	 de_init_peripherals();
 		 }
 	 }
 	 else
@@ -302,4 +297,5 @@ void test_Packet(void)
 	packet.battery_voltage = 3.3;
 	packet.temp = -23.43;
 }
+
 

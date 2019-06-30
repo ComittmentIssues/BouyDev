@@ -3,7 +3,7 @@
 #include <stdint.h>
 #include <string.h>
 #include <math.h>
-char* payload ="015d15c4c4d0bcb2c36d77e444031b02a0015b1b1da5034a0000";
+char* payload ="\001]\024£\237îh\223EnzPD\025\025\003\030\n\0023\0\0\003J\0";
 uint8_t getByte(char* msg);
 float get_float(unsigned char* bytestring);
 void float_to_hex(float f,unsigned char* hexstring);
