@@ -1,9 +1,11 @@
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/arch=x86
 LaunchTargetManager/org.eclipse.launchbar.core.launchTargetType.local,Local/os=win32
-configDescList=
+configDescList=org.eclipse.launchbar.core.descriptorType.default\:Test_Flash_SYS_F4.elf
 eclipse.preferences.version=1
 org.eclipse.launchbar.core.descriptorType.default\:TEST_SDCard_F4.elf/activeLaunchMode=debug
 org.eclipse.launchbar.core.descriptorType.default\:TEST_SDCard_F4.elf/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
+org.eclipse.launchbar.core.descriptorType.default\:Test_Flash_SYS_F4.elf/activeLaunchMode=debug
+org.eclipse.launchbar.core.descriptorType.default\:Test_Flash_SYS_F4.elf/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
 org.eclipse.launchbar.core.descriptorType.default\:Test_GPS_F4.elf/activeLaunchMode=debug
 org.eclipse.launchbar.core.descriptorType.default\:Test_GPS_F4.elf/activeLaunchTarget=org.eclipse.launchbar.core.launchTargetType.local\:Local
 org.eclipse.launchbar.core.descriptorType.default\:Test_IRIDIUM_F4.elf/activeLaunchMode=debug

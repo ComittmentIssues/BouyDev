@@ -1,0 +1,26 @@
+/*
+ * memory.h
+ *
+ *  Created on: Jun 30, 2019
+ *      Author: Jamie
+ */
+
+#ifndef MEMORY_H_
+#define MEMORY_H_
+
+#include "stm32f4xx.h"
+#include "stm32f4xx_flash.h"
+#include "stdio.h"
+#include "stdlib.h"
+
+#define USE_FLASH
+/* DO NOT PLACE DATA IN PROXIMITY TO THE ORIGIN*/
+#define FLASH_Origin 0x08000000 //16kBytes
+
+#define STORAGE_SECTOR 0x08020000 //Sector 5 128 kbytes
+#define STORAGE_SECTOR_2 0x08040000 //Sector 6 128 kbytes
+
+/* Flash Opperations*/
+void write_EEPROM(uint32_t address,uint16_t* data, uint32_t length);
+
+#endif /* MEMORY_H_ */

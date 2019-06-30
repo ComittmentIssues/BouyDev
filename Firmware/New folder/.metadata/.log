@@ -8805,3 +8805,81 @@ localhost:61234: The system tried to join a drive to a directory on a joined dri
 !MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@ffddc0): Status ERROR: org.eclipse.cdt.dsf.gdb code=10004 Interrupt failed. null' resulted in an error.
 !SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10004 2019-06-30 11:24:46.532
 !MESSAGE Interrupt failed.
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-06-30 12:55:05.202
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-06-30 12:55:17.181
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-06-30 12:55:48.946
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-06-30 12:55:48.950
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-06-30 12:55:48.957
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-06-30 12:55:48.960
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-06-30 12:55:49.174
+!MESSAGE Failed to get device info (Debug) for project Test_Flash_SYS_F4
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-06-30 12:55:49.175
+!MESSAGE Failed to get device info (Debug) for project Test_Flash_SYS_F4
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-06-30 12:55:49.177
+!MESSAGE Failed to get device info (Debug) for project Test_Flash_SYS_F4
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-06-30 12:55:49.178
+!MESSAGE Failed to get device info (Release) for project Test_Flash_SYS_F4
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-06-30 12:55:49.180
+!MESSAGE Failed to get device info (Release) for project Test_Flash_SYS_F4
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-06-30 12:55:49.182
+!MESSAGE Failed to get device info (Release) for project Test_Flash_SYS_F4
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-06-30 12:55:49.229
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-06-30 12:55:49.232
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-06-30 12:55:49.238
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-06-30 12:55:49.240
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-06-30 12:55:49.340
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-06-30 12:55:49.343
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-06-30 12:55:55.657
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-06-30 12:55:56.162
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-06-30 12:56:00.186
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-06-30 12:56:00.368
+!MESSAGE Failed to find device info
+
+!ENTRY org.eclipse.cdt.core 1 0 2019-06-30 12:56:42.063
+!MESSAGE Indexed 'Test_Flash_SYS_F4' (38 sources, 78 headers) in 3.86 sec: 9,645 declarations; 32,838 references; 1 unresolved inclusions; 34 syntax errors; 0 unresolved names (0%)
+
+!ENTRY com.atollic.hardwaredebug.launch 2 0 2019-06-30 14:51:16.816
+!MESSAGE Won't launch debug session since we failed to locate the binary.
+
+!ENTRY com.atollic.truestudio.debug 4 0 2019-06-30 14:54:07.966
+!MESSAGE Error - No active DSF-Session. tmpSessionId = 32 (contextManager row 121)
+
+!ENTRY com.atollic.truestudio.debug 4 0 2019-06-30 14:54:07.968
+!MESSAGE Existing sessions are:

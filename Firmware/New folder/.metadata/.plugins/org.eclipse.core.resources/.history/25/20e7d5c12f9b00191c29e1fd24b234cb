@@ -1,0 +1,25 @@
+/*
+ * memory.c
+ *
+ *  Created on: Jun 30, 2019
+ *      Author: Jamie
+ */
+#include "memory.h"
+
+void write_EEPROM(uint32_t address,uint8_t* data, uint32_t length)
+{
+	/* Check if FLASH SR busy*/
+	FLASH_Unlock();
+	if(FLASH_GetFlagStatus(FLASH_FLAG_BSY) == RESET)
+	{
+		/* Clear opperations*/\
+		FLASH_Unlock();
+		FLASH->CR |= FLASH_CR_PG;
+		for (int i = 0; i < length; ++i)
+		{
+			FLASH_ProgramByte(*data++);
+		}
+
+	}
+}
+
