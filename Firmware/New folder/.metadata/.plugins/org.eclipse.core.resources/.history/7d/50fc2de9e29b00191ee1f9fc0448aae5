@@ -94,8 +94,6 @@ int main(void)
 	  init_temp_sensor();
 	  init_USART_GPS();
 	  TX_ready = 0;
-	  test_Packet();
-	  to_binary_format(packet);
 	  /* initialise Iridium Module */
 	  for (int i = 0; i < 10; ++i)
 	  {
@@ -263,7 +261,7 @@ void to_binary_format(Packet packet)
 	}
 	/* Battery Conversion: 2 bytes */
 	logbuff[22] = (uint8_t)(packet.battery_voltage);
-	logbuff[23] = (uint8_t)((packet.battery_voltage- (float)logbuff[22])*100);
+	logbuff[23] = (uint8_t)(packet.battery_voltage*100+0.5);
 
 }
 

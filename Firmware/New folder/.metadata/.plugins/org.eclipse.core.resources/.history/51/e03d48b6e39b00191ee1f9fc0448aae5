@@ -263,7 +263,7 @@ void to_binary_format(Packet packet)
 	}
 	/* Battery Conversion: 2 bytes */
 	logbuff[22] = (uint8_t)(packet.battery_voltage);
-	logbuff[23] = (uint8_t)((packet.battery_voltage- (float)logbuff[22])*100);
+	logbuff[23] = (uint8_t)(packet.battery_voltage*100+0.5);
 
 }
 
