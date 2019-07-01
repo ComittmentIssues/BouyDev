@@ -1,6 +1,0 @@
-"C:\Program Files\JetBrains\CLion 2018.2.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/MinGW/bin/mingw32-make.exe -DCMAKE_C_COMPILER=C:/MinGW/bin/mingw32-g++.exe -DCMAKE_CXX_COMPILER=C:/MinGW/bin/mingw32-c++.exe -G "CodeBlocks - MinGW Makefiles" C:\Users\user\Documents\GitHub\BouyDev\Tests\Iridium\decode
-CMake Error at CMakeLists.txt:1 (cmake_minimum_required):
-  CMake 3.14 or higher is required.  You are running version 3.12.1
-
-
--- Configuring incomplete, errors occurred!
