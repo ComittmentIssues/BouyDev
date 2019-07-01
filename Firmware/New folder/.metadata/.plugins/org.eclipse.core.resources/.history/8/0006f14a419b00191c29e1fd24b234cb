@@ -21,6 +21,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "eeprom.h"
+#include "stm32f4_discovery.h"
 
 /** @addtogroup EEPROM_Emulation
   * @{

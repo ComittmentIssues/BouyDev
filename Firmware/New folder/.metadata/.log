@@ -8883,3 +8883,32 @@ localhost:61234: The system tried to join a drive to a directory on a joined dri
 
 !ENTRY com.atollic.truestudio.debug 4 0 2019-06-30 14:54:07.968
 !MESSAGE Existing sessions are:
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2019-06-30 16:20:36.905
+!MESSAGE Unloading product manager
+
+!ENTRY org.eclipse.core.jobs 4 2 2019-06-30 18:09:36.549
+!MESSAGE An internal error occurred during: "Polling news feeds".
+!STACK 0
+java.lang.NullPointerException
+	at com.atollic.truestudio.productmanager.exposed.ProductConfig.getRootNode(Unknown Source)
+	at com.atollic.truestudio.productmanager.exposed.ProductConfig.getProductTarget(Unknown Source)
+	at com.atollic.truestudio.licensing.exposed.AtollicWebServices.createNewsFeedRequest(Unknown Source)
+	at com.atollic.truestudio.news.AtollicNewsAccessHandler.getRequestForUri(Unknown Source)
+	at org.eclipse.recommenders.news.impl.poll.DefaultDownloadService.openWebResourceAsStream(DefaultDownloadService.java:160)
+	at org.eclipse.recommenders.news.impl.poll.DefaultDownloadService.doDownload(DefaultDownloadService.java:115)
+	at org.eclipse.recommenders.news.impl.poll.DefaultDownloadService.download(DefaultDownloadService.java:102)
+	at org.eclipse.recommenders.news.impl.poll.DefaultNewsPollingService.performDownload(DefaultNewsPollingService.java:118)
+	at org.eclipse.recommenders.news.impl.poll.DefaultNewsPollingService.poll(DefaultNewsPollingService.java:91)
+	at org.eclipse.recommenders.news.impl.poll.DefaultNewsPollingService.poll(DefaultNewsPollingService.java:63)
+	at org.eclipse.recommenders.internal.news.rcp.poll.PollFeedsJob.run(PollFeedsJob.java:68)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+
+!ENTRY org.eclipse.core.jobs 4 2 2019-07-01 08:28:07.564
+!MESSAGE An internal error occurred during: "Polling news feeds".
+!STACK 0
+java.lang.NullPointerException
+	at org.eclipse.recommenders.internal.news.rcp.FeedDescriptors.getRegisteredFeeds(FeedDescriptors.java:50)
+	at org.eclipse.recommenders.internal.news.rcp.NewsRcpPreferences.getFeedDescriptors(NewsRcpPreferences.java:59)
+	at org.eclipse.recommenders.internal.news.rcp.poll.PollFeedsJob.run(PollFeedsJob.java:54)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
