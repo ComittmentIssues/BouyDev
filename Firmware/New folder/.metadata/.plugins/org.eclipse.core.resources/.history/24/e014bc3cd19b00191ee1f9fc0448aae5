@@ -47,7 +47,6 @@ typedef struct
 #define GPIO_USART1_TX  GPIO_Pin_7
 #define GPIO_USART1_RX_SRC GPIO_PinSource6
 #define GPIO_USART1_TX_SRC GPIO_PinSource7
-#define offset 315964800
 #define GPS_BAUDRATE  115200
 #define STM32_GNSS_USE_DMA
 #define STM32_GMEM_USE_DMA

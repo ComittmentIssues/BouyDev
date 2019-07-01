@@ -408,7 +408,7 @@ uint8_t parse_ZDA(char* ZDAstring)
 			return -1;
 		}
 	}
-	timepointer->tm_hour = (temp[0]-48)*10+ (temp[1]-48)+2;
+	timepointer->tm_hour = (temp[0]-48)*10+ (temp[1]-48)-1;
 	timepointer->tm_min = (temp[2]-48)*10+ (temp[3]-48)-1;
 	timepointer->tm_sec = (temp[4]-48)*10+ (temp[5]-48) -1 ;
 	while(*ZDAstring++ != ',');

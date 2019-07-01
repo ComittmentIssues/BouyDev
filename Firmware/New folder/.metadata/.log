@@ -8912,3 +8912,73 @@ java.lang.NullPointerException
 	at org.eclipse.recommenders.internal.news.rcp.NewsRcpPreferences.getFeedDescriptors(NewsRcpPreferences.java:59)
 	at org.eclipse.recommenders.internal.news.rcp.poll.PollFeedsJob.run(PollFeedsJob.java:54)
 	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:55)
+!SESSION 2019-07-01 09:06:48.984 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_121
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2019-07-01 09:07:04.069
+!MESSAGE Loading product manager
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2019-07-01 09:07:05.193
+!MESSAGE OS info: Windows 10, 10.0, x86
+
+!ENTRY TrueSTUDIO 1 0 2019-07-01 09:07:17.105
+!MESSAGE Target: ARM, Version: 7.1.1, Build date: 20170310-1837, Installation dir: /C:/Program Files (x86)/Atollic/TrueSTUDIO for ARM 7.1.1/ide/
+
+!ENTRY TrueSTUDIO 1 0 2019-07-01 09:07:17.107
+!MESSAGE Workspace: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder
+
+!ENTRY LicenseSystem 1 0 2019-07-01 09:07:17.118
+!MESSAGE Updated java.library.path to: C:;C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:/Program Files (x86)/Atollic/TrueSTUDIO for ARM 7.1.1/ide/jre/bin/client;C:/Program Files (x86)/Atollic/TrueSTUDIO for ARM 7.1.1/ide/jre/bin;C:/Program Files (x86)/Atollic/TrueSTUDIO for ARM 7.1.1/ide/jre/lib/i386;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\STMicroelectronics\STM32 ST-LINK Utility\ST-LINK Utility;C:\Program Files\MATLAB\R2018a\runtime\win64;C:\Program Files\MATLAB\R2018a\bin;C:\Program Files\PuTTY\;C:\Program Files\Git\cmd;C:\Program Files (x86)\GNU Tools ARM Embedded\7 2017-q4-major\bin;C:\Users\user\AppData\Local\Mu\bin;C:\Users\user\AppData\Local\Programs\Python\Python37-32\Scripts\;C:\Users\user\AppData\Local\Programs\Python\Python37-32\;C:\Users\user\AppData\Local\Microsoft\WindowsApps;C:\texlive\2016\bin\win32;C:\Program Files (x86)\GNU MCU Eclipse\Build Tools\2.9-20170629-1013\bin\bin;C:\Program Files (x86)\GNU MCU Eclipse\OpenOCD\0.10.0-5-20171110-1117\bin;C:\MinGW\bin;;C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1;;.
+
+!ENTRY TrueSTUDIO License 1 0 2019-07-01 09:07:18.178
+!MESSAGE Valid local features found: 0
+
+!ENTRY TrueSTUDIO License 1 0 2019-07-01 09:07:18.193
+!MESSAGE Valid network features found: 0
+
+!ENTRY TrueSTUDIO License 1 0 2019-07-01 09:07:18.193
+!MESSAGE License system initialized in 485ms
+
+!ENTRY TrueSTUDIO 1 0 2019-07-01 09:07:18.193
+!MESSAGE License numbers: 0 []
+
+!ENTRY TrueSTUDIO 1 0 2019-07-01 09:07:18.193
+!MESSAGE This installation is running as LITE
+
+!ENTRY org.eclipse.jface 2 0 2019-07-01 09:07:37.762
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2019-07-01 09:07:37.762
+!MESSAGE A conflict occurred for ALT+CTRL+T:
+Binding(ALT+CTRL+T,
+	ParameterizedCommand(Command(org.eclipse.team.svn.ui.command.EditPropertiesCommand,Show Properties,
+		,
+		Category(org.eclipse.team.svn.ui.command.category,SVN,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@a33187,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+CTRL+T,
+	ParameterizedCommand(Command(org.eclipse.tm.terminal.connector.local.command.launch,Open Local Terminal on Selection,
+		,
+		Category(org.eclipse.tm.terminal.view.ui.commands.category,Terminal Commands,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@67f8b4,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY com.atollic.truestudio.integration.processorexpert 0 0 2019-07-01 09:08:09.636
+!MESSAGE Atollic TrueSTUDIO Processor Expert integration is up.
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-07-01 09:08:09.869
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\user'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY edu.hawaii.ics.csdl.jupiter 1 0 2019-07-01 09:08:11.836
+!MESSAGE Code Review is up.
