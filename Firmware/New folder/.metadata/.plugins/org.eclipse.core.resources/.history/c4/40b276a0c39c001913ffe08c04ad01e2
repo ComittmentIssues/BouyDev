@@ -96,8 +96,6 @@ int main(void)
 {
 
 	  /* Initialize LEDs */
-	  FLASH_Unlock();
-	  EE_Init();
 	  STM_EVAL_LEDInit(LED3); STM_EVAL_LEDInit(LED4); STM_EVAL_LEDInit(LED5); STM_EVAL_LEDInit(LED6);
 	  uint32_t size = sizeof(logbuff)/sizeof(*logbuff);
 	  uint16_t temp;
@@ -111,10 +109,10 @@ int main(void)
 	  }else
 	  {
 		  load_Data(logbuff,Virtual_Base_Address,size);
-		  FLASH_EraseSector(FLASH_Sector_2,VOLTAGE_RANGE);
-
+		  FLASH_EraseSector(FLASH_Sector_0,VoltageRange_4);
+		  FLASH_EraseSector(FLASH_Sector_1,VoltageRange_4);
 	  }
-	  FLASH_Lock();
+
 	  clear_packet();
 //	  init_Delay();
 //	  init_temp_sensor();

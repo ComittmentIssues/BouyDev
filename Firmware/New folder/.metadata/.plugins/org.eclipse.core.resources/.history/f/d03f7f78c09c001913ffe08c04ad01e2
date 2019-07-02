@@ -52,11 +52,10 @@ typedef struct{
 	float battery_voltage;
 } Packet;
 /* Private macro */
-
 #define Temp_GPIO GPIOD
 #define One_Wire_Pin GPIO_PIN_6
-#define Virtual_Base_Address  0x1000
-#define Virtial_Base_Address2 0x2000
+#define Virtual_Base_Address  0x1000;
+#define Virtial_Base_Address2 0x2000;
 
 /* Private variables */
 char buff[40];
@@ -81,7 +80,6 @@ void to_binary_format(Packet packet);
 void clear_packet(void);
 void test_Packet(void);
 void de_init_peripherals(void);
-uint16_t VirtAddVarTab[3];
 
 /* Private functions */
 
@@ -96,25 +94,11 @@ int main(void)
 {
 
 	  /* Initialize LEDs */
-	  FLASH_Unlock();
-	  EE_Init();
 	  STM_EVAL_LEDInit(LED3); STM_EVAL_LEDInit(LED4); STM_EVAL_LEDInit(LED5); STM_EVAL_LEDInit(LED6);
+	  test_Packet();
+	  to_binary_format(packet);
 	  uint32_t size = sizeof(logbuff)/sizeof(*logbuff);
-	  uint16_t temp;
-	  //check for previous data
-	  if(EE_ReadVariable(Virtual_Base_Address,&temp))
-	  {
-		  test_Packet();
-		  to_binary_format(packet);
-
-		  Save_Data(logbuff,Virtual_Base_Address,size);
-	  }else
-	  {
-		  load_Data(logbuff,Virtual_Base_Address,size);
-		  FLASH_EraseSector(FLASH_Sector_2,VOLTAGE_RANGE);
-
-	  }
-	  FLASH_Lock();
+	  Save_Data(logbuff,Virtual_Base_Address,size);
 	  clear_packet();
 //	  init_Delay();
 //	  init_temp_sensor();

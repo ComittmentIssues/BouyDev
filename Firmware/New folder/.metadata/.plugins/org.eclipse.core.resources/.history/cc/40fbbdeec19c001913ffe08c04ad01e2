@@ -79,6 +79,7 @@ uint16_t EE_ReadVariable(uint16_t VirtAddress, uint16_t* Data);
 uint16_t EE_WriteVariable(uint16_t VirtAddress, uint16_t Data);
 int8_t Save_Data(uint8_t* data_buf,uint16_t virtual_base_address, uint32_t buff_len);
 int8_t load_Data(uint16_t*  data_buf,uint16_t virtual_base_address, uint32_t buff_len);
+FLASH_Status EE_Format(void);
 #endif /* __EEPROM_H */
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/

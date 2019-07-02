@@ -40,7 +40,6 @@ SOFTWARE.
 #include "../GPS/GPS.h"
 #include "../Temp_sensor/tm_stm32f4_ds18b20.h"
 #include "../Temp_sensor/tm_stm32f4_onewire.h"
-#include "../Flash/eeprom.h"
 
 /* private structs*/
 typedef struct{
@@ -52,12 +51,8 @@ typedef struct{
 	float battery_voltage;
 } Packet;
 /* Private macro */
-
 #define Temp_GPIO GPIOD
 #define One_Wire_Pin GPIO_PIN_6
-#define Virtual_Base_Address  0x1000
-#define Virtial_Base_Address2 0x2000
-
 /* Private variables */
 char buff[40];
 uint8_t logbuff[26];
@@ -72,7 +67,6 @@ uint8_t SBD_ready;
 uint8_t msg_timeout;
 static const Packet empty;
 /* Private function prototypes */
-
 uint8_t init_temp_sensor(void);
 void ftoa(float f);
 void get_Temp(float* temp);
@@ -81,7 +75,6 @@ void to_binary_format(Packet packet);
 void clear_packet(void);
 void test_Packet(void);
 void de_init_peripherals(void);
-uint16_t VirtAddVarTab[3];
 
 /* Private functions */
 
@@ -96,129 +89,100 @@ int main(void)
 {
 
 	  /* Initialize LEDs */
-	  FLASH_Unlock();
-	  EE_Init();
 	  STM_EVAL_LEDInit(LED3); STM_EVAL_LEDInit(LED4); STM_EVAL_LEDInit(LED5); STM_EVAL_LEDInit(LED6);
-	  uint32_t size = sizeof(logbuff)/sizeof(*logbuff);
-	  uint16_t temp;
-	  //check for previous data
-	  if(EE_ReadVariable(Virtual_Base_Address,&temp))
+	  init_Delay();
+	  init_temp_sensor();
+	  init_USART_GPS();
+	  TX_ready = 0;
+	  test_Packet();
+	  to_binary_format(packet);
+	  /* initialise Iridium Module */
+	  for (int i = 0; i < 10; ++i)
 	  {
-		  test_Packet();
-		  to_binary_format(packet);
-
-		  Save_Data(logbuff,Virtual_Base_Address,size);
-	  }else
-	  {
-		  load_Data(logbuff,Virtual_Base_Address,size);
-		  FLASH_EraseSector(FLASH_Sector_2,VOLTAGE_RANGE);
-
+		  uint8_t ir_flag = init_Iridium_Module();
+		if (ir_flag ==0 )
+		{
+			STM_EVAL_LEDOn(LED3);
+			break;
+		}else
+		{
+			deinit_Iridium_Module();
+		}
+		Delay_begin_Timeout(3000);
+		while(!timeout);
+		STM_EVAL_LEDToggle(LED3);
 	  }
-	  FLASH_Lock();
-	  clear_packet();
-//	  init_Delay();
-//	  init_temp_sensor();
-//	  init_USART_GPS();
-//	  TX_ready = 0;
-//	  test_Packet();
-//	  to_binary_format(packet);
-//	  /* initialise Iridium Module */
-//	  uint8_t iridum_working = 0;
-//	  for (int i = 0; i < 10; ++i)
-//	  {
-//		  uint8_t ir_flag = init_Iridium_Module();
-//		if (ir_flag ==0 )
-//		{
-//			STM_EVAL_LEDOn(LED3);
-//			iridum_working = 1;
-//			break;
-//		}else
-//		{
-//			deinit_Iridium_Module();
-//		}
-//		Delay_begin_Timeout(3000);
-//		while(!timeout);
-//		STM_EVAL_LEDToggle(LED3);
-//	  }
-//
-//
-//
-//  /* Infinite loop */
-//
-//
-//
-// while(1)
-// {
-//	 //wait for full packet
-//	 if((!TX_ready)&&(packet_full == 7))
-//	 {
-//		 packet.Etime = eTime;
-//		 packet.battery_voltage = 3.3;
-//		 packet.coord = GPS_coord;
-//		 packet.diag = diag;
-//		 if(devices)
-//		 {
-//			 float temp;
-//			 get_Temp(&temp);
-//			 packet.temp = temp;
-//		 }
-//		 to_binary_format(packet);
-//		 STM_EVAL_LEDOff(LED3);
-//		 if(iridum_working)
-//		 {
-//			 TX_ready = 1;
-//		 }else
-//		 {
-//
-//			 de_init_peripherals();
-//		 }
-//
-//	 }
-//	 if((TX_ready&&msg_timeout)||(TX_ready&&!msg_timeout))
-//	 {
-//		 int8_t flag =  send_Binary_Message(logbuff,length(logbuff));
-//		 if(flag == 0)
-//		 {
-//			 //set flag for transmission
-//			 SBD_ready = 1;
-//			 msg_timeout = 0;
-//			 TX_ready = 0;
-//			 STM_EVAL_LEDOn(LED4);
-//			 STM_EVAL_LEDOff(LED3);
-//		 }if(flag == -2)
-//		 {
-//			msg_timeout = 1;
-//			STM_EVAL_LEDOn(LED3);
-//			STM_EVAL_LEDOff(LED4);
-//		}
-//	 }
-//	 if(SBD_ready&&network_available)
-//	 {
-//		 int8_t flag = create_SBD_Session();
-//		 if(flag == -2)
-//		 {
-//			 //delay for 3 seconds
-//			 STM_EVAL_LEDToggle(LED5);
-//			 Delay_begin_Timeout(3000);
-//		 }else
-//		 {
-//			 	flag = send_ATcmd("AT+SBDD0\r",1000);
-//			 	 STM_EVAL_LEDOn(LED6);
-//			 	 clear_packet();
-//			 	 TX_ready = 0;
-//			 	 SBD_ready = 0;
-//			 	 de_init_peripherals();
-//		 }
-//	 }
-//	 else
-//	 {
-//		 Delay_begin_Timeout(500);
-//		 while(timeout != 1);
-//		 STM_EVAL_LEDToggle(LED4);
-//	 }
-//
-//
-// }
+
+
+
+  /* Infinite loop */
+
+
+
+ while(1)
+ {
+	 //wait for full packet
+	 if((!TX_ready)&&(packet_full == 7))
+	 {
+		 packet.Etime = eTime;
+		 packet.battery_voltage = 3.3;
+		 packet.coord = GPS_coord;
+		 packet.diag = diag;
+		 if(devices)
+		 {
+			 float temp;
+			 get_Temp(&temp);
+			 packet.temp = temp;
+		 }
+		 to_binary_format(packet);
+		 STM_EVAL_LEDOff(LED3);
+		 TX_ready = 1;
+	 }
+	 if((TX_ready&&msg_timeout)||(TX_ready&&!msg_timeout))
+	 {
+		 int8_t flag =  send_Binary_Message(logbuff,length(logbuff));
+		 if(flag == 0)
+		 {
+			 //set flag for transmission
+			 SBD_ready = 1;
+			 msg_timeout = 0;
+			 TX_ready = 0;
+			 STM_EVAL_LEDOn(LED4);
+			 STM_EVAL_LEDOff(LED3);
+		 }if(flag == -2)
+		 {
+			msg_timeout = 1;
+			STM_EVAL_LEDOn(LED3);
+			STM_EVAL_LEDOff(LED4);
+		}
+	 }
+	 if(SBD_ready&&network_available)
+	 {
+		 int8_t flag = create_SBD_Session();
+		 if(flag == -2)
+		 {
+			 //delay for 3 seconds
+			 STM_EVAL_LEDToggle(LED5);
+			 Delay_begin_Timeout(3000);
+		 }else
+		 {
+			 	flag = send_ATcmd("AT+SBDD0\r",1000);
+			 	 STM_EVAL_LEDOn(LED6);
+			 	 clear_packet();
+			 	 TX_ready = 0;
+			 	 SBD_ready = 0;
+			 	 de_init_peripherals();
+		 }
+	 }
+	 else
+	 {
+		 Delay_begin_Timeout(500);
+		 while(timeout != 1);
+		 STM_EVAL_LEDToggle(LED4);
+	 }
+
+
+ }
 }
 
 uint8_t init_temp_sensor(void)

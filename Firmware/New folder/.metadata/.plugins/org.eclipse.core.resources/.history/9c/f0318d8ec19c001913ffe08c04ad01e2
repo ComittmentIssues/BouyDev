@@ -371,7 +371,7 @@ int8_t load_Data(uint16_t*  data_buf,uint16_t virtual_base_address, uint32_t buf
   * @retval Status of the last operation (Flash write or erase) done during
   *         EEPROM formating
   */
-static FLASH_Status EE_Format(void)
+FLASH_Status EE_Format(void)
 {
   FLASH_Status FlashStatus = FLASH_COMPLETE;
 
