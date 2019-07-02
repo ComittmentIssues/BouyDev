@@ -45,7 +45,7 @@ int main(void)
 			/* Save data 1*/
 			uint16_t  data1[] = {1,2,3,4,5,256,512,1024,2048,4098};
 			uint16_t rxbuff1[length(data1)];
-			uint32_t Virt_base_address = 0x1000;
+			Virt_base_address = 0x1000;
 			load_Data(rxbuff1,Virt_base_address,length(rxbuff1));
 			while (1);
 }

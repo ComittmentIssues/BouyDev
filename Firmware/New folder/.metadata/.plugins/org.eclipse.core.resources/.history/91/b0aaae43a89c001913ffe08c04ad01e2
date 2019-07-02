@@ -22,10 +22,15 @@
 /* Includes ------------------------------------------------------------------*/
 #include "eeprom.h"
 
-#define length(x) sizeof(x)/sizeof(*x)
+/** @addtogroup EEPROM_Emulation
+  * @{
+  */
 
-int8_t Save_Data(uint16_t* data_buf,uint16_t virtual_base_address, uint32_t buff_len);
-int8_t load_Data(uint16_t*  data_buf,uint16_t virtual_base_address, uint32_t buff_len);
+/* Private typedef -----------------------------------------------------------*/
+/* Private define ------------------------------------------------------------*/
+/* Private macro -------------------------------------------------------------*/
+/* Private variables ---------------------------------------------------------*/
+
 /* Virtual address defined by the user: 0xFFFF value is prohibited */
 uint16_t VirtAddVarTab[NB_OF_VAR] = {0x5555, 0x6666, 0x7777};
 uint16_t VarDataTab[NB_OF_VAR] = {0, 0, 0};
@@ -42,25 +47,34 @@ uint16_t VarValue = 0;
 int main(void)
 {
 
-			/* Save data 1*/
-			uint16_t  data1[] = {1,2,3,4,5,256,512,1024,2048,4098};
-			uint16_t rxbuff1[length(data1)];
-			uint32_t Virt_base_address = 0x1000;
-			load_Data(rxbuff1,Virt_base_address,length(rxbuff1));
-			while (1);
+			uint16_t  data[] = {1,2,3,4,5,256,512,1024,2048,4098};
+			for (int i = 0; i < sizeof(data)/sizeof(*data); ++i)
+			{
+				EE_WriteVariable(VirtAddVarTab[0]+i,(uint16_t)data[i]);
+			}
+			//read data
+			uint16_t val[sizeof(data)/sizeof(*data)];
+			for (int i = 0; i < sizeof(data)/sizeof(*data); ++i)
+			{
+				EE_ReadVariable(VirtAddVarTab[0]+i,&val[i]);
+
+			}
+
+
+  while (1);
 }
 
 /*
  * Store an Array of Data in halfword format and send to virtual eeprom
  * takes */
-int8_t Save_Data(uint16_t* data_buf,uint16_t virtual_base_address, uint32_t buff_len)
+uint8_t Save_Data(uint16_t* data_buf,uint16_t virtual_base_address, uint32_t buff_len)
 {
 	FLASH_Unlock();
-	EE_Init();
-	for (int i = 0; i < buff_len; ++i)
+	for (int i = 0; i < max; ++i)
 	{
 		EE_WriteVariable(virtual_base_address+i, data_buf[i]);
 	}
+	FLASH_Lock();
 
 	return 0;
 }
@@ -69,7 +83,7 @@ int8_t load_Data(uint16_t*  data_buf,uint16_t virtual_base_address, uint32_t buf
 {
 	for (int i = 0; i < buff_len;++i)
 	{
-		if(EE_ReadVariable(virtual_base_address+i,&data_buf[i]) == 1)
+		if(EE_ReadVariable(virtual_base_address+i,data_buf[i]) == 1)
 		{
 			/* invalid virtual address given*/
 			return -1;

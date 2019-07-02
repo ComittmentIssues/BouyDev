@@ -26,11 +26,6 @@
 
 int8_t Save_Data(uint16_t* data_buf,uint16_t virtual_base_address, uint32_t buff_len);
 int8_t load_Data(uint16_t*  data_buf,uint16_t virtual_base_address, uint32_t buff_len);
-/* Virtual address defined by the user: 0xFFFF value is prohibited */
-uint16_t VirtAddVarTab[NB_OF_VAR] = {0x5555, 0x6666, 0x7777};
-uint16_t VarDataTab[NB_OF_VAR] = {0, 0, 0};
-uint16_t VarValue = 0;
-
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -41,13 +36,22 @@ uint16_t VarValue = 0;
   */
 int main(void)
 {
-
+			EE_Init();
 			/* Save data 1*/
 			uint16_t  data1[] = {1,2,3,4,5,256,512,1024,2048,4098};
-			uint16_t rxbuff1[length(data1)];
-			uint32_t Virt_base_address = 0x1000;
-			load_Data(rxbuff1,Virt_base_address,length(rxbuff1));
-			while (1);
+			uint16_t Virt_base_address = 0x1000;
+			uint32_t size = length(data1);
+			Save_Data(data1,Virt_base_address,size);
+			Virt_base_address += size+1;
+			uint16_t  data2[] = {'a','d','a','f','b','c','f'};
+			size = length(data2);
+			Save_Data(data2,Virt_base_address,size);
+
+
+
+
+
+  while (1);
 }
 
 /*
@@ -56,11 +60,11 @@ int main(void)
 int8_t Save_Data(uint16_t* data_buf,uint16_t virtual_base_address, uint32_t buff_len)
 {
 	FLASH_Unlock();
-	EE_Init();
 	for (int i = 0; i < buff_len; ++i)
 	{
 		EE_WriteVariable(virtual_base_address+i, data_buf[i]);
 	}
+	FLASH_Lock();
 
 	return 0;
 }

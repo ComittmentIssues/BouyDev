@@ -9402,3 +9402,258 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY edu.hawaii.ics.csdl.jupiter 1 0 2019-07-02 09:20:13.401
 !MESSAGE Code Review is up.
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:10:09.018
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:10:32.745
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:10:40.647
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:10:48.739
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:10:50.443
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:10:51.207
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:10:51.961
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:10:52.719
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:10:53.441
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:10:54.132
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:10:54.891
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:10:55.586
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:10:59.486
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:10.889
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:11.995
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:12.115
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:12.336
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:12.602
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:12.714
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:12.906
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:13.756
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:14.010
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:14.172
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:14.377
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:14.549
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:14.730
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:14.924
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:15.078
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:15.254
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:15.448
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:15.632
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:15.822
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:16.017
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:22.206
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:24.078
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:24.802
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:36.676
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:37.365
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:38.086
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:38.810
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:41.736
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:12:47.979
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:13:17.227
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:13:28.827
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:14:50.622
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:15:02.613
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:15:04.317
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:15:05.801
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:15:39.050
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:15:48.947
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:15:54.973
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:16:10.621
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.jface 2 0 2019-07-02 10:16:48.377
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2019-07-02 10:16:48.377
+!MESSAGE A conflict occurred for CTRL+G:
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.cdt.ui.search.finddecl,Declaration,
+		Searches for declarations of the selected element in the workspace,
+		Category(org.eclipse.cdt.ui.category.source,C/C++ Source,C/C++ Source Actions,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@a4424e,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.cdt.ui.cEditorScope,,,system)
+Binding(CTRL+G,
+	ParameterizedCommand(Command(org.eclipse.debug.ui.command.gotoaddress,Go to Address,
+		Go to Address,
+		Category(org.eclipse.debug.ui.category.run,Run/Debug,Run/Debug command category,true),
+		,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.debug.ui.memory.abstractasynctablerendering,,,system)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:17:00.332
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:17:01.214
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:17:02.138
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:18:26.039
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:18:36.314
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:18:38.101
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:18:39.169
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:18:39.435
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:18:40.116
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 10:18:44.512
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:17:43.470
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:17:44.743
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:17:44.787
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:17:44.851
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:17:45.568
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:17:45.623
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:17:45.687
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:17:45.721
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:19:50.822
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:20:24.095
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:20:31.671
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:20:35.467
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:25:41.598
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:25:47.247
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:25:50.624
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-02 11:25:55.302
+!MESSAGE Endianness was never initialized!

@@ -310,6 +310,7 @@ uint16_t EE_ReadVariable(uint16_t VirtAddress, uint16_t* Data)
       Address = Address - 4;
     }
   }
+
   /* Return ReadStatus value: (0: variable exist, 1: variable doesn't exist) */
   return ReadStatus;
 }
