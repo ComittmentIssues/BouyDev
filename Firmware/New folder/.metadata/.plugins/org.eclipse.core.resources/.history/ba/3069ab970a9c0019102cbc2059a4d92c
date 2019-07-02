@@ -32,7 +32,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* Virtual address defined by the user: 0xFFFF value is prohibited */
-uint16_t VirtAddVarTab[NB_OF_VAR] = {0x5555, 0x6666, 0x7777};
+//uint16_t VirtAddVarTab[NB_OF_VAR] = {0x5555, 0x6666, 0x7777};
 uint16_t VarDataTab[NB_OF_VAR] = {0, 0, 0};
 uint16_t VarValue = 0;
 
@@ -46,18 +46,50 @@ uint16_t VarValue = 0;
   */
 int main(void)
 {
-	FLASH_Unlock();
+  /*!< At this stage the microcontroller clock setting is already configured, 
+       this is done through SystemInit() function which is called from startup
+       file (startup_stm32f4xx.s) before to branch to application main.
+       To reconfigure the default setting of SystemInit() function, refer to
+       system_stm32f4xx.c file
+     */  
+   /* Unlock the Flash Program Erase controller */
+  FLASH_Unlock();
 
-			EE_Init();
-			uint8_t  data[] = "HELLO WORLD\n";
-			for (int i = 0; i < sizeof(data)/sizeof(*data); ++i)
-			{
-				EE_WriteVariable(VirtAddVarTab[0],(uint16_t)data[i]);
-			}
-			//read data
-			uint16_t val;
-			EE_ReadVariable(VirtAddVarTab[0],&val);
+  /* EEPROM Init */
+  EE_Init();
 
+/* --- Store successively many values of the three variables in the EEPROM ---*/
+  /* Store 0x1000 values of Variable1 in EEPROM */
+  for (VarValue = 1; VarValue <= 0x1000; VarValue++)
+  {
+    EE_WriteVariable(VirtAddVarTab[0], VarValue);
+  }
+
+  /* read the last stored variables data*/
+  EE_ReadVariable(VirtAddVarTab[0], &VarDataTab[0]);
+
+
+  /* Store 0x2000 values of Variable2 in EEPROM */
+  for (VarValue = 1; VarValue <= 0x2000; VarValue++)
+  {
+    EE_WriteVariable(VirtAddVarTab[1], VarValue);
+  }
+
+  /* read the last stored variables data*/
+  EE_ReadVariable(VirtAddVarTab[0], &VarDataTab[0]);
+  EE_ReadVariable(VirtAddVarTab[1], &VarDataTab[1]);
+
+
+  /* Store 0x3000 values of Variable3 in EEPROM */
+  for (VarValue = 1; VarValue <= 0x3000; VarValue++)
+  {
+    EE_WriteVariable(VirtAddVarTab[2], VarValue);
+  }
+
+  /* read the last stored variables data*/
+  EE_ReadVariable(VirtAddVarTab[0], &VarDataTab[0]);
+  EE_ReadVariable(VirtAddVarTab[1], &VarDataTab[1]);
+  EE_ReadVariable(VirtAddVarTab[2], &VarDataTab[2]);
 
   while (1);
 }

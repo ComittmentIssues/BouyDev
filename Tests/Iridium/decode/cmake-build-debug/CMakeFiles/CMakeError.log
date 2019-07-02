@@ -1,0 +1,178 @@
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: C:/MinGW/bin/mingw32-g++.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+1
+CMakeCCompilerId.c:2:3: error: #error "A C++ compiler has been selected for C."
+ # error "A C++ compiler has been selected for C."
+   ^~~~~
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: C:/MinGW/bin/mingw32-g++.exe 
+Build flags: 
+Id flags: -c 
+
+The output was:
+1
+CMakeCCompilerId.c:2:3: error: #error "A C++ compiler has been selected for C."
+ # error "A C++ compiler has been selected for C."
+   ^~~~~
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: C:/MinGW/bin/mingw32-g++.exe 
+Build flags: 
+Id flags: -Aa 
+
+The output was:
+1
+<command-line>: error: missing '(' after predicate
+CMakeCCompilerId.c:2:3: error: #error "A C++ compiler has been selected for C."
+ # error "A C++ compiler has been selected for C."
+   ^~~~~
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: C:/MinGW/bin/mingw32-g++.exe 
+Build flags: 
+Id flags: -D__CLASSIC_C__ 
+
+The output was:
+1
+CMakeCCompilerId.c:2:3: error: #error "A C++ compiler has been selected for C."
+ # error "A C++ compiler has been selected for C."
+   ^~~~~
+CMakeCCompilerId.c:330:64: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+ char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";
+                                                                ^~~
+CMakeCCompilerId.c:602:64: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+ char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";
+                                                                ^~~
+CMakeCCompilerId.c:603:60: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+ char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";
+                                                            ^~~
+CMakeCCompilerId.c:623:43: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+   "INFO" ":" "dialect_default[" C_DIALECT "]";
+                                           ^~~
+CMakeCCompilerId.c:631:10: error: cannot declare '::main' to be a global variable
+ int main(argc, argv) int argc; char *argv[];
+          ^~~~
+CMakeCCompilerId.c:631:10: error: 'argc' was not declared in this scope
+CMakeCCompilerId.c:631:16: error: 'argv' was not declared in this scope
+ int main(argc, argv) int argc; char *argv[];
+                ^~~~
+CMakeCCompilerId.c:631:20: error: expression list treated as compound expression in initializer [-fpermissive]
+ int main(argc, argv) int argc; char *argv[];
+                    ^
+CMakeCCompilerId.c:631:38: error: storage size of 'argv' isn't known
+ int main(argc, argv) int argc; char *argv[];
+                                      ^~~~
+CMakeCCompilerId.c:635:1: error: expected unqualified-id before '{' token
+ {
+ ^
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: C:/MinGW/bin/mingw32-g++.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+1
+CMakeCCompilerId.c:2:3: error: #error "A C++ compiler has been selected for C."
+ # error "A C++ compiler has been selected for C."
+   ^~~~~
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: C:/MinGW/bin/mingw32-g++.exe 
+Build flags: 
+Id flags: -c 
+
+The output was:
+1
+CMakeCCompilerId.c:2:3: error: #error "A C++ compiler has been selected for C."
+ # error "A C++ compiler has been selected for C."
+   ^~~~~
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: C:/MinGW/bin/mingw32-g++.exe 
+Build flags: 
+Id flags: -Aa 
+
+The output was:
+1
+<command-line>: error: missing '(' after predicate
+CMakeCCompilerId.c:2:3: error: #error "A C++ compiler has been selected for C."
+ # error "A C++ compiler has been selected for C."
+   ^~~~~
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: C:/MinGW/bin/mingw32-g++.exe 
+Build flags: 
+Id flags: -D__CLASSIC_C__ 
+
+The output was:
+1
+CMakeCCompilerId.c:2:3: error: #error "A C++ compiler has been selected for C."
+ # error "A C++ compiler has been selected for C."
+   ^~~~~
+CMakeCCompilerId.c:330:64: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+ char const* info_compiler = "INFO" ":" "compiler[" COMPILER_ID "]";
+                                                                ^~~
+CMakeCCompilerId.c:602:64: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+ char const* info_platform = "INFO" ":" "platform[" PLATFORM_ID "]";
+                                                                ^~~
+CMakeCCompilerId.c:603:60: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+ char const* info_arch = "INFO" ":" "arch[" ARCHITECTURE_ID "]";
+                                                            ^~~
+CMakeCCompilerId.c:623:43: warning: ISO C++ forbids converting a string constant to 'char*' [-Wwrite-strings]
+   "INFO" ":" "dialect_default[" C_DIALECT "]";
+                                           ^~~
+CMakeCCompilerId.c:631:10: error: cannot declare '::main' to be a global variable
+ int main(argc, argv) int argc; char *argv[];
+          ^~~~
+CMakeCCompilerId.c:631:10: error: 'argc' was not declared in this scope
+CMakeCCompilerId.c:631:16: error: 'argv' was not declared in this scope
+ int main(argc, argv) int argc; char *argv[];
+                ^~~~
+CMakeCCompilerId.c:631:20: error: expression list treated as compound expression in initializer [-fpermissive]
+ int main(argc, argv) int argc; char *argv[];
+                    ^
+CMakeCCompilerId.c:631:38: error: storage size of 'argv' isn't known
+ int main(argc, argv) int argc; char *argv[];
+                                      ^~~~
+CMakeCCompilerId.c:635:1: error: expected unqualified-id before '{' token
+ {
+ ^
+
+
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+mingw32-g++.exe: fatal error: no input files
+compilation terminated.
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+mingw32-g++.exe: fatal error: no input files
+compilation terminated.
+Determining if the C compiler works failed with the following output:
+Change Dir: C:/Users/user/Documents/GitHub/BouyDev/Tests/Iridium/decode/cmake-build-debug/CMakeFiles/CMakeTmp
+
+Run Build Command(s):C:/MinGW/bin/mingw32-make.exe cmTC_df862/fast 
+C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTC_df862.dir\build.make CMakeFiles/cmTC_df862.dir/build
+mingw32-make.exe[1]: Entering directory 'C:/Users/user/Documents/GitHub/BouyDev/Tests/Iridium/decode/cmake-build-debug/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_df862.dir/testCCompiler.c.obj
+C:\MinGW\bin\mingw32-g++.exe    -o CMakeFiles\cmTC_df862.dir\testCCompiler.c.obj   -c C:\Users\user\Documents\GitHub\BouyDev\Tests\Iridium\decode\cmake-build-debug\CMakeFiles\CMakeTmp\testCCompiler.c
+C:\Users\user\Documents\GitHub\BouyDev\Tests\Iridium\decode\cmake-build-debug\CMakeFiles\CMakeTmp\testCCompiler.c:2:3: error: #error "The CMAKE_C_COMPILER is set to a C++ compiler"
+ # error "The CMAKE_C_COMPILER is set to a C++ compiler"
+   ^~~~~
+CMakeFiles\cmTC_df862.dir\build.make:64: recipe for target 'CMakeFiles/cmTC_df862.dir/testCCompiler.c.obj' failed
+mingw32-make.exe[1]: *** [CMakeFiles/cmTC_df862.dir/testCCompiler.c.obj] Error 1
+mingw32-make.exe[1]: Leaving directory 'C:/Users/user/Documents/GitHub/BouyDev/Tests/Iridium/decode/cmake-build-debug/CMakeFiles/CMakeTmp'
+Makefile:120: recipe for target 'cmTC_df862/fast' failed
+mingw32-make.exe: *** [cmTC_df862/fast] Error 2
+
+

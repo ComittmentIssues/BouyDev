@@ -1,17 +1,40 @@
-"C:\Program Files\JetBrains\CLion 2019.1.4\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug "-DCMAKE_MAKE_PROGRAM=C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/mingw32-make.exe" "-DCMAKE_C_COMPILER=C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gcc.exe" "-DCMAKE_CXX_COMPILER=C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/g++.exe" -G "CodeBlocks - MinGW Makefiles" C:\Users\user\CLionProjects\decode
--- The C compiler identification is GNU 8.1.0
--- Check for working C compiler: C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gcc.exe
--- Check for working C compiler: C:/Program Files/mingw-w64/x86_64-8.1.0-posix-seh-rt_v6-rev0/mingw64/bin/gcc.exe -- works
--- Detecting C compiler ABI info
--- Detecting C compiler ABI info - done
--- Detecting C compile features
--- Detecting C compile features - done
--- Configuring done
--- Generating done
-CMake Warning:
-  Manually-specified variables were not used by the project:
+"C:\Program Files\JetBrains\CLion 2019.1.3\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/MinGW/bin/mingw32-make.exe -DCMAKE_C_COMPILER=C:/MinGW/bin/mingw32-g++.exe -DCMAKE_CXX_COMPILER=C:/MinGW/bin/mingw32-c++.exe -G "CodeBlocks - MinGW Makefiles" C:\Users\user\Documents\GitHub\BouyDev\Tests\Iridium\decode
+-- The C compiler identification is unknown
+-- Check for working C compiler: C:/MinGW/bin/mingw32-g++.exe
+-- Check for working C compiler: C:/MinGW/bin/mingw32-g++.exe -- broken
+CMake Error at C:/Program Files/JetBrains/CLion 2019.1.3/bin/cmake/win/share/cmake-3.14/Modules/CMakeTestCCompiler.cmake:60 (message):
+  The C compiler
 
-    CMAKE_CXX_COMPILER
+    "C:/MinGW/bin/mingw32-g++.exe"
+
+  is not able to compile a simple test program.
+
+  It fails with the following output:
+
+    Change Dir: C:/Users/user/Documents/GitHub/BouyDev/Tests/Iridium/decode/cmake-build-debug/CMakeFiles/CMakeTmp
+    
+    Run Build Command(s):C:/MinGW/bin/mingw32-make.exe cmTC_df862/fast 
+    C:/MinGW/bin/mingw32-make.exe -f CMakeFiles\cmTC_df862.dir\build.make CMakeFiles/cmTC_df862.dir/build
+    mingw32-make.exe[1]: Entering directory 'C:/Users/user/Documents/GitHub/BouyDev/Tests/Iridium/decode/cmake-build-debug/CMakeFiles/CMakeTmp'
+    Building C object CMakeFiles/cmTC_df862.dir/testCCompiler.c.obj
+    C:\MinGW\bin\mingw32-g++.exe    -o CMakeFiles\cmTC_df862.dir\testCCompiler.c.obj   -c C:\Users\user\Documents\GitHub\BouyDev\Tests\Iridium\decode\cmake-build-debug\CMakeFiles\CMakeTmp\testCCompiler.c
+    C:\Users\user\Documents\GitHub\BouyDev\Tests\Iridium\decode\cmake-build-debug\CMakeFiles\CMakeTmp\testCCompiler.c:2:3: error: #error "The CMAKE_C_COMPILER is set to a C++ compiler"
+     # error "The CMAKE_C_COMPILER is set to a C++ compiler"
+       ^~~~~
+    CMakeFiles\cmTC_df862.dir\build.make:64: recipe for target 'CMakeFiles/cmTC_df862.dir/testCCompiler.c.obj' failed
+    mingw32-make.exe[1]: *** [CMakeFiles/cmTC_df862.dir/testCCompiler.c.obj] Error 1
+    mingw32-make.exe[1]: Leaving directory 'C:/Users/user/Documents/GitHub/BouyDev/Tests/Iridium/decode/cmake-build-debug/CMakeFiles/CMakeTmp'
+    Makefile:120: recipe for target 'cmTC_df862/fast' failed
+    mingw32-make.exe: *** [cmTC_df862/fast] Error 2
+    
+
+  
+
+  CMake will not be able to correctly generate this project.
+Call Stack (most recent call first):
+  CMakeLists.txt:2 (project)
 
 
--- Build files have been written to: C:/Users/user/CLionProjects/decode/cmake-build-debug
+-- Configuring incomplete, errors occurred!
+See also "C:/Users/user/Documents/GitHub/BouyDev/Tests/Iridium/decode/cmake-build-debug/CMakeFiles/CMakeOutput.log".
+See also "C:/Users/user/Documents/GitHub/BouyDev/Tests/Iridium/decode/cmake-build-debug/CMakeFiles/CMakeError.log".

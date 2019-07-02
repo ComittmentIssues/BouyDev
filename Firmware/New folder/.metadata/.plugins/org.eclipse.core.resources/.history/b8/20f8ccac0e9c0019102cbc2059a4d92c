@@ -56,7 +56,7 @@ int main(void)
 			}
 			//read data
 			uint16_t val;
-			EE_ReadVariable(VirtAddVarTab[0],&val);
+			EE_ReadVariable(VirtAddVarTab,&val);
 
 
   while (1);

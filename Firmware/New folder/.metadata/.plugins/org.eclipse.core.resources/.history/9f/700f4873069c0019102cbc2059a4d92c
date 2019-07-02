@@ -21,46 +21,42 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "eeprom.h"
+#include "stm32f4_discovery.h"
 
-/** @addtogroup EEPROM_Emulation
-  * @{
-  */
+void go_to_sleep(void);
 
-/* Private typedef -----------------------------------------------------------*/
-/* Private define ------------------------------------------------------------*/
-/* Private macro -------------------------------------------------------------*/
-/* Private variables ---------------------------------------------------------*/
 
-/* Virtual address defined by the user: 0xFFFF value is prohibited */
-uint16_t VirtAddVarTab[NB_OF_VAR] = {0x5555, 0x6666, 0x7777};
-uint16_t VarDataTab[NB_OF_VAR] = {0, 0, 0};
-uint16_t VarValue = 0;
-
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
-
-/**
-  * @brief  Main program.
-  * @param  None
-  * @retval None
-  */
 int main(void)
 {
-	FLASH_Unlock();
 
-			EE_Init();
-			uint8_t  data[] = "HELLO WORLD\n";
-			for (int i = 0; i < sizeof(data)/sizeof(*data); ++i)
-			{
-				EE_WriteVariable(VirtAddVarTab[0],(uint16_t)data[i]);
-			}
-			//read data
-			uint16_t val;
-			EE_ReadVariable(VirtAddVarTab[0],&val);
-
-
-  while (1);
+	if((PWR->CSR & PWR_CSR_SBF))
+	{
+		PWR_ClearFlag(PWR_FLAG_SB);
+		PWR_ClearFlag(PWR_FLAG_WU);
+		STM_EVAL_LEDInit(LED3);
+		STM_EVAL_LEDOn(LED3);
+	}else
+	{
+		STM_EVAL_LEDInit(LED4);
+		STM_EVAL_LEDOn(LED4);
+	}
+	if(PWR_GetFlagStatus(PWR_FLAG_WU))
+	{
+		return PWR_FLAG_SB;
+	}
+  while (1)
+  {
+	  go_to_sleep();
+  }
 }
+void go_to_sleep(void)
+{
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR,ENABLE);
+	PWR_WakeUpPinCmd(ENABLE);
+	PWR_EnterSTANDBYMode();
+
+}
+
 
 #ifdef  USE_FULL_ASSERT
 

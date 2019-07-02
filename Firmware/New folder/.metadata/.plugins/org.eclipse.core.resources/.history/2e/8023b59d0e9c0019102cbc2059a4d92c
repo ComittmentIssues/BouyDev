@@ -46,18 +46,15 @@ uint16_t VarValue = 0;
   */
 int main(void)
 {
-	FLASH_Unlock();
+		FLASH_Unlock();
 
-			EE_Init();
-			uint8_t  data[] = "HELLO WORLD\n";
-			for (int i = 0; i < sizeof(data)/sizeof(*data); ++i)
-			{
-				EE_WriteVariable(VirtAddVarTab[0],(uint16_t)data[i]);
-			}
-			//read data
-			uint16_t val;
-			EE_ReadVariable(VirtAddVarTab[0],&val);
-
+		EE_Init();
+		uint8_t  data[] = "HELLO WORLD\n";
+		for (int i = 0; i < sizeof(data)/sizeof(*data); ++i)
+		{
+			EE_WriteVariable(VirtAddVarTab[0],(uint16_t)data[i]);
+		}
+		//read data
 
   while (1);
 }

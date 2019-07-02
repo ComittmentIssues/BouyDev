@@ -9,9 +9,11 @@
 		<item value="" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
-		<item value="true" key="wrap"/>
+		<item value="false" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="Virt"/>
+			<item value="VirtAddVarTab"/>
 			<item value="TIM2"/>
 			<item value="IRQn"/>
 			<item value="USART3"/>
