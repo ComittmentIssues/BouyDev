@@ -68,7 +68,7 @@ int main(void)
 			Atime.RTC_Hours += 1;
 		}else
 		{
-			Atime.RTC_Minutes += 10;
+			Atime.RTC_Minutes += 1;
 		}
 		set_RTCAlarm_A(&Atime,&alarmA);
 		STM_EVAL_LEDOn(LED3);

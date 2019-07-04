@@ -60,8 +60,6 @@ void set_RTCAlarm_A(RTC_TimeTypeDef* RTC_Alarmtime,RTC_AlarmTypeDef* Alarm_val)
 	// disable write protection
 	RTC_WriteProtectionCmd(DISABLE);
 	/* Disable Alarm*/
-	/* Clear any pending bits*/
-	RTC_ClearFlag(RTC_FLAG_ALRAF);
 	RTC_AlarmCmd(RTC_Alarm_A,DISABLE);
 	while(RTC_GetFlagStatus(RTC_FLAG_ALRAWF) == RESET);
 

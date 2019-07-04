@@ -37,23 +37,12 @@ uint16_t VarValue = 0;
 uint8_t dummy_packet[] = {0x01,0x5d,0x1a,0x13,0x49,0x4f,0xd7,0x51,0xc5,0x76,0x75,0xe4,0x44,0x03,0x00,0x02,0xf0,0x01,0x1f,0x1f,0x18,0x66,0x03,0x1d,00,00};
 
 RTC_TimeTypeDef Atime;
-RTC_TimeTypeDef ttime;
+
 RTC_AlarmTypeDef alarmA;
 int main(void)
 {
-		/* Check if software reset has occurred */
-		STM_EVAL_LEDInit(LED3);
-		if(PWR_GetFlagStatus(PWR_FLAG_WU) == SET)
+		if(((RTC_GetFlagStatus(RTC_FLAG_ALRAF) == SET)&&(PWR_GetFlagStatus(PWR_FLAG_WU)) == SET))
 		{
-			/* check if source came from alarm flag*/
-			if(RTC_GetFlagStatus(RTC_FLAG_ALRAF) == SET)
-			{
-				/* Disable Power*/
-				RCC_APB1PeriphResetCmd(RCC_APB1Periph_PWR,DISABLE);
-				/* Enable access to back up registers*/
-				PWR_BackupAccessCmd(ENABLE);
-
-			}
 			PWR_ClearFlag(PWR_FLAG_WU);
 
 		}else
@@ -68,21 +57,16 @@ int main(void)
 			Atime.RTC_Hours += 1;
 		}else
 		{
-			Atime.RTC_Minutes += 10;
+			Atime.RTC_Minutes += 1;
 		}
 		set_RTCAlarm_A(&Atime,&alarmA);
-		STM_EVAL_LEDOn(LED3);
+
 
 		//add one minute
 
 	while(1)
 	{
-		RTC_GetTime(RTC_Format_BIN,&ttime);
-		if(ttime.RTC_Seconds == 1)
-		{
-			set_StdBy_Mode();
-		}
-
+		set_StdBy_Mode();
 	}
 }
 
