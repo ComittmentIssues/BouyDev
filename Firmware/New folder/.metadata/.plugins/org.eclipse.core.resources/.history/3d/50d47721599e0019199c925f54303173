@@ -54,8 +54,6 @@ int main(void)
 			RTC_WriteProtectionCmd(ENABLE);
 			/* Locks the DBP bit of PWR_CR register again */
 			RCC_APB1PeriphResetCmd(RCC_APB1Periph_PWR, ENABLE);
-			RTC_ClearITPendingBit(RTC_IT_ALRA);
-			EXTI_ClearITPendingBit(EXTI_Line17);
 
 		}else
 		{

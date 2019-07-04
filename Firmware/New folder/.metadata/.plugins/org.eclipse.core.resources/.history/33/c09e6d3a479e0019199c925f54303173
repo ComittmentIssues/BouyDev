@@ -9,7 +9,10 @@
 #define RTC_C_
 
 #include "RTC.h"
-
+#include "stm32f4xx.h"
+#include "stm32f4xx_rtc.h"
+#include "stm32f4xx_pwr.h"
+#include "stm32f4_discovery.h"
 
 void init_Delay(void);
 
@@ -51,7 +54,7 @@ void init_RTC_LSI(void)
 	RCC_RTCCLKCmd(ENABLE);
 	RTC_WaitForSynchro();
 }
-void set_RTCAlarm_A(RTC_TimeTypeDef* RTC_Alarmtime,RTC_AlarmTypeDef* Alarm_val)
+void set_RTCAlarm_A(void)
 {
 
 
@@ -60,19 +63,19 @@ void set_RTCAlarm_A(RTC_TimeTypeDef* RTC_Alarmtime,RTC_AlarmTypeDef* Alarm_val)
 	// disable write protection
 	RTC_WriteProtectionCmd(DISABLE);
 	/* Disable Alarm*/
-	RTC_AlarmCmd(RTC_Alarm_A,DISABLE);
+	RTC_AlarmCmd(DISABLE);
 	while(RTC_GetFlagStatus(RTC_FLAG_ALRAWF) == RESET);
 
 	RTC_AlarmTypeDef RTC_AlarmInitStruct;
-	RTC_AlarmInitStruct.RTC_AlarmTime.RTC_Hours = RTC_Alarmtime->RTC_Hours;
-	RTC_AlarmInitStruct.RTC_AlarmTime.RTC_Minutes = RTC_Alarmtime->RTC_Minutes ;
-	RTC_AlarmInitStruct.RTC_AlarmTime.RTC_Seconds = RTC_Alarmtime->RTC_Seconds;
-	RTC_AlarmInitStruct.RTC_AlarmDateWeekDaySel =  Alarm_val->RTC_AlarmDateWeekDaySel;
-	RTC_AlarmInitStruct.RTC_AlarmDateWeekDay = Alarm_val->RTC_AlarmDateWeekDay;
-	RTC_AlarmInitStruct.RTC_AlarmMask = Alarm_val->RTC_AlarmMask;
+	RTC_AlarmInitStruct.RTC_AlarmTime.RTC_Hours = 0;
+	RTC_AlarmInitStruct.RTC_AlarmTime.RTC_Minutes = 0;
+	RTC_AlarmInitStruct.RTC_AlarmTime.RTC_Seconds = 12;
+	RTC_AlarmInitStruct.RTC_AlarmDateWeekDaySel = RTC_AlarmDateWeekDaySel_Date;
+	RTC_AlarmInitStruct.RTC_AlarmDateWeekDay = 1;
+	RTC_AlarmInitStruct.RTC_AlarmMask = RTC_AlarmMask_None;
 
 	/*set alarm interrupt*/
-	RTC_SetAlarm(RTC_Format_BIN,RTC_Alarm_A,&RTC_AlarmInitStruct);
+	RTC_SetAlarm(RTC_Format_BCD,RTC_Alarm_A,&RTC_AlarmInitStruct);
 
 	RTC_AlarmCmd(RTC_Alarm_A,ENABLE);
 	RTC_WriteProtectionCmd(ENABLE);
@@ -160,12 +163,12 @@ void TIM2_IRQHandler(void)
 }
 void RTC_Alarm_IRQHandler()
 {
-
-	RTC_ClearITPendingBit(RTC_IT_ALRA);
-	EXTI_ClearITPendingBit(EXTI_Line17);
+	if(RTC_GetFlagStatus(RTC_FLAG_ALRAF) == SET)
+	{
+		RTC_ClearITPendingBit(RTC_IT_ALRA);
+		EXTI_ClearITPendingBit(EXTI_Line17);
+	}
 }
-
-
 void RTC_WKUP_IRQHandler()
 {
 	__NOP();

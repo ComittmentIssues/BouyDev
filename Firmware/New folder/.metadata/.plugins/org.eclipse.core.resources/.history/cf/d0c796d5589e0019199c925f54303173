@@ -43,7 +43,7 @@ int main(void)
 {
 		if(((RTC_GetFlagStatus(RTC_FLAG_ALRAF) == SET)&&(PWR_GetFlagStatus(PWR_FLAG_WU)) == SET))
 		{
-			PWR_ClearFlag(PWR_FLAG_WU);
+			PWR_ClearFlag(PWR_FLAG_WU)
 			RCC_APB1PeriphResetCmd(RCC_APB1Periph_PWR, DISABLE);
 			/* Writes 1 in the DBP bit of PWR_CR register */
 			PWR_BackupAccessCmd(ENABLE);
@@ -54,8 +54,6 @@ int main(void)
 			RTC_WriteProtectionCmd(ENABLE);
 			/* Locks the DBP bit of PWR_CR register again */
 			RCC_APB1PeriphResetCmd(RCC_APB1Periph_PWR, ENABLE);
-			RTC_ClearITPendingBit(RTC_IT_ALRA);
-			EXTI_ClearITPendingBit(EXTI_Line17);
 
 		}else
 		{

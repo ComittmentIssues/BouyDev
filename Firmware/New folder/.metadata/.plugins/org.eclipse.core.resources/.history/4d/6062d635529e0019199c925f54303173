@@ -160,12 +160,12 @@ void TIM2_IRQHandler(void)
 }
 void RTC_Alarm_IRQHandler()
 {
-
-	RTC_ClearITPendingBit(RTC_IT_ALRA);
-	EXTI_ClearITPendingBit(EXTI_Line17);
+	if(RTC_GetFlagStatus(RTC_FLAG_ALRAF) == SET)
+	{
+		RTC_ClearITPendingBit(RTC_IT_ALRA);
+		EXTI_ClearITPendingBit(EXTI_Line17);
+	}
 }
-
-
 void RTC_WKUP_IRQHandler()
 {
 	__NOP();
