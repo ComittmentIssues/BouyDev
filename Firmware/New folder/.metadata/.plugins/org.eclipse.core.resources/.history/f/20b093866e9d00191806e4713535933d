@@ -1,0 +1,37 @@
+/*
+ * RTC.c
+ *
+ *  Created on: Jul 2, 2019
+ *      Author: Jamie
+ */
+
+#ifndef RTC_C_
+#define RTC_C_
+
+#include "RTC.h"
+#include "stm32f4xx.h"
+#include "stm32f4xx_rtc.h"
+void init_RTC()
+{
+	/* Disable RTC register write protection*/
+	RTC_WriteProtectionCmd(DISABLE);
+	/* Enter initialization mode */
+	RTC_EnterInitMode();
+	while(RTC_GetFlagStatus(RTC_FLAG_INITF) != SET);
+	/* Load Time and Date*/
+
+	/* Set time format*/
+}
+/*
+ * Configure RTC to use LSI clock
+ */
+void init_RTC_LSI(void)
+{
+	RCC_LSICmd(ENABLE);
+	while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET);
+	RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
+	RCC_RTCCLKCmd(ENABLE);
+	RTC_WaitForSynchro();
+}
+
+#endif /* RTC_C_ */

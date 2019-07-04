@@ -1,0 +1,153 @@
+/*
+ * RTC.c
+ *
+ *  Created on: Jul 2, 2019
+ *      Author: Jamie
+ */
+
+#ifndef RTC_C_
+#define RTC_C_
+
+#include "RTC.h"
+#include "stm32f4xx.h"
+#include "stm32f4xx_rtc.h"
+#include "stm32f4xx_pwr.h"
+void init_RTC()
+{
+	/* Power on back up registers*/
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR,ENABLE);
+	PWR_BackupAccessCmd(ENABLE);
+	/* Enable clock*/
+	init_RTC_LSI();
+	/* Disable RTC register write protection*/
+	RTC_WriteProtectionCmd(DISABLE);
+
+	/* Enter initialization mode */
+	RTC_EnterInitMode();
+	while(RTC_GetFlagStatus(RTC_FLAG_INITF) != SET);
+	/* Configure RTC mode*/
+	RTC_InitTypeDef RTC_InitStruct;
+	RTC_InitStruct.RTC_HourFormat = RTC_HourFormat_24;
+	RTC_InitStruct.RTC_SynchPrediv = 127; //set prescaler
+	RTC_InitStruct.RTC_AsynchPrediv = 249;
+	RTC_Init(&RTC_InitStruct);
+
+	/* Set time format to 00:00:00 am*/
+	RTC_TimeTypeDef RTC_TimeStruct;
+	RTC_TimeStruct.RTC_Seconds = 0;
+	RTC_TimeStruct.RTC_Minutes = 0;
+	RTC_TimeStruct.RTC_Hours = 0;
+	RTC_TimeStruct.RTC_H12 = RTC_H12_AM;
+	RTC_SetTime(RTC_Format_BCD, &RTC_TimeStruct);
+
+	/* Set Date to 01/01/1970*/
+	RTC_DateTypeDef RTC_DateStruct;
+	RTC_DateStruct.RTC_Date = 1;
+	RTC_DateStruct.RTC_Month = RTC_Month_January;
+	RTC_DateStruct.RTC_Year = 70;
+	RTC_SetDate(RTC_Format_BCD,&RTC_DateStruct);
+	/* Exit init mode*/
+	RTC_ExitInitMode();
+	/* enable write protection*/
+	RTC_WriteProtectionCmd(ENABLE);
+
+}
+/*
+ * Configure RTC to use LSE clock
+ */
+void init_RTC_LSI(void)
+{
+	/* Allow access to the RTC */
+	PWR_BackupAccessCmd(ENABLE);
+	RCC_LSICmd(ENABLE);
+	while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET);
+
+	RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
+	RCC_RTCCLKCmd(ENABLE);
+	RTC_WaitForSynchro();
+}
+void set_RTCAlarm_A(void)
+{
+	RTC_WriteProtectionCmd(DISABLE);
+	RTC_AlarmCmd(RTC_Alarm_A,DISABLE);
+	while((RTC->ISR & RTC_ISR_ALRAWF) ==0);
+	/* Configure Alarm*/
+	RTC_AlarmTypeDef RTC_AlarmInitStruct;
+	RTC_AlarmInitStruct.RTC_AlarmTime.RTC_Hours = 0;
+	RTC_AlarmInitStruct.RTC_AlarmTime.RTC_Minutes = 0;
+	RTC_AlarmInitStruct.RTC_AlarmTime.RTC_Seconds = 1;
+	RTC_AlarmInitStruct.RTC_AlarmDateWeekDaySel = RTC_AlarmDateWeekDaySel_Date;
+	RTC_AlarmInitStruct.RTC_AlarmDateWeekDay = 1;
+	RTC_AlarmInitStruct.RTC_AlarmMask = RTC_AlarmMask_All;
+	RTC_SetAlarm(RTC_Format_BIN,RTC_Alarm_A,&RTC_AlarmInitStruct);
+	/*set alarm interrupt*/
+	RTC_ITConfig(RTC_IT_ALRA,ENABLE);
+	NVIC_SetPriority(RTC_Alarm_IRQn,1);
+	NVIC_EnableIRQ(RTC_Alarm_IRQn);
+
+	RTC_AlarmCmd(RTC_Alarm_A,ENABLE);
+	RTC_WriteProtectionCmd(ENABLE);
+
+
+
+}
+
+
+void init_AutoWakeUp(void)
+{
+	/* Disable Write Protection*/
+	RTC_WriteProtectionCmd(DISABLE);
+	/* Disable Wake Up timer */
+	RTC_WakeUpCmd(DISABLE);
+	while(RTC_GetFlagStatus(RTC_FLAG_WUTWF) == RESET);
+	/* Set Wake up timer period*/
+	RTC_SetWakeUpCounter(1); //1 second
+	/* set configuration 2, 1 s wake up period*/
+	RTC_WakeUpClockConfig(RTC_WakeUpClock_CK_SPRE_16bits);
+	/* Enable Wake-up Timer interrupt */
+	RTC_ITConfig(RTC_IT_WUT,ENABLE);
+
+	/* Configure NVIC*/
+	NVIC_InitTypeDef NVIC_InitStructure;
+	NVIC_InitStructure.NVIC_IRQChannel = RTC_WKUP_IRQn;
+	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
+	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
+	NVIC_Init(&NVIC_InitStructure);
+	NVIC_EnableIRQ(RTC_WKUP_IRQn);
+
+	/* Enable Wake up Timer*/
+	RTC_ClearITPendingBit(RTC_IT_WUT);
+	RTC_ClearFlag( RTC_FLAG_WUTF );
+	PWR->CR |= PWR_CR_CWUF;
+
+	RTC_WakeUpCmd(ENABLE);
+	RTC_WriteProtectionCmd(ENABLE);
+
+
+}
+void set_StdBy_Mode(void)
+{
+	/* Enable Power command*/
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR,ENABLE);
+	/* Set sleep deep bit*/
+	SCB->SCR |= SCB_SCR_SLEEPDEEP_Msk;
+	/* select stdby mode*/
+	PWR->CR |= PWR_CR_PDDS;
+	/* Clear Wake Up flag*/
+	PWR->CR |= PWR_CR_CWUF;
+	/* enable wake up pin*/
+	PWR->CSR |= PWR_CSR_EWUP;
+	/* request wait for interrupt*/
+	__WFI();
+
+}
+void RTC_Alarm_IRQHandler()
+{
+	__NOP();
+}
+void RTC_WKUP_IRQHandler()
+{
+	__NOP();
+}
+#endif /* RTC_C_ */

@@ -1,0 +1,67 @@
+/*
+ * RTC.c
+ *
+ *  Created on: Jul 2, 2019
+ *      Author: Jamie
+ */
+
+#ifndef RTC_C_
+#define RTC_C_
+
+#include "RTC.h"
+#include "stm32f4xx.h"
+#include "stm32f4xx_rtc.h"
+void init_RTC()
+{
+	/* Power on back up registers*/
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_PWR,ENABLE);
+	PWR_BackupAccessCmd(ENABLE);
+	/* Enable clock*/
+	init_RTC_LSI();
+
+	/* Disable RTC register write protection*/
+	RTC_WriteProtectionCmd(DISABLE);
+	/* Enter initialization mode */
+	RTC_EnterInitMode();
+	while(RTC_GetFlagStatus(RTC_FLAG_INITF) != SET);
+	/* Configure RTC mode*/
+	RTC_InitTypeDef RTC_InitStruct;
+	RTC_InitStruct.RTC_HourFormat = RTC_HourFormat_24;
+	RTC_InitStruct.RTC_SynchPrediv = 124; //set prescaler
+	RTC_InitStruct.RTC_AsynchPrediv = 254;
+	RTC_Init(&RTC_InitStruct);
+
+	/* Set time format to 00:00:00 am*/
+	RTC_TimeTypeDef RTC_TimeStruct;
+	RTC_TimeStruct.RTC_Seconds = 0;
+	RTC_TimeStruct.RTC_Minutes = 0;
+	RTC_TimeStruct.RTC_Hours = 0;
+	RTC_TimeStruct.RTC_H12 = RTC_H12_AM;
+	RTC_SetTime(RTC_Format_BCD, &RTC_TimeStruct);
+
+	/* Set Date to 01/01/1970*/
+	RTC_DateTypeDef RTC_DateStruct;
+	RTC_DateStruct.RTC_Date = 1;
+	RTC_DateStruct.RTC_Month = RTC_Month_January;
+	RTC_DateStruct.RTC_Year = 0;
+	RTC_SetDate(RTC_Format_BCD,&RTC_DateStruct);
+	/* Exit init mode*/
+	RTC_ExitInitMode();
+
+	/* enable write protection*/
+	RTC_WriteProtectionCmd(ENABLE);
+
+}
+/*
+ * Configure RTC to use LSI clock
+ */
+void init_RTC_LSI(void)
+{
+	RCC_LSICmd(ENABLE);
+	while(RCC_GetFlagStatus(RCC_FLAG_LSIRDY) == RESET);
+	RCC_RTCCLKConfig(RCC_RTCCLKSource_LSI);
+	RCC_RTCCLKCmd(ENABLE);
+	RTC_WaitForSynchro();
+}
+
+#endif /* RTC_C_ */

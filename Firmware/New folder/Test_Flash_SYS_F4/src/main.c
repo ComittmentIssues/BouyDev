@@ -23,6 +23,10 @@
 #include "eeprom.h"
 #include "stdlib.h"
 #include "string.h"
+#include "RTC.h"
+#include "stm32f4_discovery.h"
+#include "time.h"
+
 #define length(x) sizeof(x)/sizeof(*x)
 
 
@@ -32,30 +36,20 @@ uint16_t VarDataTab[NB_OF_VAR] = {0, 0, 0};
 uint16_t VarValue = 0;
 uint8_t dummy_packet[] = {0x01,0x5d,0x1a,0x13,0x49,0x4f,0xd7,0x51,0xc5,0x76,0x75,0xe4,0x44,0x03,0x00,0x02,0xf0,0x01,0x1f,0x1f,0x18,0x66,0x03,0x1d,00,00};
 
-/* Private function prototypes -----------------------------------------------*/
-/* Private functions ---------------------------------------------------------*/
 
-/**
-  * @brief  Main program.
-  * @param  None
-  * @retval None
-  */
 int main(void)
 {
-	//save dummy data at a virtual address during
-	Save_Data(dummy_packet,0x1000,length(dummy_packet));
-	uint16_t data[length(dummy_packet)];
-	load_Data(data,0x1000,length(data));
-	while(1);
+		init_RTC();
+		STM_EVAL_LEDInit(LED3);STM_EVAL_LEDInit(LED5);STM_EVAL_LEDInit(LED6);
+		set_RTCAlarm_A();
+
+
+
+	while(1)
+	{
+		set_StdBy_Mode();
+	}
 }
-
-/*
- * Store an Array of Data in halfword format and send to virtual eeprom
- * takes */
-
-/**
-  * @}
-  */
 
 
 /******************* (C) COPYRIGHT 2011 STMicroelectronics *****END OF FILE****/
