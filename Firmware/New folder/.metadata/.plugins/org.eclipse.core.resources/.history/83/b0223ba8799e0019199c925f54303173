@@ -53,9 +53,8 @@ int main(void)
 				/* Enable access to back up registers*/
 				PWR_BackupAccessCmd(ENABLE);
 				// read block at virtual address
-				FLASH_Unlock();
 				EE_Init();
-
+				FLASH_Unlock();
 				if(EE_ReadVariable(VirtAddVarTab[0],&VarValue))
 				{
 					EE_WriteVariable(VirtAddVarTab[0],0x1);
@@ -75,18 +74,14 @@ int main(void)
 		}
 		RTC_GetTime(RTC_Format_BIN,&Atime);
 		alarmA.RTC_AlarmMask = (RTC_AlarmMask_Hours | RTC_AlarmMask_DateWeekDay | RTC_AlarmMask_Seconds);
-		Atime.RTC_Minutes+= 15;
-		if(Atime.RTC_Seconds > 59)
+		if(Atime.RTC_Minutes == 59)
 		{
-			Atime.RTC_Seconds -= 60; //add a minute
+			Atime.RTC_Seconds = 0; //add a minute
 			Atime.RTC_Minutes += 1;
-		}
-		if(Atime.RTC_Minutes > 59)
+		}else
 		{
-			Atime.RTC_Minutes = 0;
-			Atime.RTC_Hours++;
+			Atime.RTC_Seconds+= 5;
 		}
-
 		set_RTCAlarm_A(&Atime,&alarmA);
 		STM_EVAL_LEDOn(LED3);
 

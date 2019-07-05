@@ -74,17 +74,12 @@ int main(void)
 			init_RTC();
 		}
 		RTC_GetTime(RTC_Format_BIN,&Atime);
-		alarmA.RTC_AlarmMask = (RTC_AlarmMask_Hours | RTC_AlarmMask_DateWeekDay | RTC_AlarmMask_Seconds);
-		Atime.RTC_Minutes+= 15;
+		alarmA.RTC_AlarmMask = (RTC_AlarmMask_Hours | RTC_AlarmMask_DateWeekDay | RTC_AlarmMask_Minutes);
+		Atime.RTC_Seconds+= 10;
 		if(Atime.RTC_Seconds > 59)
 		{
 			Atime.RTC_Seconds -= 60; //add a minute
 			Atime.RTC_Minutes += 1;
-		}
-		if(Atime.RTC_Minutes > 59)
-		{
-			Atime.RTC_Minutes = 0;
-			Atime.RTC_Hours++;
 		}
 
 		set_RTCAlarm_A(&Atime,&alarmA);

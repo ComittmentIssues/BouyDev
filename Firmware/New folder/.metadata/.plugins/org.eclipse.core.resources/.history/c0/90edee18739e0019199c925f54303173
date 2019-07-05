@@ -52,20 +52,7 @@ int main(void)
 				RCC_APB1PeriphResetCmd(RCC_APB1Periph_PWR,DISABLE);
 				/* Enable access to back up registers*/
 				PWR_BackupAccessCmd(ENABLE);
-				// read block at virtual address
-				FLASH_Unlock();
-				EE_Init();
 
-				if(EE_ReadVariable(VirtAddVarTab[0],&VarValue))
-				{
-					EE_WriteVariable(VirtAddVarTab[0],0x1);
-				}
-				else
-				{
-					VarValue++;
-					EE_WriteVariable(VirtAddVarTab[0],VarValue);
-				}
-				FLASH_Lock();
 			}
 			PWR_ClearFlag(PWR_FLAG_WU);
 
@@ -75,18 +62,14 @@ int main(void)
 		}
 		RTC_GetTime(RTC_Format_BIN,&Atime);
 		alarmA.RTC_AlarmMask = (RTC_AlarmMask_Hours | RTC_AlarmMask_DateWeekDay | RTC_AlarmMask_Seconds);
-		Atime.RTC_Minutes+= 15;
-		if(Atime.RTC_Seconds > 59)
+		if(Atime.RTC_Minutes == 59)
 		{
-			Atime.RTC_Seconds -= 60; //add a minute
-			Atime.RTC_Minutes += 1;
-		}
-		if(Atime.RTC_Minutes > 59)
+			Atime.RTC_Minutes = 0; //add a minute
+			Atime.RTC_Hours += 1;
+		}else
 		{
-			Atime.RTC_Minutes = 0;
-			Atime.RTC_Hours++;
+			Atime.RTC_Minutes += 10;
 		}
-
 		set_RTCAlarm_A(&Atime,&alarmA);
 		STM_EVAL_LEDOn(LED3);
 
@@ -95,8 +78,10 @@ int main(void)
 	while(1)
 	{
 		RTC_GetTime(RTC_Format_BIN,&ttime);
-
+		if(ttime.RTC_Seconds == 1)
+		{
 			set_StdBy_Mode();
+		}
 
 	}
 }
