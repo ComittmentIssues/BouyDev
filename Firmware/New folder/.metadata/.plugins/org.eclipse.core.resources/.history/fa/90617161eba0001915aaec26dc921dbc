@@ -202,7 +202,7 @@ if (log_State)
 		 if (ir_flag ==0 )
 		 {
 		 	STM_EVAL_LEDOn(LED3);
-		 	Iridium_On = 1;
+		 	iridum_working = 1;
 		 	break;
 		 }else
 		 {
@@ -211,58 +211,6 @@ if (log_State)
 		 Delay_begin_Timeout(3000);
 		 while(!timeout);
 		 STM_EVAL_LEDToggle(LED3);
-	  }
-	  /* If Communications was successful*/
-	  if(Iridium_On)
-	  {
-		  clear_packet();
-		  int8_t tx_error;
-		 for (int i = 0; i < length(VirtAddVarTab); ++i)
-		 {
-			 /* load Data from FLASH into data buffer*/
-			 uint32_t size = length(packet_buff);
-			 uint8_t temp_log[size];
-			load_Data(temp_log,VirtAddVarTab[i],size);
-			/* Transfer to Iridium Modem*/
-			tx_error = send_Binary_Message(temp_log,size);
-			/* Check for successful transfer */
-			if(tx_error == -2)
-			{
-				break;
-			}
-		 }
-
-		 /* Wait for network availability*/
-		 uint8_t retry = 0;
-		 Delay_begin_Timeout(50000);
-		 while(!timeout)
-		 {
-			 if(network_available)
-			 {
-				 /* Create SBD Session*/
-				 Delay_Disable();
-				 int flag = create_SBD_Session();
-				 if(flag == 0)
-				 {
-					 /* Flush the Iridium message queue*/
-					 send_ATcmd("AT+SBDD0\r",1000);
-					 break;
-				 }
-				 /* If not successful, set delay for another 3 seconds*/
-				 if (retry < 3)
-				 {
-					 Delay_begin_Timeout(3000);
-					 retry++;
-				 }else
-				 {
-					 break;
-				 }
-
-			 }
-		 }
-
-		 /* Turn Off Module when done */
-		 deinit_Iridium_Module();
 	  }
 
   }

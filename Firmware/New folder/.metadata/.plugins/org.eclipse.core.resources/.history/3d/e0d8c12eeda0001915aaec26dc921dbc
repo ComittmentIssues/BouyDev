@@ -353,18 +353,14 @@ int8_t Save_Data(uint8_t* data_buf,uint16_t virtual_base_address, uint32_t buff_
 	return 0;
 }
 
-int8_t load_Data(uint8_t*  data_buf,uint16_t virtual_base_address, uint32_t buff_len)
+int8_t load_Data(uint16_t*  data_buf,uint16_t virtual_base_address, uint32_t buff_len)
 {
 	for (int i = 0; i < buff_len;++i)
 	{
-		uint16_t tempvar;
-		if(EE_ReadVariable(virtual_base_address+i,&tempvar) == 1)
+		if(EE_ReadVariable(virtual_base_address+i,&data_buf[i]) == 1)
 		{
 			/* invalid virtual address given*/
 			return -1;
-		}else
-		{
-			data_buf[i] = (uint8_t)(tempvar&0xFF);
 		}
 	}
 	return 0;

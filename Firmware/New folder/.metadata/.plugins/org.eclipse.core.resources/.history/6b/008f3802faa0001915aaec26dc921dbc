@@ -234,7 +234,6 @@ if (log_State)
 
 		 /* Wait for network availability*/
 		 uint8_t retry = 0;
-		 Delay_begin_Timeout(50000);
 		 while(!timeout)
 		 {
 			 if(network_available)

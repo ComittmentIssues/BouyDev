@@ -165,7 +165,6 @@ void init_Control_Pins(void)
 	EXTI_InitStruct.EXTI_Mode =EXTI_Mode_Interrupt;
 	EXTI_InitStruct.EXTI_Trigger = EXTI_Trigger_Rising_Falling; //when high
 	EXTI_Init(&EXTI_InitStruct);
-	EXTI_ClearITPendingBit(EXTI_Line0);
 	NVIC_InitTypeDef  NVIC_InitStructure;
 	NVIC_InitStructure.NVIC_IRQChannel = EXTI0_IRQn;
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;

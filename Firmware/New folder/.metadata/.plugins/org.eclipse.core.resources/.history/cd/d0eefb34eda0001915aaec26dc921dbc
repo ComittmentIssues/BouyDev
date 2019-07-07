@@ -358,7 +358,7 @@ int8_t load_Data(uint8_t*  data_buf,uint16_t virtual_base_address, uint32_t buff
 	for (int i = 0; i < buff_len;++i)
 	{
 		uint16_t tempvar;
-		if(EE_ReadVariable(virtual_base_address+i,&tempvar) == 1)
+		if(EE_ReadVariable(virtual_base_address+i,&tempvar[i]) == 1)
 		{
 			/* invalid virtual address given*/
 			return -1;
