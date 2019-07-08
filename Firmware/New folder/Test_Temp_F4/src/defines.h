@@ -31,4 +31,5 @@
 /* Put your global defines for all libraries here used in your project */
 
 #define	FATFS_USE_SDIO				0
+
 #endif

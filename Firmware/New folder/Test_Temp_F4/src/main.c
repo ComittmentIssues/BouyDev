@@ -82,7 +82,7 @@ void clear_packet(void);
 void test_Packet(void);
 void de_init_peripherals(void);
 uint16_t VirtAddVarTab[3];
-
+void init_RCC_Clock(void);
 /* Private functions */
 
 /**
@@ -96,29 +96,12 @@ int main(void)
 {
 
 	  /* Initialize LEDs */
-	  FLASH_Unlock();
-	  EE_Init();
-	  STM_EVAL_LEDInit(LED3); STM_EVAL_LEDInit(LED4); STM_EVAL_LEDInit(LED5); STM_EVAL_LEDInit(LED6);
-	  uint32_t size = sizeof(logbuff)/sizeof(*logbuff);
-	  uint16_t temp;
-	  //check for previous data
-	  if(EE_ReadVariable(Virtual_Base_Address,&temp))
-	  {
-		  test_Packet();
-		  to_binary_format(packet);
-
-		  Save_Data(logbuff,Virtual_Base_Address,size);
-	  }else
-	  {
-		  load_Data(logbuff,Virtual_Base_Address,size);
-		  FLASH_EraseSector(FLASH_Sector_2,VOLTAGE_RANGE);
-
-	  }
-	  FLASH_Lock();
-	  clear_packet();
-//	  init_Delay();
-//	  init_temp_sensor();
-//	  init_USART_GPS();
+//	  init_Delay()
+	  RCC_ClocksTypeDef rcc;
+//	  init_RCC_Clock();
+	  RCC_GetClocksFreq(&rcc);
+	  init_temp_sensor();
+	  init_USART_GPS();
 //	  TX_ready = 0;
 //	  test_Packet();
 //	  to_binary_format(packet);
@@ -147,21 +130,20 @@ int main(void)
 //
 //
 //
-// while(1)
-// {
+
+
 //	 //wait for full packet
 //	 if((!TX_ready)&&(packet_full == 7))
 //	 {
-//		 packet.Etime = eTime;
-//		 packet.battery_voltage = 3.3;
-//		 packet.coord = GPS_coord;
-//		 packet.diag = diag;
-//		 if(devices)
-//		 {
-//			 float temp;
-//			 get_Temp(&temp);
-//			 packet.temp = temp;
-//		 }
+		 packet.Etime = eTime;
+		 packet.battery_voltage = 3.3;
+		 packet.coord = GPS_coord;
+		 packet.diag = diag;
+
+			 float temp;
+			 get_Temp(&temp);
+			 packet.temp = temp;
+
 //		 to_binary_format(packet);
 //		 STM_EVAL_LEDOff(LED3);
 //		 if(iridum_working)
@@ -218,8 +200,8 @@ int main(void)
 //	 }
 //
 //
-// }
-}
+	}
+
 
 uint8_t init_temp_sensor(void)
 {
@@ -342,3 +324,37 @@ void test_Packet(void)
 	packet.temp = -23.43;
 }
 
+
+void init_RCC_Clock(void)
+{
+	/* Set RCC value to default state*/
+	RCC_DeInit();
+	/* Enable external Crystal Oscilator*/
+	RCC_HSEConfig(RCC_HSE_ON);
+	ErrorStatus errorstatus = RCC_WaitForHSEStartUp();
+	if(errorstatus == SUCCESS)
+	{
+		/* Configure PLL clock for 48 MHz*/
+		RCC_PLLConfig(RCC_PLLSource_HSE,4,192,8,8);
+		/* enable pll and wait until ready*/
+		RCC_PLLCmd(ENABLE);
+		while(RCC_GetFlagStatus(RCC_FLAG_PLLRDY) == RESET);
+
+		/* Set Flash Latency*/
+		FLASH_SetLatency(FLASH_Latency_1);
+		/* Set AHB prescaler*/
+		RCC_HCLKConfig(RCC_SYSCLK_Div1);
+		/* Set APB1 Scaler */
+		RCC_PCLK1Config(RCC_HCLK_Div2);
+		/* Set APB2 Scaler*/
+		RCC_PCLK2Config(RCC_HCLK_Div1);
+		 /* Set Clock source to PLL*/
+		 RCC_SYSCLKConfig(RCC_SYSCLKSource_PLLCLK);
+
+	}else
+	{
+			//Set clock source to default config
+			RCC_DeInit();
+	}
+	SystemCoreClockUpdate();
+}

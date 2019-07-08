@@ -3,3 +3,5 @@
 1562483294358	Delete resource 'BUOY_FiRMWARE_F4/Utilities/STM32F4-Discovery/stm32f4_discovery_audio_codec.h'
 1562505660108	Delete resource 'BUOY_FiRMWARE_F4/My_Libs/eeprom.c'
 1562505663530	Delete resource 'BUOY_FiRMWARE_F4/My_Libs/eeprom.h'
+1562544468683	Delete resource 'Test_Temp_F4/src/system_stm32f4xx.c'
+1562544631584	Delete resource 'Test_Temp_F4/src/system_stm32f4xx.c'

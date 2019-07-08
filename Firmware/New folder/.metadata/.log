@@ -13661,3 +13661,11 @@ localhost:61234: The system tried to join a drive to a directory on a joined dri
 
 !ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-07-07 19:24:35.497
 !MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf 4 10005 2019-07-08 01:05:05.964
+!MESSAGE Request for monitor: 'RequestMonitor (org.eclipse.cdt.dsf.mi.service.MIRunControl$9@1f4da07): Status ERROR: org.eclipse.cdt.dsf.gdb code=10001 Context cannot be suspended. null' resulted in an error.
+!SUBENTRY 1 org.eclipse.cdt.dsf.gdb 4 10001 2019-07-08 01:05:05.964
+!MESSAGE Context cannot be suspended.
+
+!ENTRY com.atollic.hardwaredebug.launch 2 0 2019-07-08 02:10:52.589
+!MESSAGE Won't launch debug session since we failed to locate the binary.
