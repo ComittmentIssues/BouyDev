@@ -365,7 +365,7 @@ static void SetSysClock(void)
   {
     /* Enable high performance mode, System frequency up to 168 MHz */
     RCC->APB1ENR |= RCC_APB1ENR_PWREN;
-    PWR->CR |= PWR_CR_PMODE;  
+    PWR->CR |= PWR_CR_PMODE;
 
     /* HCLK = SYSCLK / 1*/
     RCC->CFGR |= RCC_CFGR_HPRE_DIV1;

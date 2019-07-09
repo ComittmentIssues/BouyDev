@@ -28,29 +28,18 @@ SOFTWARE.
 */
 
 /* Includes */
-#include <defines.h>
 #include <Delay.h>
 #include <Iridium.h>
 #include <stdlib.h>
-#include <tm_stm32f4_delay.h>
 #include "stm32f4xx.h"
 #include "stm32f4_discovery.h"
 #include <string.h>
 #include <stdio.h>
-#include "../GPS/GPS.h"
-#include "../Temp_sensor/tm_stm32f4_ds18b20.h"
-#include "../Temp_sensor/tm_stm32f4_onewire.h"
-#include "../Flash/eeprom.h"
+#include <DS18B20.h>
+
 
 /* private structs*/
-typedef struct{
 
-	Coord_t coord;
-	uint32_t Etime;
-	Diagnostic_t diag;
-	float temp;
-	float battery_voltage;
-} Packet;
 /* Private macro */
 
 #define Temp_GPIO GPIOD
@@ -59,29 +48,12 @@ typedef struct{
 #define Virtial_Base_Address2 0x2000
 
 /* Private variables */
-char buff[40];
-uint8_t logbuff[26];
-float temp;
-uint8_t device[8];
-TM_OneWire_t oneWire;
-Packet packet;
+char buff[60];
 /* Flags*/
-uint8_t devices;
-uint8_t  TX_ready;
-uint8_t SBD_ready;
-uint8_t msg_timeout;
-static const Packet empty;
-/* Private function prototypes */
 
-uint8_t init_temp_sensor(void);
+
+
 void ftoa(float f);
-void get_Temp(float* temp);
-int32_t float_to_int(float f);
-void to_binary_format(Packet packet);
-void clear_packet(void);
-void test_Packet(void);
-void de_init_peripherals(void);
-uint16_t VirtAddVarTab[3];
 void init_RCC_Clock(void);
 /* Private functions */
 
@@ -94,138 +66,29 @@ void init_RCC_Clock(void);
 */
 int main(void)
 {
+	STM_EVAL_LEDInit(LED3);
+	if(!init_OneWire())
+	{
+		reset_OneWire();
+		SWI_sendByte(0x33);
+		uint8_t ROM = SWI_readByte();
 
-	  /* Initialize LEDs */
-//	  init_Delay()
-	  RCC_ClocksTypeDef rcc;
-//	  init_RCC_Clock();
-	  RCC_GetClocksFreq(&rcc);
-	  init_temp_sensor();
-	  init_USART_GPS();
-//	  TX_ready = 0;
-//	  test_Packet();
-//	  to_binary_format(packet);
-//	  /* initialise Iridium Module */
-//	  uint8_t iridum_working = 0;
-//	  for (int i = 0; i < 10; ++i)
-//	  {
-//		  uint8_t ir_flag = init_Iridium_Module();
-//		if (ir_flag ==0 )
-//		{
-//			STM_EVAL_LEDOn(LED3);
-//			iridum_working = 1;
-//			break;
-//		}else
-//		{
-//			deinit_Iridium_Module();
-//		}
-//		Delay_begin_Timeout(3000);
-//		while(!timeout);
-//		STM_EVAL_LEDToggle(LED3);
-//	  }
-//
-//
-//
-//  /* Infinite loop */
-//
-//
-//
-
-
-//	 //wait for full packet
-//	 if((!TX_ready)&&(packet_full == 7))
-//	 {
-		 packet.Etime = eTime;
-		 packet.battery_voltage = 3.3;
-		 packet.coord = GPS_coord;
-		 packet.diag = diag;
-
-			 float temp;
-			 get_Temp(&temp);
-			 packet.temp = temp;
-
-//		 to_binary_format(packet);
-//		 STM_EVAL_LEDOff(LED3);
-//		 if(iridum_working)
-//		 {
-//			 TX_ready = 1;
-//		 }else
-//		 {
-//
-//			 de_init_peripherals();
-//		 }
-//
-//	 }
-//	 if((TX_ready&&msg_timeout)||(TX_ready&&!msg_timeout))
-//	 {
-//		 int8_t flag =  send_Binary_Message(logbuff,length(logbuff));
-//		 if(flag == 0)
-//		 {
-//			 //set flag for transmission
-//			 SBD_ready = 1;
-//			 msg_timeout = 0;
-//			 TX_ready = 0;
-//			 STM_EVAL_LEDOn(LED4);
-//			 STM_EVAL_LEDOff(LED3);
-//		 }if(flag == -2)
-//		 {
-//			msg_timeout = 1;
-//			STM_EVAL_LEDOn(LED3);
-//			STM_EVAL_LEDOff(LED4);
-//		}
-//	 }
-//	 if(SBD_ready&&network_available)
-//	 {
-//		 int8_t flag = create_SBD_Session();
-//		 if(flag == -2)
-//		 {
-//			 //delay for 3 seconds
-//			 STM_EVAL_LEDToggle(LED5);
-//			 Delay_begin_Timeout(3000);
-//		 }else
-//		 {
-//			 	flag = send_ATcmd("AT+SBDD0\r",1000);
-//			 	 STM_EVAL_LEDOn(LED6);
-//			 	 clear_packet();
-//			 	 TX_ready = 0;
-//			 	 SBD_ready = 0;
-//			 	 de_init_peripherals();
-//		 }
-//	 }
-//	 else
-//	 {
-//		 Delay_begin_Timeout(500);
-//		 while(timeout != 1);
-//		 STM_EVAL_LEDToggle(LED4);
-//	 }
-//
-//
+		STM_EVAL_LEDOn(LED4);
 	}
-
-
-uint8_t init_temp_sensor(void)
-{
-
-	  SystemInit();
-	  TM_DELAY_Init();
-	  TM_OneWire_Init(&oneWire, Temp_GPIO, GPIO_Pin_6);
-	  /* Check for devices on oneWire bus*/
-	  devices = TM_OneWire_First(&oneWire);
-	  if(devices)
-	  {
-		  STM_EVAL_LEDOn(LED3);
-		  TM_OneWire_GetFullROM(&oneWire, device);
-		  return 0;
-	  }
-	  return 1;
+	else
+	{
+		STM_EVAL_LEDInit(LED5);
+		STM_EVAL_LEDOn(LED5);
+	}
+	DWT_Delay_init();
+	while(1)
+	{
+		STM_EVAL_LEDToggle(LED3);
+		DWT_delay_us(500000);
+	}
 }
 
-void get_Temp(float* temp)
-{
-	TM_DS18B20_Start(&oneWire,device);
-	while(!TM_DS18B20_AllDone(&oneWire));
-	TM_DS18B20_Read(&oneWire,device,temp);
-}
+
 void ftoa(float f)
 {
 	//get int;
@@ -236,93 +99,7 @@ void ftoa(float f)
 
 }
 
-void to_binary_format(Packet packet)
-{
-	logbuff[0] = 1; // ID
-	logbuff[1] = (packet.Etime&0xFF000000)>>24;
-	logbuff[2] = (packet.Etime&0x00FF0000)>>16;
-	logbuff[3] = (packet.Etime&0x0000FF00)>>8;
-	logbuff[4] = (packet.Etime&0x000000FF);
-	/* Add coordinates bytes 1 - 5 = lat, bytes 6 - 10 = long*/
-	union
-	{
-		float a;
-		unsigned char bytes[4];
-	} coord_int;
-	coord_int.a = packet.coord.lat;
-	for (int i = 5; i < 9; ++i)
-	{
-		logbuff[i] = coord_int.bytes[i-5];
-	}
-	coord_int.a = packet.coord.longi;
 
-	for (int i = 9; i < 13; ++i)
-	{
-			logbuff[i] =  coord_int.bytes[i-9];
-	}
-	/* break time down into MSB and LSB and store as as 2 unsigned bytes in big endian */
-
-	//convert HDOP,VDOP, PDOP to 2 bytes big endian
-	logbuff[13] = packet.diag.HDOP.digit;
-	logbuff[14] = packet.diag.HDOP.precision;
-	logbuff[15] = packet.diag.VDOP.digit;
-	logbuff[16] = packet.diag.VDOP.precision;
-	logbuff[17] = packet.diag.PDOP.digit;
-	logbuff[18] = packet.diag.PDOP.precision;
-	logbuff[19] = (packet.diag.num_sats);
-	logbuff[19] = logbuff[19]<<2;
-	logbuff[19] |= packet.diag.fix_type;
-
-	/*Temperature - 2 bytes (dec), (precision ) - 2 decimal places */
-	if(devices)
-	{
-		logbuff[20] = (uint8_t)(packet.temp);
-		logbuff[21] = (uint8_t)(packet.temp*100+0.5); //adding 0.5 to account for offsets
-	}
-	/* Battery Conversion: 2 bytes */
-	logbuff[22] = (uint8_t)(packet.battery_voltage);
-	logbuff[23] = (uint8_t)((packet.battery_voltage- (float)logbuff[22])*100);
-
-}
-
-void clear_packet(void)
-{
-	for (int i = 0; i < length(logbuff); ++i)
-	{
-		logbuff[i]=0;
-	}
-}
-void de_init_peripherals()
-{
-	deinit_Iridium_Module();
-	deinit_USART_GPS();
-	//loop infinite
-	STM_EVAL_LEDOff(LED3);STM_EVAL_LEDOff(LED4);STM_EVAL_LEDOff(LED5);STM_EVAL_LEDOff(LED6);
-	while(1)
-	{
-		for (int i = 0; i < 4; ++i)
-		{
-			STM_EVAL_LEDToggle(i);
-			Delay_begin_Timeout(200);
-		}
-	}
-}
-void test_Packet(void)
-{
-	packet.Etime = 1561633695;
-	Coord_t coord = {4717.11634,00833.91297};
-	packet.coord = coord;
-	DOP_t pdop = {10,2};
-	DOP_t vdop = {3,24};
-	DOP_t hdop = {21,21};
-	packet.diag.HDOP = hdop;
-	packet.diag.PDOP = pdop;
-	packet.diag.VDOP = vdop;
-	packet.diag.fix_type = 3;
-	packet.diag.num_sats = 12;
-	packet.battery_voltage = 3.3;
-	packet.temp = -23.43;
-}
 
 
 void init_RCC_Clock(void)

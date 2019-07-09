@@ -35,8 +35,9 @@ SOFTWARE.
 #include "../My_Libs/Delay.h"
 #include "../My_Libs/GPS.h"
 #include "../My_Libs/Iridium.h"
-#include "../My_Libs/tm_stm32f4_ds18b20.h"
-#include "../My_Libs/tm_stm32f4_onewire.h"
+#include "../My_Libs/Battery.h"
+//#include "../My_Libs/tm_stm32f4_ds18b20.h"
+//#include "../My_Libs/tm_stm32f4_onewire.h"
 
 /* Private Structs*/
 typedef struct
@@ -46,7 +47,7 @@ typedef struct
 	uint32_t Etime;
 	Diagnostic_t diag;
 	float temp;
-	float battery_voltage;
+	uint8_t battery_voltage;
 } Packet;
 
 /* Private macro */
@@ -59,7 +60,7 @@ typedef struct
 RTC_TimeTypeDef rtc_time;
 RTC_AlarmTypeDef RTC_alarma;
 Packet packet;
-TM_OneWire_t oneWire;
+//TM_OneWire_t oneWire;
 
 /* private Variables*/
 float temp;
@@ -103,7 +104,7 @@ void get_Temp(float* temp);
 int main(void)
 {
   /********************** Base Initializations *****************************/
-  //init_RCC_Clock();
+  init_RCC_Clock();
   init_RTC();
   init_Delay();
   init_State = 0;
@@ -162,7 +163,8 @@ int main(void)
 	  EE_WriteVariable(VirtPacketAdd,nextPacketID);
   }
   /********************* Peripheral initializations ***********************/
-
+if(log_State)
+{
   /*
    * 1. GPS
    */
@@ -170,12 +172,16 @@ int main(void)
   /*
    * 2. Temp Sensor
    */
-  	  temp_On = init_temp_sensor();
+  	  temp_On = ~(init_temp_sensor())&0b1;
+
+  /*
+   * 3. Battery Monitor
+   */
+  	  VBat_On = ~(init_Battery_ADC())&0b1;
 
   /*************** Routine 1: Collect GPS and store in a packet ***********/
 
-if (log_State)
-{
+
 	Delay_begin_Timeout(300000);
 	GPS_On = 0;
 	while(!timeout)
@@ -189,7 +195,19 @@ if (log_State)
 
 			break;
 		}
+	}
 
+	/* If Temp Sensor Available, get Temperature */
+	if(temp_On)
+	{
+		get_Temp(&temp);
+		packet.temp = temp;
+	}
+	/* If Battery Monitor Available Get Battery Voltage*/
+	if(VBat_On)
+	{
+
+		packet.battery_voltage = Sample_ADC();
 	}
 	/* If GPS is available, acquire signal and store data*/
 	if(GPS_On)
@@ -205,12 +223,7 @@ if (log_State)
 		save_Data(packet_buff,length(packet_buff), VirtAddVarTab[packet.ID - 1]);
 	}
 
-	/* If Temp Sensor Available, get Temperature */
-	if(temp_On)
-	{
-		get_Temp(&temp);
-		packet.temp = temp;
-	}
+
 
 }
 /********************** Routine 2: Iridium Transmit *****************************/
@@ -292,7 +305,7 @@ if (log_State)
   }
 
 	/* SHUT DOWN ROUTINE */
-	RTC_alarma.RTC_AlarmMask = RTC_AlarmMask_All&(~RTC_AlarmMask_Hours);
+	RTC_alarma.RTC_AlarmMask = RTC_AlarmMask_All;//&(~RTC_AlarmMask_Hours);
 	RTC_GetTime(RTC_Format_BIN,&rtc_time);
 	rtc_time.RTC_Hours+= 1;
 	set_RTCAlarm_A(&rtc_time,&RTC_alarma);
@@ -387,9 +400,19 @@ void to_binary_format(Packet packet,uint8_t ID)
 	packet_buff[19] |= packet.diag.fix_type;
 
 	/*Temperature - 2 bytes (dec), (precision ) - 2 decimal places */
-	  //TODO: Temp Sensor Routine
+	if(temp_On)
+	{
+		ftoa(temp);
+		char* temp = strtok(fbuff,".");
+		packet_buff[20] = atoi(temp);
+		temp = strtok(NULL,"");
+		packet_buff[21] = atoi(temp);
+	}
 	/* Battery Conversion: 2 bytes */
-	  //TODO: Battery check routine
+	if(VBat_On)
+	{
+		packet_buff[22] = packet.battery_voltage;
+	}
 	packet_buff[24] = 0xd; //end of packet character
 
 }
@@ -415,22 +438,23 @@ void save_Data(uint8_t* data, int length, uint16_t virtualAddressBase)
 
 uint8_t init_temp_sensor(void)
 {
-	  TM_DELAY_Init();
-	  TM_OneWire_Init(&oneWire, Temp_GPIO, GPIO_Pin_5);
+	  //TM_DELAY_Init();
+	  //TM_OneWire_Init(&oneWire, Temp_GPIO, GPIO_Pin_6);
 	  /* Check for devices on oneWire bus*/
-	  devices = TM_OneWire_First(&oneWire);
-	  if(devices)
-	  {
-		  STM_EVAL_LEDOn(LED3);
-		  TM_OneWire_GetFullROM(&oneWire, device);
-		  return 0;
-	  }
-	  return 1;
+	  //devices = TM_OneWire_First(&oneWire);
+	 // if(devices)
+	  //{
+	//	  STM_EVAL_LEDOn(LED3);
+	//	  TM_OneWire_GetFullROM(&oneWire, device);
+	//	  return 0;
+	 // }
+	  //return 1;
+	return 1;
 }
 
 void get_Temp(float* temp)
 {
-	TM_DS18B20_Start(&oneWire,device);
-	while(!TM_DS18B20_AllDone(&oneWire));
-	TM_DS18B20_Read(&oneWire,device,temp);
+//	TM_DS18B20_Start(&oneWire,device);
+	//while(!TM_DS18B20_AllDone(&oneWire));
+//	TM_DS18B20_Read(&oneWire,device,temp);
 }

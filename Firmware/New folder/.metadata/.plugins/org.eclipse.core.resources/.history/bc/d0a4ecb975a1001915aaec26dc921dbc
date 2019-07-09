@@ -1,0 +1,28 @@
+/*
+ * SysTickDelay.c
+ *
+ *  Created on: Jul 8, 2019
+ *      Author: Jamie
+ */
+
+
+#include "SysTickDelay.h"
+
+uint8_t delay_done;
+
+void init_muDelay(uint32_t microseconds)
+{
+	/* get Clock Frequency*/
+	delay_done = 0;
+	RCC_ClocksTypeDef rcc;
+	RCC_GetClocksFreq(&rcc);
+
+	/* compute number of ticks*/
+	uint32_t ticks = microseconds*(rcc.SYSCLK_Frequency)/1000000;
+	SysTick_Config(ticks);
+}
+
+void SysTick_Handler(void)
+{
+	delay_done = 1;
+}

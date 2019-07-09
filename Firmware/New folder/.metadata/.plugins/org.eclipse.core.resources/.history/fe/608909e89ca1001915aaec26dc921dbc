@@ -1,0 +1,51 @@
+/*
+ * DS18B20.c
+ *
+ *  Created on: Jul 8, 2019
+ *      Author: Jamie
+ */
+
+#include "DS18B20.h"
+
+
+void init_OneWire_GPIO(void)
+{
+	/* clock power*/
+	RCC_AHB1PeriphClockCmd(RCC_OneWirePeriph,ENABLE);
+	GPIO_InitTypeDef OneWire_struct;
+	OneWire_struct.GPIO_Mode = GPIO_Mode_OUT;
+	OneWire_struct.GPIO_OType = GPIO_OType_OD;
+	OneWire_struct.GPIO_Speed = GPIO_Speed_100MHz;
+	OneWire_struct.GPIO_PuPd = GPIO_PuPd_UP;
+	GPIO_Init(OneWire_Port,&OneWire_struct);
+
+	SWI_FLOAT;
+
+}
+
+uint32_t DWT_Delay_init()
+{
+	/* Disable TRC */
+	 CoreDebug->DEMCR &= ~CoreDebug_DEMCR_TRCENA_Msk; // ~0x01000000;
+	 /* Enable TRC */
+	 CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk; // 0x01000000;
+	 /* Disable clock cycle counter */
+	 DWT->CTRL &= ~DWT_CTRL_CYCCNTENA_Msk; //~0x00000001;
+	 /* Enable clock cycle counter */
+	 DWT->CTRL |= DWT_CTRL_CYCCNTENA_Msk; //0x00000001;
+	 /* Reset the clock cycle counter value */
+	 DWT->CYCCNT = 0;
+	/* 3 NO OPERATION instructions */
+	__NOP();
+	__NOP();
+	__NOP();
+	 /* Check if clock cycle counter has started */
+	if(DWT->CYCCNT)
+	{
+	 return 0; /*clock cycle counter started*/
+	}
+	else
+	 {
+	 return 1; /*clock cycle counter not started*/
+	 }
+}

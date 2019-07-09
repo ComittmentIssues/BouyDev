@@ -1,0 +1,20 @@
+/*
+ * Battery.c
+ *
+ *  Created on: Jul 8, 2019
+ *      Author: Jamie
+ */
+
+
+#include "Battery.h"
+
+uint8_t init_Battery_ADC(void)
+{
+	GPIO_TypeDef GPI_InitStruct;
+	ADC_TypeDef ADC_InitStruct;
+
+	RCC_GPIO_PeriphEnable(RCC_GPIOPeriph,ENABLE);
+	RCC_ADC_PeriphEnable(RCC_ADCPeriph_ADC,ENABLE);
+
+	return 0;
+}

@@ -1,0 +1,7 @@
+10:39:52 **** Rebuild of configuration Debug for project Test_Battery_F4 ****
+Info: Internal Builder is used for build
+gcc -O0 -g3 -Wall -c -fmessage-length=0 -o src\main.o ..\src\main.c 
+gcc -o Test_Battery_F4.exe src\main.o 
+
+10:39:59 Build Finished (took 7s.21ms)
+

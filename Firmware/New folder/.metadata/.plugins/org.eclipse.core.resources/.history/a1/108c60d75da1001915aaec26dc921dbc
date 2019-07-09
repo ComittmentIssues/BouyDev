@@ -1,0 +1,20 @@
+/*
+ * Battery.h
+ *
+ *  Created on: Jul 8, 2019
+ *      Author: Jamie
+ */
+
+#ifndef BATTERY_H_
+#define BATTERY_H_
+
+#include "stm32f4xx.h"
+#include "stm32f4xx_adc.h"
+#include "stm32f4xx_gpio.h"
+#include "stm32f4xx_rcc.h"
+
+#define VBAT_PIN GPIO_Pin_1
+#define VBAT_PINSource GPIO_PinSource1
+#define VBAT_GPIO GPIOA
+
+#endif /* BATTERY_H_ */

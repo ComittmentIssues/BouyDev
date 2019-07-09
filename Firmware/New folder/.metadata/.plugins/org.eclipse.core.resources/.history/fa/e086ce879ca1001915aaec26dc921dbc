@@ -1,0 +1,20 @@
+/*
+ * DS18B20.h
+ *
+ *  Created on: Jul 8, 2019
+ *      Author: Jamie
+ */
+
+#ifndef DS18B20_H_
+#define DS18B20_H_
+
+#include "stm32f4xx.h"
+
+#define OneWire_Port GPIOD
+#define OneWire_Pin GPIO_Pin
+#define RCC_OneWirePeriph RCC_AHB1Periph_GPIOD
+
+#define SWI_FLOAT GPIO_WriteBit(OneWire_struct,OneWire_Pin,SET);
+#define SWI_LOW GPIO_WriteBit(OneWire_struct,OneWire_Pin,RESET);
+
+#endif /* DS18B20_H_ */
