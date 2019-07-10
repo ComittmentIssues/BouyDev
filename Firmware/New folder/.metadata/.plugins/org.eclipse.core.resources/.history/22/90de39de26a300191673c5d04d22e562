@@ -45,7 +45,7 @@ SOFTWARE.
 */
 int main(void)
 {
-  init_Battery_Control();
+  int i = 0;
   init_Battery_ADC();
   /**
   *  IMPORTANT NOTE!
@@ -70,7 +70,7 @@ int main(void)
   STM_EVAL_LEDOn(LED4);
   STM_EVAL_LEDOn(LED5);
   STM_EVAL_LEDOn(LED6);
-  GPIO_WriteBit(VBAT_GPIO,VBAT_Control,SET);
+
   /* Infinite loop */
   while (1)
   {

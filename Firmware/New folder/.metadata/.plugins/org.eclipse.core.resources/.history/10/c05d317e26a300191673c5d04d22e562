@@ -12,7 +12,7 @@ void init_Battery_Control(void)
 {
 	RCC_GPIO_PeriphEnable(RCC_GPIOPeriph,ENABLE);
 	GPIO_InitTypeDef GPIO_InitStruct;
-	GPIO_InitStruct.GPIO_Pin = VBAT_Control;
+	GPIO_InitStruct.GPIO_Pin = VBAT_;
 	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_OUT;
 	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
 	GPIO_Init(VBAT_GPIO,&GPIO_InitStruct);

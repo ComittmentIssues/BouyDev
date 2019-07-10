@@ -16,8 +16,8 @@
 #define VBAT_PIN GPIO_Pin_1
 #define VBAT_Control GPIO_Pin_2
 
-#define VBAT_BATPINSource GPIO_PinSource1
-#define VBAT_CTRLPINSource GPIO_PinSource2
+#define VBAT_PINSource GPIO_PinSource1
+#define VBAT_PINSource GPIO_PinSource2
 #define VBAT_GPIO GPIOA
 #define VBAT_ADC ADC1
 #define VBAT_ADCChannel ADC_Channel_1
