@@ -84,22 +84,25 @@ void SysTick_Handler(void) {
 	}
 }
 
-void TM_DELAY_Init(void) {	
+void TM_DELAY_Init(void) {
+	RCC_ClocksTypeDef RCC_ClockStruct;
+	RCC_GetClocksFreq(&RCC_ClockStruct);
+
 #if defined(TM_DELAY_TIM)
 	TM_DELAY_INT_InitTIM();
 #else
 	/* Set Systick interrupt every 1ms */
-	if (SysTick_Config(SystemCoreClock / 1000)) {
+	if (SysTick_Config(RCC_ClockStruct.HCLK_Frequency / 2000)) {
 		/* Capture error */
 		while (1);
 	}
 	
 	#ifdef __GNUC__
 		/* Set multiplier for delay under 1us with pooling mode = not so accurate */
-		mult = SystemCoreClock / 7000000;
+		mult = RCC_ClockStruct.HCLK_Frequency / 14000000;
 	#else
 		/* Set multiplier for delay under 1us with pooling mode = not so accurate */
-		mult = SystemCoreClock / 3000000;
+		mult = RCC_ClockStruct.HCLK_Frequency / 3000000;
 	#endif
 #endif
 	

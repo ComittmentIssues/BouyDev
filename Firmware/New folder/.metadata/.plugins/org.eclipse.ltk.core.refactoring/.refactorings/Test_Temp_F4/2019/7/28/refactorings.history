@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;tm_stm32f4_ds18b20.c, tm_stm32f4_ds18b20.h, tm_stm32f4_onewire.c, tm_stm32f4_onewire.h, tm_stm32f4_timer_properties.c, tm_stm32f4_timer_properties.h&apos; to &apos;Temp_sensor&apos;" description="Move 6 resources to &apos;Temp_sensor&apos;" destination="Temp_sensor" element1="Temp_Sense/tm_stm32f4_ds18b20.c" element2="Temp_Sense/tm_stm32f4_ds18b20.h" element3="Temp_Sense/tm_stm32f4_onewire.c" element4="Temp_Sense/tm_stm32f4_onewire.h" element5="Temp_Sense/tm_stm32f4_timer_properties.c" element6="Temp_Sense/tm_stm32f4_timer_properties.h" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="6" stamp="1562762371519" updateReferences="true"/>
+</session>

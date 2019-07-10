@@ -36,8 +36,8 @@ SOFTWARE.
 #include "../My_Libs/GPS.h"
 #include "../My_Libs/Iridium.h"
 #include "../My_Libs/Battery.h"
-//#include "../My_Libs/tm_stm32f4_ds18b20.h"
-//#include "../My_Libs/tm_stm32f4_onewire.h"
+#include "../My_Libs/tm_stm32f4_ds18b20.h"
+#include "../My_Libs/tm_stm32f4_onewire.h"
 
 /* Private Structs*/
 typedef struct
@@ -53,14 +53,14 @@ typedef struct
 /* Private macro */
 #define length(x) sizeof(x)/sizeof(*x)
 #define IRIDIUM_TIMEOUT_ATTEMPTS 5
-#define Temp_GPIO GPIOD
-#define One_Wire_Pin GPIO_PIN_6
+#define Temp_GPIO GPIOB
+#define One_Wire_Pin GPIO_PIN_8
 
 /* Private Typedefs */
 RTC_TimeTypeDef rtc_time;
 RTC_AlarmTypeDef RTC_alarma;
 Packet packet;
-//TM_OneWire_t oneWire;
+TM_OneWire_t oneWire;
 
 /* private Variables*/
 float temp;
@@ -172,7 +172,7 @@ if(log_State)
   /*
    * 2. Temp Sensor
    */
-  	  temp_On = ~(init_temp_sensor())&0b1;
+  	  temp_On = init_temp_sensor();
 
   /*
    * 3. Battery Monitor
@@ -181,7 +181,9 @@ if(log_State)
 
   /*************** Routine 1: Collect GPS and store in a packet ***********/
 
-
+if(log_State)
+{
+	/* Acquire GPS signal*/
 	Delay_begin_Timeout(300000);
 	GPS_On = 0;
 	while(!timeout)
@@ -192,7 +194,6 @@ if(log_State)
 			Delay_Disable();
 			deinit_USART_GPS();
 			GPS_On = 1;
-
 			break;
 		}
 	}
@@ -209,6 +210,7 @@ if(log_State)
 
 		packet.battery_voltage = Sample_ADC();
 	}
+
 	/* If GPS is available, acquire signal and store data*/
 	if(GPS_On)
 	{
@@ -216,12 +218,14 @@ if(log_State)
 		packet.Etime = eTime;
 		packet.coord = GPS_coord;
 		packet.diag = diag;
-		to_binary_format(packet, packet.ID);
-		/* Save and store in */
-		FLASH_Unlock();
-		EE_Init();
-		save_Data(packet_buff,length(packet_buff), VirtAddVarTab[packet.ID - 1]);
 	}
+
+	/* Save and store in */
+	to_binary_format(packet, packet.ID);
+	FLASH_Unlock();
+	EE_Init();
+	save_Data(packet_buff,length(packet_buff), VirtAddVarTab[packet.ID - 1]);
+}
 
 
 
@@ -302,17 +306,19 @@ if(log_State)
 		 deinit_Iridium_Module();
 	  }
 
-  }
+  	}
 
 	/* SHUT DOWN ROUTINE */
 	RTC_alarma.RTC_AlarmMask = RTC_AlarmMask_All;//&(~RTC_AlarmMask_Hours);
 	RTC_GetTime(RTC_Format_BIN,&rtc_time);
 	rtc_time.RTC_Hours+= 1;
 	set_RTCAlarm_A(&rtc_time,&RTC_alarma);
-  while (1)
-  {
-	set_StdBy_Mode();
-  }
+
+	/* Main Function, enter standby mode untill wake up*/
+	while (1)
+	{
+		set_StdBy_Mode();
+	}
 }
 
 void init_RCC_Clock(void)
@@ -405,7 +411,7 @@ void to_binary_format(Packet packet,uint8_t ID)
 		ftoa(temp);
 		char* temp = strtok(fbuff,".");
 		packet_buff[20] = atoi(temp);
-		temp = strtok(NULL,"");
+		temp = strtok(NULL,"\n");
 		packet_buff[21] = atoi(temp);
 	}
 	/* Battery Conversion: 2 bytes */
@@ -438,23 +444,20 @@ void save_Data(uint8_t* data, int length, uint16_t virtualAddressBase)
 
 uint8_t init_temp_sensor(void)
 {
-	  //TM_DELAY_Init();
-	  //TM_OneWire_Init(&oneWire, Temp_GPIO, GPIO_Pin_6);
-	  /* Check for devices on oneWire bus*/
-	  //devices = TM_OneWire_First(&oneWire);
-	 // if(devices)
-	  //{
-	//	  STM_EVAL_LEDOn(LED3);
-	//	  TM_OneWire_GetFullROM(&oneWire, device);
-	//	  return 0;
-	 // }
-	  //return 1;
-	return 1;
+	TM_DELAY_Init();
+	/* Initialize OneWire on pin PD0 */
+	TM_OneWire_Init(&oneWire, Temp_GPIO, One_Wire_Pin);
+	if(TM_OneWire_First(&oneWire))
+	{
+		TM_OneWire_GetFullROM(&oneWire,device);
+		return 1;
+	}
+	return 0;
 }
 
 void get_Temp(float* temp)
 {
-//	TM_DS18B20_Start(&oneWire,device);
-	//while(!TM_DS18B20_AllDone(&oneWire));
-//	TM_DS18B20_Read(&oneWire,device,temp);
+	TM_DS18B20_Start(&oneWire,device);
+	while(!TM_DS18B20_AllDone(&oneWire));
+	TM_DS18B20_Read(&oneWire,device,temp);
 }
