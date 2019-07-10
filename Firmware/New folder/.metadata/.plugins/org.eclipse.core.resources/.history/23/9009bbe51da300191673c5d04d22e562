@@ -249,7 +249,6 @@ if(log_State)
 		 {
 		 	deinit_Iridium_Module();
 		 }
-		 /* Delay for 3 seconds*/
 		 Delay_begin_Timeout(3000);
 		 while(!timeout);
 		 STM_EVAL_LEDToggle(LED3);
@@ -257,16 +256,21 @@ if(log_State)
 	  /* If Communications was successful*/
 	  if(Iridium_On)
 	  {
-		  /* Create a message buffer for all packets*/
 		  clear_packet();
-		  uint32_t size = length(packet_buff);
-		  uint32_t numpackets = length(VirtAddVarTab);
-		  uint8_t temp_log[size*numpackets];
+		  int8_t tx_error;
 		 for (int i = 0; i < length(VirtAddVarTab); ++i)
 		 {
 			 /* load Data from FLASH into data buffer*/
-			load_Data(&temp_log[i*size],VirtAddVarTab[i],size);
-
+			 uint32_t size = length(packet_buff);
+			 uint8_t temp_log[size];
+			load_Data(temp_log,VirtAddVarTab[i],size);
+			/* Transfer to Iridium Modem*/
+			tx_error = send_Binary_Message(temp_log,size);
+			/* Check for successful transfer */
+			if(tx_error == -2)
+			{
+				break;
+			}
 		 }
 
 		 /* Wait for network availability*/

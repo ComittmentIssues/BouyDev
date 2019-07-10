@@ -259,6 +259,7 @@ if(log_State)
 	  {
 		  /* Create a message buffer for all packets*/
 		  clear_packet();
+		  int8_t tx_error;
 		  uint32_t size = length(packet_buff);
 		  uint32_t numpackets = length(VirtAddVarTab);
 		  uint8_t temp_log[size*numpackets];
