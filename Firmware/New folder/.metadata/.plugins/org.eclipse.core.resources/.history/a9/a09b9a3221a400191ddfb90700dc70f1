@@ -410,6 +410,8 @@ void to_binary_format(Packet packet,uint8_t ID)
 		packet_buff[20] = atoi(t);
 		t = strtok(NULL,"\n");
 		packet_buff[21] = atoi(t);
+
+
 	}
 	/* Battery Conversion: 2 bytes */
 	if(VBat_On)

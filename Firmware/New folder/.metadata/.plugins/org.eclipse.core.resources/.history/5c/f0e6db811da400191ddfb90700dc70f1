@@ -8,19 +8,8 @@
 
 #include "Battery.h"
 
-void init_Battery_Control(void)
-{
-	RCC_GPIO_PeriphEnable(RCC_GPIOPeriph,ENABLE);
-	GPIO_InitTypeDef GPIO_InitStruct;
-	GPIO_InitStruct.GPIO_Pin = VBAT_CTRLPIN;
-	GPIO_InitStruct.GPIO_Mode = GPIO_Mode_OUT;
-	GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
-	GPIO_Init(VBAT_GPIO,&GPIO_InitStruct);
-
-}
 uint8_t init_Battery_ADC(void)
 {
-	init_Battery_Control();
 	GPIO_InitTypeDef GPIO_InitStruct;
 	ADC_InitTypeDef ADC_InitStruct;
 
@@ -35,21 +24,17 @@ uint8_t init_Battery_ADC(void)
 
 	/* Configure ADC */
 	ADC_InitStruct.ADC_DataAlign = ADC_DataAlign_Right;
-	ADC_InitStruct.ADC_Resolution = ADC_Resolution_12b;
-	ADC_InitStruct.ADC_NbrOfConversion = 1;
-	ADC_InitStruct.ADC_ContinuousConvMode = DISABLE;
+	ADC_InitStruct.ADC_Resolution = ADC_Resolution_8b;
+	ADC_InitStruct.ADC_ContinuousConvMode = ENABLE;
 	ADC_InitStruct.ADC_ScanConvMode = DISABLE;
 	ADC_InitStruct.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
 	ADC_Init(VBAT_ADC, &ADC_InitStruct);
 
 	//Channel select
 	ADC_Cmd(VBAT_ADC, ENABLE);
-	ADC_RegularChannelConfig(VBAT_ADC,VBAT_ADCChannel,1,ADC_SampleTime_84Cycles);
+	ADC_RegularChannelConfig(VBAT_ADC,VBAT_ADCChannel,1,ADC_SampleTime_144Cycles);
 
-	/* Write low to enable conversion */
-	GPIO_WriteBit(VBAT_GPIO,VBAT_CTRLPIN ,RESET);
-
-	return 1;
+	return 0;
 }
 
 void deinit_Battery_ADC(void)

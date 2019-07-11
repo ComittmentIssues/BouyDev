@@ -49,7 +49,7 @@ uint8_t init_Battery_ADC(void)
 	/* Write low to enable conversion */
 	GPIO_WriteBit(VBAT_GPIO,VBAT_CTRLPIN ,RESET);
 
-	return 1;
+	return 0;
 }
 
 void deinit_Battery_ADC(void)

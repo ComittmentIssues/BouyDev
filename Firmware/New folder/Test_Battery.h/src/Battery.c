@@ -8,6 +8,8 @@
 
 #include "Battery.h"
 
+
+
 void init_Battery_Control(void)
 {
 	RCC_GPIO_PeriphEnable(RCC_GPIOPeriph,ENABLE);

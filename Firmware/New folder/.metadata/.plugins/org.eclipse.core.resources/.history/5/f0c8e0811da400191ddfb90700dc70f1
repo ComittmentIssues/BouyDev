@@ -135,7 +135,7 @@ int main(void)
 			  /* signal for transmission after last packet*/
 			  Transmit_State = 1;
 			  log_State = 1;
-
+			  nextPacketID = 0;
 		  }else
 		  {
 
@@ -177,26 +177,26 @@ if(log_State)
   /*
    * 3. Battery Monitor
    */
-  	  VBat_On = init_Battery_ADC()&0b1;
+  	  VBat_On = ~(init_Battery_ADC())&0b1;
 
   /*************** Routine 1: Collect GPS and store in a packet ***********/
 
 if(log_State)
 {
 	/* Acquire GPS signal*/
-//	Delay_begin_Timeout(300000);
-//	GPS_On = 0;
-//	while(!timeout)
-//	{
-//		if(packet_full == 7)
-//		{
-//			/* Disable delay and end comms*/
-//			Delay_Disable();
-//			deinit_USART_GPS();
-//			GPS_On = 1;
-//			break;
-//		}
-//	}
+	Delay_begin_Timeout(300000);
+	GPS_On = 0;
+	while(!timeout)
+	{
+		if(packet_full == 7)
+		{
+			/* Disable delay and end comms*/
+			Delay_Disable();
+			deinit_USART_GPS();
+			GPS_On = 1;
+			break;
+		}
+	}
 
 	/* If Temp Sensor Available, get Temperature */
 	if(temp_On)
@@ -207,8 +207,8 @@ if(log_State)
 	/* If Battery Monitor Available Get Battery Voltage*/
 	if(VBat_On)
 	{
-		/* Convert devided voltage to nominal voltage value*/
-		packet.battery_voltage = 2*Sample_ADC();
+
+		packet.battery_voltage = Sample_ADC();
 	}
 
 	/* If GPS is available, acquire signal and store data*/
@@ -300,7 +300,6 @@ if(log_State)
 
 		 /* Turn Off Module when done */
 		 deinit_Iridium_Module();
-		 nextPacketID = 0;
 	  }
 
   	}
@@ -360,7 +359,7 @@ void ftoa(float f)
 	//get int;
 	int num = (int)f;
 	f -= (float)num;
-	int dec = f*10000;
+	int dec = f*1000;
 	sprintf(fbuff,"%d.%d\n\r",num,dec);
 
 }
@@ -405,11 +404,11 @@ void to_binary_format(Packet packet,uint8_t ID)
 	/*Temperature - 2 bytes (dec), (precision ) - 2 decimal places */
 	if(temp_On)
 	{
-		ftoa(packet.temp);
-		char* t = strtok(fbuff,".");
-		packet_buff[20] = atoi(t);
-		t = strtok(NULL,"\n");
-		packet_buff[21] = atoi(t);
+		ftoa(temp);
+		char* temp = strtok(fbuff,".");
+		packet_buff[20] = atoi(temp);
+		temp = strtok(NULL,"\n");
+		packet_buff[21] = atoi(temp);
 	}
 	/* Battery Conversion: 2 bytes */
 	if(VBat_On)

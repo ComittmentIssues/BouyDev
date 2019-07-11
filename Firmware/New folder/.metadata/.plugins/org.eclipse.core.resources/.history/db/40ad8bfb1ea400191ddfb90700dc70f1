@@ -405,11 +405,12 @@ void to_binary_format(Packet packet,uint8_t ID)
 	/*Temperature - 2 bytes (dec), (precision ) - 2 decimal places */
 	if(temp_On)
 	{
-		ftoa(packet.temp);
-		char* t = strtok(fbuff,".");
-		packet_buff[20] = atoi(t);
-		t = strtok(NULL,"\n");
-		packet_buff[21] = atoi(t);
+		ftoa(temp);
+		char* temp = strtok(fbuff,".");
+		packet_buff[20] = atoi(temp);
+		temp++;
+		temp = strtok(fbuff,"\n\r");
+		packet_buff[21] = atoi(temp);
 	}
 	/* Battery Conversion: 2 bytes */
 	if(VBat_On)

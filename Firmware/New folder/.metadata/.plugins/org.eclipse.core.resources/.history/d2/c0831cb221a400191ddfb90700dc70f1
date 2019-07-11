@@ -409,7 +409,13 @@ void to_binary_format(Packet packet,uint8_t ID)
 		char* t = strtok(fbuff,".");
 		packet_buff[20] = atoi(t);
 		t = strtok(NULL,"\n");
-		packet_buff[21] = atoi(t);
+		t = strtok(NULL,"\n");
+		while(*(++t) != '\n')
+		{
+			packet_buff[21] = packet_buff[21]*10+ (*t-48);
+		}
+
+
 	}
 	/* Battery Conversion: 2 bytes */
 	if(VBat_On)

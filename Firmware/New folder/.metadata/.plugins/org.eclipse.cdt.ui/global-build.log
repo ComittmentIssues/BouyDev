@@ -627,3 +627,451 @@ Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_
 Generate listing file done
 Generate build reports done
 Info: Nothing to build for Test_IMU_F4
+22:50:25 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -c ..\My_Libs\Battery.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o My_Libs\Battery.o 
+..\My_Libs\Battery.c: In function 'init_Battery_Control':
+..\My_Libs\Battery.c:15:29: error: 'VBAT_Control' undeclared (first use in this function)
+  GPIO_InitStruct.GPIO_Pin = VBAT_Control;
+                             ^
+..\My_Libs\Battery.c:15:29: note: each undeclared identifier is reported only once for each function it appears in
+..\My_Libs\Battery.c: In function 'init_Battery_ADC':
+..\My_Libs\Battery.c:49:26: error: 'VBAT' undeclared (first use in this function)
+  GPIO_WriteBit(VBAT_GPIO,VBAT)
+                          ^
+..\My_Libs\Battery.c:49:2: error: too few arguments to function 'GPIO_WriteBit'
+  GPIO_WriteBit(VBAT_GPIO,VBAT)
+  ^
+In file included from ../src/stm32f4xx_conf.h:46:0,
+                 from ../Libraries/Device/STM32F4xx/Include/stm32f4xx.h:7116,
+                 from ..\My_Libs\Battery.h:11,
+                 from ..\My_Libs\Battery.c:9:
+../Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_gpio.h:402:6: note: declared here
+ void GPIO_WriteBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BitAction BitVal);
+      ^
+..\My_Libs\Battery.c:51:2: error: expected ';' before 'return'
+  return 0;
+  ^
+..\My_Libs\Battery.c:52:1: warning: control reaches end of non-void function [-Wreturn-type]
+ }
+ ^
+22:50:27 **** Incremental Build of configuration Debug for project Test_Battery.h ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\Battery.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\Battery.o 
+arm-atollic-eabi-gcc -o Test_Battery.h.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_audio_codec.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\Battery.o src\clock.o src\delay.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\usart.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_Battery.h.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_Battery.h\Debug\Test_Battery.h.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+   5468	     44	   1192	   6704	   1a30	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_Battery.h\Debug\Test_Battery.h.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_Battery.h\Debug\Test_Battery.h.list
+Generate listing file done
+Generate build reports done
+22:50:51 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\My_Libs\Battery.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o My_Libs\Battery.o 
+..\My_Libs\Battery.c: In function 'init_Battery_Control':
+..\My_Libs\Battery.c:15:29: error: 'VBAT_Control' undeclared (first use in this function)
+  GPIO_InitStruct.GPIO_Pin = VBAT_Control;
+                             ^
+..\My_Libs\Battery.c:15:29: note: each undeclared identifier is reported only once for each function it appears in
+In file included from ..\My_Libs\Battery.c:9:0:
+..\My_Libs\Battery.c: In function 'init_Battery_ADC':
+..\My_Libs\Battery.h:17:32: error: expected ')' before ';' token
+ #define VBAT_CTRLPIN GPIO_Pin_2;
+                                ^
+..\My_Libs\Battery.c:50:26: note: in expansion of macro 'VBAT_CTRLPIN'
+  GPIO_WriteBit(VBAT_GPIO,VBAT_CTRLPIN,RESET);
+                          ^
+..\My_Libs\Battery.c:50:2: error: too few arguments to function 'GPIO_WriteBit'
+  GPIO_WriteBit(VBAT_GPIO,VBAT_CTRLPIN,RESET);
+  ^
+In file included from ../src/stm32f4xx_conf.h:46:0,
+                 from ../Libraries/Device/STM32F4xx/Include/stm32f4xx.h:7116,
+                 from ..\My_Libs\Battery.h:11,
+                 from ..\My_Libs\Battery.c:9:
+../Libraries/STM32F4xx_StdPeriph_Driver/inc/stm32f4xx_gpio.h:402:6: note: declared here
+ void GPIO_WriteBit(GPIO_TypeDef* GPIOx, uint16_t GPIO_Pin, BitAction BitVal);
+      ^
+Info: Nothing to build for Test_Battery.h
+22:51:16 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\My_Libs\Battery.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o My_Libs\Battery.o 
+..\My_Libs\Battery.c: In function 'init_Battery_Control':
+..\My_Libs\Battery.c:15:29: error: 'VBAT_Control' undeclared (first use in this function)
+  GPIO_InitStruct.GPIO_Pin = VBAT_Control;
+                             ^
+..\My_Libs\Battery.c:15:29: note: each undeclared identifier is reported only once for each function it appears in
+Info: Nothing to build for Test_Battery.h
+22:51:26 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\My_Libs\Battery.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o My_Libs\Battery.o 
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  45036	   1532	   8488	  55056	   d710	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+22:52:50 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -c ..\My_Libs\Battery.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o My_Libs\Battery.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44900	   1532	   8488	  54920	   d688	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+Info: Nothing to build for BUOY_FiRMWARE_F4
+Info: Nothing to build for BUOY_FiRMWARE_F4
+22:57:02 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44916	   1532	   8488	  54936	   d698	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+22:57:40 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44916	   1532	   8488	  54936	   d698	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+Info: Nothing to build for BUOY_FiRMWARE_F4
+22:59:15 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44916	   1532	   8488	  54936	   d698	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+Info: Nothing to build for BUOY_FiRMWARE_F4
+23:00:07 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44916	   1532	   8488	  54936	   d698	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+Info: Nothing to build for BUOY_FiRMWARE_F4
+23:00:59 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44908	   1532	   8488	  54928	   d690	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+Info: Nothing to build for BUOY_FiRMWARE_F4
+23:01:41 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+..\src\main.c: In function 'to_binary_format':
+..\src\main.c:411:22: warning: passing argument 2 of 'strtok' makes pointer from integer without a cast [-Wint-conversion]
+   temp = strtok(NULL,'\n');
+                      ^
+In file included from c:\program files (x86)\atollic\truestudio for arm 7.1.1\armtools\arm-atollic-eabi\include\string.h:10:0,
+                 from ..\src\../My_Libs/GPS.h:13,
+                 from ..\src\main.c:36:
+c:\program files (x86)\atollic\truestudio for arm 7.1.1\armtools\arm-atollic-eabi\include\string.h:42:8: note: expected 'const char * restrict' but argument is of type 'int'
+ char  *_EXFUN(strtok,(char *__restrict, const char *__restrict));
+        ^
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44892	   1532	   8488	  54912	   d680	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+23:01:59 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44892	   1532	   8488	  54912	   d680	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+Info: Nothing to build for BUOY_FiRMWARE_F4
+23:05:06 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+..\src\main.c: In function 'to_binary_format':
+..\src\main.c:412:16: warning: comparison between pointer and integer
+   while(++temp != '\n')
+                ^
+..\src\main.c:415:3: error: expected ';' before '}' token
+   }
+   ^
+..\src\main.c:417:3: error: expected ';' before 'packet_buff'
+   packet_buff[21] = atoi(char*(temp-count));
+   ^
+Info: Nothing to build for Test_Battery.h
+23:05:12 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+..\src\main.c: In function 'to_binary_format':
+..\src\main.c:412:16: warning: comparison between pointer and integer
+   while(++temp != '\n')
+                ^
+..\src\main.c:415:3: error: expected ';' before '}' token
+   }
+   ^
+..\src\main.c:417:3: error: expected ';' before 'packet_buff'
+   packet_buff[21] = atoi((char*)(temp-count));
+   ^
+Info: Nothing to build for Test_Battery.h
+23:05:20 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+..\src\main.c: In function 'to_binary_format':
+..\src\main.c:412:16: warning: comparison between pointer and integer
+   while(++temp != '\n')
+                ^
+..\src\main.c:417:3: error: expected ';' before 'packet_buff'
+   packet_buff[21] = atoi((char*)(temp-count));
+   ^
+Info: Nothing to build for Test_Battery.h
+23:05:35 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+..\src\main.c: In function 'to_binary_format':
+..\src\main.c:417:3: error: expected ';' before 'packet_buff'
+   packet_buff[21] = atoi((char*)(temp-count));
+   ^
+Info: Nothing to build for Test_Battery.h
+23:05:40 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44924	   1532	   8488	  54944	   d6a0	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+Info: Nothing to build for BUOY_FiRMWARE_F4
+Info: Nothing to build for BUOY_FiRMWARE_F4
+Info: Nothing to build for BUOY_FiRMWARE_F4
+23:09:56 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+..\src\main.c: In function 'to_binary_format':
+..\src\main.c:418:3: error: expected ';' before 'packet_buff'
+   packet_buff[21] = atoi(temp);
+   ^
+Info: Nothing to build for Test_Battery.h
+23:10:09 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44924	   1532	   8488	  54944	   d6a0	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+Info: Nothing to build for BUOY_FiRMWARE_F4
+23:11:37 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+..\src\main.c: In function 'to_binary_format':
+..\src\main.c:411:11: warning: unused variable 'count' [-Wunused-variable]
+   uint8_t count = 0;
+           ^
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44924	   1532	   8488	  54944	   d6a0	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+Info: Nothing to build for BUOY_FiRMWARE_F4
+23:11:56 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44916	   1532	   8488	  54936	   d698	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for BUOY_FiRMWARE_F4
+23:15:26 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44900	   1532	   8488	  54920	   d688	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+Info: Nothing to build for BUOY_FiRMWARE_F4
+23:16:50 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44908	   1532	   8488	  54928	   d690	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+Info: Nothing to build for BUOY_FiRMWARE_F4
+23:18:57 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44940	   1532	   8488	  54960	   d6b0	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+23:20:24 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44940	   1532	   8488	  54960	   d6b0	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+Info: Nothing to build for BUOY_FiRMWARE_F4
+23:21:03 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44932	   1532	   8488	  54952	   d6a8	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+23:21:38 **** Incremental Build of configuration Debug for project BUOY_FiRMWARE_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+arm-atollic-eabi-gcc -o BUOY_FiRMWARE_F4.elf Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o My_Libs\Battery.o My_Libs\Delay.o My_Libs\GPS.o My_Libs\Iridium.o My_Libs\RTC.o My_Libs\eeprom.o My_Libs\tm_stm32f4_ds18b20.o My_Libs\tm_stm32f4_onewire.o My_Libs\tm_stm32f4_timer_properties.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_delay.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=BUOY_FiRMWARE_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf 
+Generate build reports...
+Print size information
+   text	   data	    bss	    dec	    hex	filename
+  44900	   1532	   8488	  54920	   d688	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.elf
+Print size information done
+Generate listing file
+Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\BUOY_FiRMWARE_F4\Debug\BUOY_FiRMWARE_F4.list
+Generate listing file done
+Generate build reports done
+Info: Nothing to build for Test_Battery.h
+Info: Nothing to build for BUOY_FiRMWARE_F4
