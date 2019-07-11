@@ -21,3 +21,7 @@
 1562762130355	Delete resource 'Test_Temp_F4/src/DS18B20.h'
 1562762253218	Delete resource 'Test_Temp_F4/src/DS18B20.c'
 1562762377081	Delete resource 'Test_Temp_F4/Temp_Sense'
+1562774927320	Delete resource 'Test_IMU_F4/Utilities/STM32F4-Discovery/stm32f4_discovery_audio_codec.c'
+1562774930566	Delete resource 'Test_IMU_F4/Utilities/STM32F4-Discovery/stm32f4_discovery_audio_codec.h'
+1562776378869	Delete 6 resources
+1562776381928	Delete resource 'Test_Battery.h/src/src'

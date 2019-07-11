@@ -30,12 +30,24 @@ SOFTWARE.
 /* Includes */
 #include "stm32f4xx.h"
 #include "stm32f4_discovery.h"
-#include "stm32f4_discovery_lis302dl.h"
+#include "defines.h"
+#include "tm_stm32f4_i2c.h"
+#include "tm_stm32f4_mpu6050.h"
 /* Private macro */
+#define ADDRESS 0xD0
+#define SAMPLE_RATE 2 //Hz
+#define Sample_Timer TIM7
+#define Sample_PSC  65535
+#define Sample_Size 2400
 /* Private variables */
+int16_t samples[Sample_Size];
+int16_t count = 0;
 /* Private function prototypes */
+void init_I2C(void);
+void start_I2C(void);
+void init_Timer(void);
 /* Private functions */
-
+TM_MPU6050_t MPU6050_Data0;
 /**
 **===========================================================================
 **
@@ -45,85 +57,76 @@ SOFTWARE.
 */
 int main(void)
 {
-  int i = 0;
+	TM_MPU6050_t MPU6050_Data0;
+	STM_EVAL_LEDInit(LED3);
+	STM_EVAL_LEDInit(LED4);
+	STM_EVAL_LEDInit(LED5);
+	STM_EVAL_LEDInit(LED6);
+	 if (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok)
+	 {
+		 STM_EVAL_LEDOn(LED3);
+		 STM_EVAL_LEDOff(LED4);
+	 }else
+	 {
 
-  /**
-  *  IMPORTANT NOTE!
-  *  The symbol VECT_TAB_SRAM needs to be defined when building the project
-  *  if code has been located to RAM and interrupts are used. 
-  *  Otherwise the interrupt table located in flash will be used.
-  *  See also the <system_*.c> file and how the SystemInit() function updates 
-  *  SCB->VTOR register.  
-  *  E.g.  SCB->VTOR = 0x20000000;  
-  */
-
-  /* TODO - Add your application code here */
-
-  /* Initialize LEDs */
-  STM_EVAL_LEDInit(LED3);
-  STM_EVAL_LEDInit(LED4);
-  STM_EVAL_LEDInit(LED5);
-  STM_EVAL_LEDInit(LED6);
-
-  /* Turn on LEDs */
-  STM_EVAL_LEDOn(LED3);
-  STM_EVAL_LEDOn(LED4);
-  STM_EVAL_LEDOn(LED5);
-  STM_EVAL_LEDOn(LED6);
-
-  /* Infinite loop */
-  LIS302DL_InitTypeDef acc;
-  acc.Axes_Enable = LIS302DL_CLICKINTERRUPT_XYZ_ENABLE;
-  acc.Output_DataRate = LIS302DL_DATARATE_100;
-  acc.Full_Scale = LIS302DL_FULLSCALE_9_2;
-  LIS302DL_Init(&acc);
-
-  /* Turn on device*/
-  uint8_t byte = 0x47;
-  LIS302DL_Write(&byte,LIS302DL_CTRL_REG1_ADDR,1);
-  uint8_t rec;
-  uint16_t val[5];
-  for (int i = 0; i < 5; ++i)
-  {
-
-
-	  while((rec & 0b1000) != 0b1000 )
-	  {
-		  LIS302DL_Read(&rec,LIS302DL_STATUS_REG_ADDR,1);
-	  }
-  uint16_t X;
-  LIS302DL_Read(&X,LIS302DL_OUT_X_ADDR,1);
-  }
-
-
+		 STM_EVAL_LEDOn(LED4);
+		 STM_EVAL_LEDOff(LED3);
+	 }
+	 init_Timer();
   while (1)
   {
-	i++;
+
   }
 }
 
-
 /*
- * Callback used by stm32f4_discovery_audio_codec.c.
- * Refer to stm32f4_discovery_audio_codec.h for more info.
+ * @brief function to set the sampling rate of IMU
  */
-void EVAL_AUDIO_TransferComplete_CallBack(uint32_t pBuffer, uint32_t Size)
+
+void init_Timer(void)
 {
-  /* TODO, implement your code here */
-  return;
+
+		RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7,ENABLE);
+
+		TIM_TimeBaseInitTypeDef timerInitStructure; //create a 1ms delaay
+		RCC_ClocksTypeDef rcc;
+		RCC_GetClocksFreq(&rcc);
+
+		timerInitStructure.TIM_Prescaler = Sample_PSC;
+		timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
+		timerInitStructure.TIM_Period= rcc.HCLK_Frequency/(2*SAMPLE_RATE*Sample_PSC);
+		timerInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
+		timerInitStructure.TIM_RepetitionCounter = 0;
+		TIM_TimeBaseInit(Sample_Timer, &timerInitStructure);
+
+		/* Prevent interrupt from triggering*/
+		TIM_ClearITPendingBit(Sample_Timer,TIM_IT_Update);
+		TIM_UpdateRequestConfig(TIM2,TIM_UpdateSource_Regular);
+		TIM_ITConfig(Sample_Timer, TIM_IT_Update,ENABLE);
+
+		NVIC_InitTypeDef nvicStructure;
+	    nvicStructure.NVIC_IRQChannel = TIM7_IRQn;
+		nvicStructure.NVIC_IRQChannelPreemptionPriority = 0;
+		nvicStructure.NVIC_IRQChannelSubPriority = 1;
+		nvicStructure.NVIC_IRQChannelCmd = ENABLE;
+		NVIC_Init(&nvicStructure);
+		TIM_Cmd(Sample_Timer,ENABLE);
+		//enable interrupts
+
 }
 
-/*
- * Callback used by stm324xg_eval_audio_codec.c.
- * Refer to stm324xg_eval_audio_codec.h for more info.
- */
-uint16_t EVAL_AUDIO_GetSampleCallBack(void)
+void TIM7_IRQHandler(void)
 {
-  /* TODO, implement your code here */
-  return -1;
-}
-
-uint32_t LIS302DL_TIMEOUT_UserCallback(void)
-{
-	return -1;
+	if(count == Sample_Size)
+	{
+		TIM_Cmd(Sample_Timer,DISABLE);
+		STM_EVAL_LEDOn(LED6);
+	}else
+	{
+		TM_MPU6050_ReadAccelerometer(&MPU6050_Data0);
+		samples[count] = MPU6050_Data0.Accelerometer_X;
+		count++;
+	}
+	STM_EVAL_LEDToggle(LED5);
+	TIM_ClearITPendingBit(Sample_Timer,TIM_IT_Update);
 }
