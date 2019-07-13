@@ -1,704 +1,74 @@
-06:21:07 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
+19:20:19 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
+Info: Internal Builder is used for build
+arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\eeprom.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+src\main.o:(.data.VirtAddVarTab+0x0): multiple definition of `VirtAddVarTab'
+IMU\IMU.o:(.data.VirtAddVarTab+0x0): first defined here
+collect2.exe: error: ld returned 1 exit status
+19:20:58 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
 Info: Internal Builder is used for build
 arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-..\IMU\IMU.c:11:1: error: unknown type name 'int16_t'
- int16_t samples[Sample_Size];
- ^
-..\IMU\IMU.c: In function 'init_Timer':
-..\IMU\IMU.c:17:3: warning: implicit declaration of function 'RCC_APB1PeriphClockCmd' [-Wimplicit-function-declaration]
-   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7,ENABLE);
-   ^
-..\IMU\IMU.c:17:26: error: 'RCC_APB1Periph_TIM7' undeclared (first use in this function)
-   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7,ENABLE);
-                          ^
-..\IMU\IMU.c:17:26: note: each undeclared identifier is reported only once for each function it appears in
-..\IMU\IMU.c:17:46: error: 'ENABLE' undeclared (first use in this function)
-   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7,ENABLE);
-                                              ^
-..\IMU\IMU.c:19:3: error: unknown type name 'TIM_TimeBaseInitTypeDef'
-   TIM_TimeBaseInitTypeDef timerInitStructure; //create a 1ms delaay
-   ^
-..\IMU\IMU.c:20:3: error: unknown type name 'RCC_ClocksTypeDef'
-   RCC_ClocksTypeDef rcc;
-   ^
-..\IMU\IMU.c:21:3: warning: implicit declaration of function 'RCC_GetClocksFreq' [-Wimplicit-function-declaration]
-   RCC_GetClocksFreq(&rcc);
-   ^
-..\IMU\IMU.c:23:21: error: request for member 'TIM_Prescaler' in something not a structure or union
-   timerInitStructure.TIM_Prescaler = Sample_PSC;
-                     ^
-..\IMU\IMU.c:24:21: error: request for member 'TIM_CounterMode' in something not a structure or union
-   timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-                     ^
-..\IMU\IMU.c:24:40: error: 'TIM_CounterMode_Up' undeclared (first use in this function)
-   timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-                                        ^
-..\IMU\IMU.c:25:21: error: request for member 'TIM_Period' in something not a structure or union
-   timerInitStructure.TIM_Period= rcc.HCLK_Frequency/(2*SAMPLE_RATE*Sample_PSC);
-                     ^
-..\IMU\IMU.c:25:37: error: request for member 'HCLK_Frequency' in something not a structure or union
-   timerInitStructure.TIM_Period= rcc.HCLK_Frequency/(2*SAMPLE_RATE*Sample_PSC);
-                                     ^
-..\IMU\IMU.c:26:21: error: request for member 'TIM_ClockDivision' in something not a structure or union
-   timerInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-                     ^
-..\IMU\IMU.c:26:42: error: 'TIM_CKD_DIV1' undeclared (first use in this function)
-   timerInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-                                          ^
-..\IMU\IMU.c:27:21: error: request for member 'TIM_RepetitionCounter' in something not a structure or union
-   timerInitStructure.TIM_RepetitionCounter = 0;
-                     ^
-..\IMU\IMU.c:28:3: warning: implicit declaration of function 'TIM_TimeBaseInit' [-Wimplicit-function-declaration]
-   TIM_TimeBaseInit(Sample_Timer, &timerInitStructure);
-   ^
-In file included from ..\IMU\IMU.c:8:0:
-..\IMU\IMU.h:13:22: error: 'TIM7' undeclared (first use in this function)
- #define Sample_Timer TIM7
-                      ^
-..\IMU\IMU.c:28:20: note: in expansion of macro 'Sample_Timer'
-   TIM_TimeBaseInit(Sample_Timer, &timerInitStructure);
-                    ^
-..\IMU\IMU.c:31:3: warning: implicit declaration of function 'TIM_ClearITPendingBit' [-Wimplicit-function-declaration]
-   TIM_ClearITPendingBit(Sample_Timer,TIM_IT_Update);
-   ^
-..\IMU\IMU.c:31:38: error: 'TIM_IT_Update' undeclared (first use in this function)
-   TIM_ClearITPendingBit(Sample_Timer,TIM_IT_Update);
-                                      ^
-..\IMU\IMU.c:32:3: warning: implicit declaration of function 'TIM_UpdateRequestConfig' [-Wimplicit-function-declaration]
-   TIM_UpdateRequestConfig(TIM2,TIM_UpdateSource_Regular);
-   ^
-..\IMU\IMU.c:32:27: error: 'TIM2' undeclared (first use in this function)
-   TIM_UpdateRequestConfig(TIM2,TIM_UpdateSource_Regular);
-                           ^
-..\IMU\IMU.c:32:32: error: 'TIM_UpdateSource_Regular' undeclared (first use in this function)
-   TIM_UpdateRequestConfig(TIM2,TIM_UpdateSource_Regular);
-                                ^
-..\IMU\IMU.c:33:3: warning: implicit declaration of function 'TIM_ITConfig' [-Wimplicit-function-declaration]
-   TIM_ITConfig(Sample_Timer, TIM_IT_Update,ENABLE);
-   ^
-..\IMU\IMU.c:35:3: error: unknown type name 'NVIC_InitTypeDef'
-   NVIC_InitTypeDef nvicStructure;
-   ^
-..\IMU\IMU.c:36:19: error: request for member 'NVIC_IRQChannel' in something not a structure or union
-      nvicStructure.NVIC_IRQChannel = TIM7_IRQn;
+arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
+..\src\main.c: In function 'main':
+..\src\main.c:70:19: error: 'VirtAddVarTab' undeclared (first use in this function)
+    load_Data(data,VirtAddVarTab[i],Sample_Size);
                    ^
-..\IMU\IMU.c:36:38: error: 'TIM7_IRQn' undeclared (first use in this function)
-      nvicStructure.NVIC_IRQChannel = TIM7_IRQn;
-                                      ^
-..\IMU\IMU.c:37:16: error: request for member 'NVIC_IRQChannelPreemptionPriority' in something not a structure or union
-   nvicStructure.NVIC_IRQChannelPreemptionPriority = 0;
-                ^
-..\IMU\IMU.c:38:16: error: request for member 'NVIC_IRQChannelSubPriority' in something not a structure or union
-   nvicStructure.NVIC_IRQChannelSubPriority = 1;
-                ^
-..\IMU\IMU.c:39:16: error: request for member 'NVIC_IRQChannelCmd' in something not a structure or union
-   nvicStructure.NVIC_IRQChannelCmd = ENABLE;
-                ^
-..\IMU\IMU.c:40:3: warning: implicit declaration of function 'NVIC_Init' [-Wimplicit-function-declaration]
-   NVIC_Init(&nvicStructure);
-   ^
-..\IMU\IMU.c:41:3: warning: implicit declaration of function 'TIM_Cmd' [-Wimplicit-function-declaration]
-   TIM_Cmd(Sample_Timer,ENABLE);
-   ^
-In file included from ..\IMU\IMU.c:8:0:
-..\IMU\IMU.c: In function 'deinit_Timer':
-..\IMU\IMU.h:13:22: error: 'TIM7' undeclared (first use in this function)
- #define Sample_Timer TIM7
-                      ^
-..\IMU\IMU.c:47:10: note: in expansion of macro 'Sample_Timer'
-  TIM_Cmd(Sample_Timer,DISABLE);
-          ^
-..\IMU\IMU.c:47:23: error: 'DISABLE' undeclared (first use in this function)
-  TIM_Cmd(Sample_Timer,DISABLE);
-                       ^
-..\IMU\IMU.c:48:29: error: 'TIM_IT_Update' undeclared (first use in this function)
-  TIM_ITConfig(Sample_Timer, TIM_IT_Update,DISABLE);
-                             ^
-..\IMU\IMU.c:49:2: warning: implicit declaration of function 'TIM_DeInit' [-Wimplicit-function-declaration]
-  TIM_DeInit(TIM7);
-  ^
-..\IMU\IMU.c:50:2: warning: implicit declaration of function 'NVIC_DisableIRQ' [-Wimplicit-function-declaration]
-  NVIC_DisableIRQ(TIM7_IRQn);
-  ^
-..\IMU\IMU.c:50:18: error: 'TIM7_IRQn' undeclared (first use in this function)
-  NVIC_DisableIRQ(TIM7_IRQn);
-                  ^
-..\IMU\IMU.c:51:25: error: 'RCC_APB1Periph_TIM7' undeclared (first use in this function)
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7,DISABLE);
-                         ^
-06:21:25 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
-..\src\main.c: In function 'main':
-..\src\main.c:69:3: warning: implicit declaration of function 'init_Timer' [-Wimplicit-function-declaration]
-   init_Timer();
-   ^
-..\src\main.c: In function 'TIM7_IRQHandler':
-..\src\main.c:83:14: error: 'Sample_Size' undeclared (first use in this function)
-  if(count == Sample_Size)
+..\src\main.c:70:19: note: each undeclared identifier is reported only once for each function it appears in
+..\src\main.c:70:14: warning: pointer targets in passing argument 1 of 'load_Data' differ in signedness [-Wpointer-sign]
+    load_Data(data,VirtAddVarTab[i],Sample_Size);
               ^
-..\src\main.c:83:14: note: each undeclared identifier is reported only once for each function it appears in
-..\src\main.c:85:11: error: 'Sample_Timer' undeclared (first use in this function)
-   TIM_Cmd(Sample_Timer,DISABLE);
-           ^
-..\src\main.c:90:3: error: 'samples' undeclared (first use in this function)
-   samples[count] = MPU6050_Data0.Accelerometer_X;
-   ^
-06:41:01 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
+In file included from ..\src\../IMU/IMU.h:14:0,
+                 from ..\src\main.c:33:
+../src/eeprom.h:81:8: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'int16_t * {aka short int *}'
+ int8_t load_Data(uint16_t*  data_buf,uint16_t virtual_base_address, uint32_t buff_len);
+        ^
+19:21:43 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
 Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o 
-arm-atollic-eabi-gcc -c ..\Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\misc.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o 
-arm-atollic-eabi-gcc -c ..\IMU\tm_stm32f4_mpu6050.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\tm_stm32f4_mpu6050.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o 
-arm-atollic-eabi-gcc -c ..\src\system_stm32f4xx.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\system_stm32f4xx.o 
-arm-atollic-eabi-gcc -c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -g -Wa,--warn -x assembler-with-cpp -o src\startup_stm32f40xx.o ..\src\startup_stm32f40xx.s 
 arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
 ..\src\main.c: In function 'main':
-..\src\main.c:60:3: warning: implicit declaration of function 'init_Timer' [-Wimplicit-function-declaration]
-   init_Timer();
-   ^
-..\src\main.c:54:15: warning: unused variable 'MPU6050_Data0' [-Wunused-variable]
-  TM_MPU6050_t MPU6050_Data0;
-               ^
-..\src\main.c: In function 'TIM7_IRQHandler':
-..\src\main.c:74:14: error: 'Sample_Size' undeclared (first use in this function)
-  if(count == Sample_Size)
+..\src\main.c:70:14: warning: pointer targets in passing argument 1 of 'load_Data' differ in signedness [-Wpointer-sign]
+    load_Data(data,VirtAdd[i],Sample_Size);
               ^
-..\src\main.c:74:14: note: each undeclared identifier is reported only once for each function it appears in
-..\src\main.c:76:11: error: 'Sample_Timer' undeclared (first use in this function)
-   TIM_Cmd(Sample_Timer,DISABLE);
-           ^
-..\src\main.c:81:3: error: 'samples' undeclared (first use in this function)
-   samples[count] = MPU6050_Data0.Accelerometer_X;
-   ^
-06:41:33 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-..\IMU\IMU.c: In function 'init_IMU':
-..\IMU\IMU.c:49:10: warning: implicit declaration of function 'TM_MPU6050_Init' [-Wimplicit-function-declaration]
-  flag = (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok)
-          ^
-..\IMU\IMU.c:49:27: error: 'MPU6050_Data0' undeclared (first use in this function)
-  flag = (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok)
-                           ^
-..\IMU\IMU.c:49:27: note: each undeclared identifier is reported only once for each function it appears in
-..\IMU\IMU.c:49:42: error: 'TM_MPU6050_Device_0' undeclared (first use in this function)
-  flag = (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok)
-                                          ^
-..\IMU\IMU.c:49:63: error: 'TM_MPU6050_Accelerometer_8G' undeclared (first use in this function)
-  flag = (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok)
-                                                               ^
-..\IMU\IMU.c:49:92: error: 'TM_MPU6050_Gyroscope_250s' undeclared (first use in this function)
-  flag = (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok)
-                                                                                            ^
-..\IMU\IMU.c:49:122: error: 'TM_MPU6050_Result_Ok' undeclared (first use in this function)
-  flag = (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok)
-                                                                                                                          ^
-..\IMU\IMU.c:53:1: error: expected ';' before '}' token
- }
- ^
-..\IMU\IMU.c:47:10: warning: variable 'flag' set but not used [-Wunused-but-set-variable]
-  uint8_t flag = 0;
-          ^
-06:41:43 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o 
-arm-atollic-eabi-gcc -c ..\IMU\tm_stm32f4_i2c.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\tm_stm32f4_i2c.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o 
-arm-atollic-eabi-gcc -c ..\src\tm_stm32f4_gpio.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\tm_stm32f4_gpio.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o 
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-..\IMU\IMU.c: In function 'init_IMU':
-..\IMU\IMU.c:49:10: warning: implicit declaration of function 'TM_MPU6050_Init' [-Wimplicit-function-declaration]
-  flag = (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok);
-          ^
-..\IMU\IMU.c:49:27: error: 'MPU6050_Data0' undeclared (first use in this function)
-  flag = (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok);
-                           ^
-..\IMU\IMU.c:49:27: note: each undeclared identifier is reported only once for each function it appears in
-..\IMU\IMU.c:49:42: error: 'TM_MPU6050_Device_0' undeclared (first use in this function)
-  flag = (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok);
-                                          ^
-..\IMU\IMU.c:49:63: error: 'TM_MPU6050_Accelerometer_8G' undeclared (first use in this function)
-  flag = (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok);
-                                                               ^
-..\IMU\IMU.c:49:92: error: 'TM_MPU6050_Gyroscope_250s' undeclared (first use in this function)
-  flag = (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok);
-                                                                                            ^
-..\IMU\IMU.c:49:122: error: 'TM_MPU6050_Result_Ok' undeclared (first use in this function)
-  flag = (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok);
-                                                                                                                          ^
-..\IMU\IMU.c:47:10: warning: variable 'flag' set but not used [-Wunused-but-set-variable]
-  uint8_t flag = 0;
-          ^
-..\IMU\IMU.c: In function 'TIM7_IRQHandler':
-..\IMU\IMU.c:65:5: error: 'count' undeclared (first use in this function)
-  if(count == Sample_Size)
-     ^
-..\IMU\IMU.c:68:3: warning: implicit declaration of function 'STM_EVAL_LEDOn' [-Wimplicit-function-declaration]
-   STM_EVAL_LEDOn(LED6);
-   ^
-..\IMU\IMU.c:68:18: error: 'LED6' undeclared (first use in this function)
-   STM_EVAL_LEDOn(LED6);
-                  ^
-..\IMU\IMU.c:71:3: warning: implicit declaration of function 'TM_MPU6050_ReadAccelerometer' [-Wimplicit-function-declaration]
-   TM_MPU6050_ReadAccelerometer(&MPU6050_Data0);
-   ^
-..\IMU\IMU.c:71:33: error: 'MPU6050_Data0' undeclared (first use in this function)
-   TM_MPU6050_ReadAccelerometer(&MPU6050_Data0);
-                                 ^
-..\IMU\IMU.c:75:2: warning: implicit declaration of function 'STM_EVAL_LEDToggle' [-Wimplicit-function-declaration]
-  STM_EVAL_LEDToggle(LED5);
-  ^
-..\IMU\IMU.c:75:21: error: 'LED5' undeclared (first use in this function)
-  STM_EVAL_LEDToggle(LED5);
-                     ^
-06:42:24 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-..\IMU\IMU.c: In function 'init_IMU':
-..\IMU\IMU.c:49:27: error: 'MPU6050_Data0' undeclared (first use in this function)
-  flag = (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok);
-                           ^
-..\IMU\IMU.c:49:27: note: each undeclared identifier is reported only once for each function it appears in
-..\IMU\IMU.c:47:10: warning: variable 'flag' set but not used [-Wunused-but-set-variable]
-  uint8_t flag = 0;
-          ^
-..\IMU\IMU.c: In function 'TIM7_IRQHandler':
-..\IMU\IMU.c:65:5: error: 'count' undeclared (first use in this function)
-  if(count == Sample_Size)
-     ^
-..\IMU\IMU.c:68:3: warning: implicit declaration of function 'STM_EVAL_LEDOn' [-Wimplicit-function-declaration]
-   STM_EVAL_LEDOn(LED6);
-   ^
-..\IMU\IMU.c:68:18: error: 'LED6' undeclared (first use in this function)
-   STM_EVAL_LEDOn(LED6);
-                  ^
-..\IMU\IMU.c:71:33: error: 'MPU6050_Data0' undeclared (first use in this function)
-   TM_MPU6050_ReadAccelerometer(&MPU6050_Data0);
-                                 ^
-..\IMU\IMU.c:75:2: warning: implicit declaration of function 'STM_EVAL_LEDToggle' [-Wimplicit-function-declaration]
-  STM_EVAL_LEDToggle(LED5);
-  ^
-..\IMU\IMU.c:75:21: error: 'LED5' undeclared (first use in this function)
-  STM_EVAL_LEDToggle(LED5);
-                     ^
-06:42:55 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\tm_stm32f4_lis302dl_lis3dsh.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\tm_stm32f4_lis302dl_lis3dsh.o 
-In file included from ..\IMU\tm_stm32f4_lis302dl_lis3dsh.c:19:0:
-..\IMU\tm_stm32f4_lis302dl_lis3dsh.h:72:28: fatal error: tm_stm32f4_spi.h: No such file or directory
-compilation terminated.
-06:45:05 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\Utilities\STM32F4-Discovery\stm32f4_discovery.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Utilities\STM32F4-Discovery\stm32f4_discovery.o 
-arm-atollic-eabi-gcc -c ..\src\stm32f4xx_it.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\stm32f4xx_it.o 
-arm-atollic-eabi-gcc -c ..\IMU\tm_stm32f4_spi.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\tm_stm32f4_spi.o 
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-..\IMU\IMU.c: In function 'init_IMU':
-..\IMU\IMU.c:48:10: warning: variable 'flag' set but not used [-Wunused-but-set-variable]
-  uint8_t flag = 0;
-          ^
-..\IMU\IMU.c: In function 'TIM7_IRQHandler':
-..\IMU\IMU.c:69:3: warning: implicit declaration of function 'STM_EVAL_LEDOn' [-Wimplicit-function-declaration]
-   STM_EVAL_LEDOn(LED6);
-   ^
-..\IMU\IMU.c:69:18: error: 'LED6' undeclared (first use in this function)
-   STM_EVAL_LEDOn(LED6);
-                  ^
-..\IMU\IMU.c:69:18: note: each undeclared identifier is reported only once for each function it appears in
-..\IMU\IMU.c:76:2: warning: implicit declaration of function 'STM_EVAL_LEDToggle' [-Wimplicit-function-declaration]
-  STM_EVAL_LEDToggle(LED5);
-  ^
-..\IMU\IMU.c:76:21: error: 'LED5' undeclared (first use in this function)
-  STM_EVAL_LEDToggle(LED5);
-                     ^
-06:45:21 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o 
-arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
-..\src\main.c: In function 'main':
-..\src\main.c:53:2: error: unknown type name 'TM_MPU6050_t'
-  TM_MPU6050_t MPU6050_Data0;
-  ^
-..\src\main.c:59:3: warning: implicit declaration of function 'init_Timer' [-Wimplicit-function-declaration]
-   init_Timer();
-   ^
-..\src\main.c:53:15: warning: unused variable 'MPU6050_Data0' [-Wunused-variable]
-  TM_MPU6050_t MPU6050_Data0;
-               ^
-06:46:34 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-..\IMU\IMU.c: In function 'init_IMU':
-..\IMU\IMU.c:48:10: warning: unused variable 'flag' [-Wunused-variable]
-  uint8_t flag = 0;
-          ^
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o 
-arm-atollic-eabi-gcc -c ..\src\tiny_printf.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\tiny_printf.o 
-arm-atollic-eabi-gcc -c ..\IMU\tm_stm32f4_lis302dl_lis3dsh.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\tm_stm32f4_lis302dl_lis3dsh.o 
-arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
-..\src\main.c: In function 'main':
-..\src\main.c:58:3: warning: implicit declaration of function 'init_Timer' [-Wimplicit-function-declaration]
-   init_Timer();
-   ^
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o 
-arm-atollic-eabi-gcc -c ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o 
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+In file included from ..\src\../IMU/IMU.h:14:0,
+                 from ..\src\main.c:33:
+../src/eeprom.h:81:8: note: expected 'uint16_t * {aka short unsigned int *}' but argument is of type 'int16_t * {aka short int *}'
+ int8_t load_Data(uint16_t*  data_buf,uint16_t virtual_base_address, uint32_t buff_len);
+        ^
+arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\eeprom.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
 C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
 Generate build reports...
 Print size information
    text	   data	    bss	    dec	    hex	filename
-   3760	     40	   5888	   9688	   25d8	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
-Print size information done
-Generate listing file
-Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
-Generate listing file done
-Generate build reports done
-06:49:50 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-..\IMU\IMU.c: In function 'init_IMU':
-..\IMU\IMU.c:52:5: warning: implicit declaration of function 'TM_LIS302DL_LIS3DSH_Detect' [-Wimplicit-function-declaration]
-  if(TM_LIS302DL_LIS3DSH_Detect()== TM_LIS302DL_LIS3DSH_Device_LIS302DL)
-     ^
-..\IMU\IMU.c:52:36: error: 'TM_LIS302DL_LIS3DSH_Device_LIS302DL' undeclared (first use in this function)
-  if(TM_LIS302DL_LIS3DSH_Detect()== TM_LIS302DL_LIS3DSH_Device_LIS302DL)
-                                    ^
-..\IMU\IMU.c:52:36: note: each undeclared identifier is reported only once for each function it appears in
-..\IMU\IMU.c:54:3: error: 'TIM_LIS' undeclared (first use in this function)
-   TIM_LIS
-   ^
-..\IMU\IMU.c:55:2: error: expected ';' before '}' token
-  }
-  ^
-..\IMU\IMU.c:48:10: warning: unused variable 'flag' [-Wunused-variable]
-  uint8_t flag = 0;
-          ^
-06:50:59 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-..\IMU\IMU.c: In function 'init_IMU':
-..\IMU\IMU.c:54:3: error: 'TIM_LIS' undeclared (first use in this function)
-   TIM_LIS
-   ^
-..\IMU\IMU.c:54:3: note: each undeclared identifier is reported only once for each function it appears in
-..\IMU\IMU.c:55:2: error: expected ';' before '}' token
-  }
-  ^
-..\IMU\IMU.c:48:10: warning: unused variable 'flag' [-Wunused-variable]
-  uint8_t flag = 0;
-          ^
-06:53:29 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-..\IMU\IMU.c: In function 'init_IMU':
-..\IMU\IMU.c:54:3: warning: implicit declaration of function 'TM_LIS302DL_LIS3DSH_INT_InitLIS302DL' [-Wimplicit-function-declaration]
-   TM_LIS302DL_LIS3DSH_INT_InitLIS302DL(TM_LIS302DL_Sensitivity_2_3G, TM_LIS302DL_Filter_2Hz);
-   ^
-..\IMU\IMU.c:48:10: warning: variable 'flag' set but not used [-Wunused-but-set-variable]
-  uint8_t flag = 0;
-          ^
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   3760	     40	   5888	   9688	   25d8	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
-Print size information done
-Generate listing file
-Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
-Generate listing file done
-Generate build reports done
-06:59:52 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   3760	     40	   5888	   9688	   25d8	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
-Print size information done
-Generate listing file
-Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
-Generate listing file done
-Generate build reports done
-07:00:16 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
-..\src\main.c: In function 'main':
-..\src\main.c:57:2: warning: implicit declaration of function 'init_IMU' [-Wimplicit-function-declaration]
-  init_IMU();
-  ^
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   6152	     24	   5920	  12096	   2f40	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
-Print size information done
-Generate listing file
-Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
-Generate listing file done
-Generate build reports done
-07:02:13 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   6152	     24	   5920	  12096	   2f40	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
+   9636	     64	  15528	  25228	   628c	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
 Print size information done
 Generate listing file
 Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
 Generate listing file done
 Generate build reports done
 Info: Nothing to build for Test_IMU_F4
-07:06:46 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-..\IMU\IMU.c: In function 'read_IMU_Data':
-..\IMU\IMU.c:72:0: error: unterminated #ifdef
- #ifdef USE_
- ^
-..\IMU\IMU.c:71:1: error: expected declaration or statement at end of input
- {
- ^
-07:07:02 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   5372	     52	   5920	  11344	   2c50	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
-Print size information done
-Generate listing file
-Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
-Generate listing file done
-Generate build reports done
-07:08:33 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-..\IMU\IMU.c: In function 'read_IMU_Data':
-..\IMU\IMU.c:78:32: error: 'acc_data' undeclared (first use in this function)
-  TM_LIS302DL_LIS3DSH_ReadAxes(&acc_data);
-                                ^
-..\IMU\IMU.c:78:32: note: each undeclared identifier is reported only once for each function it appears in
-07:09:29 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   5448	     52	   5920	  11420	   2c9c	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
-Print size information done
-Generate listing file
-Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
-Generate listing file done
-Generate build reports done
-07:09:44 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
-..\src\main.c: In function 'main':
-..\src\main.c:57:2: warning: implicit declaration of function 'init_IMU' [-Wimplicit-function-declaration]
-  init_IMU();
-  ^
-..\src\main.c:58:2: warning: implicit declaration of function 'init_Timer' [-Wimplicit-function-declaration]
-  init_Timer();
-  ^
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   6204	     52	   5920	  12176	   2f90	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
-Print size information done
-Generate listing file
-Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
-Generate listing file done
-Generate build reports done
-07:10:14 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
+19:28:04 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
 Info: Internal Builder is used for build
 arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\eeprom.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
 C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
 Generate build reports...
 Print size information
    text	   data	    bss	    dec	    hex	filename
-   6204	     52	   5920	  12176	   2f90	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
+   9636	     64	  15528	  25228	   628c	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
 Print size information done
 Generate listing file
 Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
 Generate listing file done
 Generate build reports done
 Info: Nothing to build for Test_IMU_F4
-07:10:43 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-..\IMU\IMU.c: In function 'read_IMU_Data':
-..\IMU\IMU.c:76:32: error: 'acc_data' undeclared (first use in this function)
-  TM_LIS302DL_LIS3DSH_ReadAxes(&acc_data);
-                                ^
-..\IMU\IMU.c:76:32: note: each undeclared identifier is reported only once for each function it appears in
-07:11:02 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
+19:32:37 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
 Info: Internal Builder is used for build
 arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
+arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\eeprom.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
 C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
 Generate build reports...
 Print size information
    text	   data	    bss	    dec	    hex	filename
-   6912	     40	   5920	  12872	   3248	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
-Print size information done
-Generate listing file
-Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
-Generate listing file done
-Generate build reports done
-Info: Nothing to build for Test_IMU_F4
-07:15:18 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   6912	     40	  15520	  22472	   57c8	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
-Print size information done
-Generate listing file
-Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
-Generate listing file done
-Generate build reports done
-07:17:29 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   7000	     40	  15520	  22560	   5820	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
-Print size information done
-Generate listing file
-Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
-Generate listing file done
-Generate build reports done
-07:18:17 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-..\IMU\IMU.c: In function 'read_IMU_Data':
-..\IMU\IMU.c:75:35: error: 'TM_MPU6050_t {aka struct <anonymous>}' has no member named 'X'
-  samples[0][count] = MPU6050_Data0.X;
-                                   ^
-..\IMU\IMU.c:76:35: error: 'TM_MPU6050_t {aka struct <anonymous>}' has no member named 'Y'
-  samples[1][count] = MPU6050_Data0.Y;
-                                   ^
-..\IMU\IMU.c:77:37: error: 'TM_MPU6050_t {aka struct <anonymous>}' has no member named 'Z'
-  samples[2][count++] = MPU6050_Data0.Z;
-                                     ^
-07:18:41 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   6292	     52	  29920	  36264	   8da8	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
-Print size information done
-Generate listing file
-Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
-Generate listing file done
-Generate build reports done
-07:19:40 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   6368	     52	  29920	  36340	   8df4	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
-Print size information done
-Generate listing file
-Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
-Generate listing file done
-Generate build reports done
-Info: Nothing to build for Test_IMU_F4
-07:21:11 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-arm-atollic-eabi-gcc -c ..\src\main.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o src\main.o 
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   7000	     40	  15520	  22560	   5820	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
-Print size information done
-Generate listing file
-Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
-Generate listing file done
-Generate build reports done
-Info: Nothing to build for Test_IMU_F4
-07:24:26 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   7148	     40	  15520	  22708	   58b4	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
-Print size information done
-Generate listing file
-Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list
-Generate listing file done
-Generate build reports done
-Info: Nothing to build for Test_IMU_F4
-07:25:10 **** Incremental Build of configuration Debug for project Test_IMU_F4 ****
-Info: Internal Builder is used for build
-arm-atollic-eabi-gcc -c ..\IMU\IMU.c -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -std=gnu11 -DSTM32F4XX -DSTM32F40XX -DUSE_STDPERIPH_DRIVER -DUSE_STM32F4_DISCOVERY -DHSE_VALUE=8000000 -I../src -I../Libraries/CMSIS/Include -I../Libraries/Device/STM32F4xx/Include -I../Libraries/STM32F4xx_StdPeriph_Driver/inc -I../Utilities/STM32F4-Discovery -O0 -ffunction-sections -fdata-sections -g -fstack-usage -Wall -o IMU\IMU.o 
-arm-atollic-eabi-gcc -o Test_IMU_F4.elf IMU\IMU.o IMU\tm_stm32f4_i2c.o IMU\tm_stm32f4_lis302dl_lis3dsh.o IMU\tm_stm32f4_mpu6050.o IMU\tm_stm32f4_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\misc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_adc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_crc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_aes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_des.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_cryp_tdes.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dac.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dbgmcu.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dcmi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_dma.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_exti.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_flash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_fsmc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_gpio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_md5.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_hash_sha1.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_i2c.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_iwdg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_pwr.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rcc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rng.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_rtc.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_sdio.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_spi.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_syscfg.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_tim.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_usart.o Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_wwdg.o Utilities\STM32F4-Discovery\stm32f4_discovery.o Utilities\STM32F4-Discovery\stm32f4_discovery_lis302dl.o src\main.o src\startup_stm32f40xx.o src\stm32f4xx_it.o src\system_stm32f4xx.o src\tiny_printf.o src\tm_stm32f4_gpio.o -mthumb -mcpu=cortex-m4 -mfloat-abi=hard -mfpu=fpv4-sp-d16 -T..\stm32f4_flash.ld -Wl,--start-group -lc -lm -Wl,--end-group -specs=nosys.specs -static -Wl,-cref,-u,Reset_Handler -Wl,-Map=Test_IMU_F4.map -Wl,--gc-sections -Wl,--defsym=malloc_getpagesize_P=0x80 
-C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\ide\jre\bin\java -jar C:\Program Files (x86)\Atollic\TrueSTUDIO for ARM 7.1.1\Tools\arm-atollic-reports.jar sizeinfo list C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf 
-Generate build reports...
-Print size information
-   text	   data	    bss	    dec	    hex	filename
-   7148	     40	  15520	  22708	   58b4	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
+   9640	     64	  15528	  25232	   6290	C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.elf
 Print size information done
 Generate listing file
 Output sent to: C:\Users\user\Documents\GitHub\BouyDev\Firmware\New folder\Test_IMU_F4\Debug\Test_IMU_F4.list

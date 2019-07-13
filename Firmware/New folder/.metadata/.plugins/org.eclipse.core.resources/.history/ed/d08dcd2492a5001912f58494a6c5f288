@@ -37,7 +37,7 @@ SOFTWARE.
 /* Private macro */
 
 /* Private variables */
-uint16_t VirtAdd[6] = {0x01,0x0961,0x12C1,0x2581,0x2EE1,0x3841};
+
 
 /* Private function prototypes */
 
@@ -63,11 +63,11 @@ int main(void)
   while (!sample_finished);
   //read data
   FLASH_Unlock();
-  uint16_t data[Sample_Size];
+  int16_t data[Sample_Size];
   for (int i = 0; i < NAxis; ++i)
   {
 
-	  load_Data(data,VirtAdd[i],Sample_Size);
+	  load_Data(data,VirtAddVarTab[i]);
   }
   while(1)
   {

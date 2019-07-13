@@ -63,7 +63,7 @@ int main(void)
   while (!sample_finished);
   //read data
   FLASH_Unlock();
-  uint16_t data[Sample_Size];
+  int16_t data[Sample_Size];
   for (int i = 0; i < NAxis; ++i)
   {
 

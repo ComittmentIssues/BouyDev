@@ -9,12 +9,10 @@
 #include "stm32f4xx.h"
 #include "stm32f4_discovery.h"
 /* Private Variables*/
-uint16_t samples[NAxis][Sample_Size];
+int16_t samples[NAxis][Sample_Size];
 TM_MPU6050_t MPU6050_Data0;
 TM_LIS302DL_LIS3DSH_t LIS3DSH_Data0;
 int16_t count = 0;
-uint16_t VirtAddVarTab[6] = {0x01,0x0961,0x12C1,0x2581,0x2EE1,0x3841};
-
 /* Private Function Definitions*/
 void init_Timer(void)
 {
@@ -79,17 +77,17 @@ void read_IMU_Data(void)
 #ifdef USE_EXT_IMU
 	TM_MPU6050_ReadAccelerometer(&MPU6050_Data0);
 	TM_MPU6050_ReadGyroscope(&MPU6050_Data0);
-	samples[0][count] = (uint16_t)MPU6050_Data0.Accelerometer_X;
-	samples[1][count] =  (uint16_t)MPU6050_Data0.Accelerometer_Y;
-	samples[2][count] =  (uint16_t)MPU6050_Data0.Accelerometer_Z;
-	samples[3][count] =  (uint16_t)MPU6050_Data0.Gyroscope_X;
-	samples[4][count] =    (uint16_t)MPU6050_Data0.Gyroscope_Y;
-	samples[5][count++] =  (uint16_t)MPU6050_Data0.Gyroscope_Z;
+	samples[0][count] = MPU6050_Data0.Accelerometer_X;
+	samples[1][count] = MPU6050_Data0.Accelerometer_Y;
+	samples[2][count] = MPU6050_Data0.Accelerometer_Z;
+	samples[3][count] = MPU6050_Data0.Gyroscope_X;
+	samples[4][count] = MPU6050_Data0.Gyroscope_Y;
+	samples[5][count++] = MPU6050_Data0.Gyroscope_Z;
 #else
 	TM_LIS302DL_LIS3DSH_ReadAxes(&LIS3DSH_Data0);
-	samples[0][count] =  (uint16_t)LIS3DSH_Data0.X;
-	samples[1][count] =  (uint16_t)LIS3DSH_Data0.Y;
-	samples[2][count++] = (uint16_t)LIS3DSH_Data0.Z;
+	samples[0][count] = LIS3DSH_Data0.X;
+	samples[1][count] = LIS3DSH_Data0.Y;
+	samples[2][count++] = LIS3DSH_Data0.Z;
 #endif
 
 }
@@ -107,21 +105,16 @@ void TIM7_IRQHandler(void)
 	if(count == Sample_Size)
 	{
 		TIM_Cmd(Sample_Timer,DISABLE);
-		for (int i = 0; i < NAxis; ++i)
-		{
-			for (int j = 0; j < Sample_Size; ++j)
-			{
-				EE_WriteVariable(VirtAddVarTab[i]+j,samples[i][j]);
-			}
-		}
-		sample_finished = 1;
-		FLASH_Lock();
 		STM_EVAL_LEDOn(LED3);STM_EVAL_LEDOn(LED4);STM_EVAL_LEDOn(LED5);STM_EVAL_LEDOn(LED6);
 	}else
 	{
-		sample_finished = 0;
 		STM_EVAL_LEDToggle(LED6);
 		read_IMU_Data();
+#ifdef USE_EXT_IMU
+
+#else
+#endif
+
 	}
 	TIM_ClearITPendingBit(Sample_Timer,TIM_IT_Update);
 }

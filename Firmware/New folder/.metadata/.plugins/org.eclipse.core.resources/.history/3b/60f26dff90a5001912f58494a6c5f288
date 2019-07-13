@@ -27,9 +27,6 @@
 #else
 #define NAxis 3 //accelerator only
 #endif
-
-uint8_t sample_finished;
-
 uint8_t init_IMU(void);
 void init_Timer(void);
 void deinit_Timer(void);
