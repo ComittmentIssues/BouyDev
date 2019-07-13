@@ -30,24 +30,18 @@ SOFTWARE.
 /* Includes */
 #include "stm32f4xx.h"
 #include "stm32f4_discovery.h"
+#include "../IMU/IMU.h"
 #include "defines.h"
-#include "tm_stm32f4_i2c.h"
-#include "tm_stm32f4_mpu6050.h"
+
 /* Private macro */
-#define ADDRESS 0xD0
-#define SAMPLE_RATE 2 //Hz
-#define Sample_Timer TIM7
-#define Sample_PSC  65535
-#define Sample_Size 2400
+
 /* Private variables */
-int16_t samples[Sample_Size];
-int16_t count = 0;
+
+
 /* Private function prototypes */
-void init_I2C(void);
-void start_I2C(void);
-void init_Timer(void);
+
 /* Private functions */
-TM_MPU6050_t MPU6050_Data0;
+
 /**
 **===========================================================================
 **
@@ -57,22 +51,12 @@ TM_MPU6050_t MPU6050_Data0;
 */
 int main(void)
 {
-	TM_MPU6050_t MPU6050_Data0;
 	STM_EVAL_LEDInit(LED3);
 	STM_EVAL_LEDInit(LED4);
 	STM_EVAL_LEDInit(LED5);
 	STM_EVAL_LEDInit(LED6);
-	 if (TM_MPU6050_Init(&MPU6050_Data0, TM_MPU6050_Device_0, TM_MPU6050_Accelerometer_8G, TM_MPU6050_Gyroscope_250s) == TM_MPU6050_Result_Ok)
-	 {
-		 STM_EVAL_LEDOn(LED3);
-		 STM_EVAL_LEDOff(LED4);
-	 }else
-	 {
-
-		 STM_EVAL_LEDOn(LED4);
-		 STM_EVAL_LEDOff(LED3);
-	 }
-	 init_Timer();
+	init_IMU();
+	init_Timer();
   while (1)
   {
 
@@ -83,50 +67,5 @@ int main(void)
  * @brief function to set the sampling rate of IMU
  */
 
-void init_Timer(void)
-{
 
-		RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM7,ENABLE);
 
-		TIM_TimeBaseInitTypeDef timerInitStructure; //create a 1ms delaay
-		RCC_ClocksTypeDef rcc;
-		RCC_GetClocksFreq(&rcc);
-
-		timerInitStructure.TIM_Prescaler = Sample_PSC;
-		timerInitStructure.TIM_CounterMode = TIM_CounterMode_Up;
-		timerInitStructure.TIM_Period= rcc.HCLK_Frequency/(2*SAMPLE_RATE*Sample_PSC);
-		timerInitStructure.TIM_ClockDivision = TIM_CKD_DIV1;
-		timerInitStructure.TIM_RepetitionCounter = 0;
-		TIM_TimeBaseInit(Sample_Timer, &timerInitStructure);
-
-		/* Prevent interrupt from triggering*/
-		TIM_ClearITPendingBit(Sample_Timer,TIM_IT_Update);
-		TIM_UpdateRequestConfig(TIM2,TIM_UpdateSource_Regular);
-		TIM_ITConfig(Sample_Timer, TIM_IT_Update,ENABLE);
-
-		NVIC_InitTypeDef nvicStructure;
-	    nvicStructure.NVIC_IRQChannel = TIM7_IRQn;
-		nvicStructure.NVIC_IRQChannelPreemptionPriority = 0;
-		nvicStructure.NVIC_IRQChannelSubPriority = 1;
-		nvicStructure.NVIC_IRQChannelCmd = ENABLE;
-		NVIC_Init(&nvicStructure);
-		TIM_Cmd(Sample_Timer,ENABLE);
-		//enable interrupts
-
-}
-
-void TIM7_IRQHandler(void)
-{
-	if(count == Sample_Size)
-	{
-		TIM_Cmd(Sample_Timer,DISABLE);
-		STM_EVAL_LEDOn(LED6);
-	}else
-	{
-		TM_MPU6050_ReadAccelerometer(&MPU6050_Data0);
-		samples[count] = MPU6050_Data0.Accelerometer_X;
-		count++;
-	}
-	STM_EVAL_LEDToggle(LED5);
-	TIM_ClearITPendingBit(Sample_Timer,TIM_IT_Update);
-}

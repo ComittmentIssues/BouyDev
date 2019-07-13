@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move &apos;tm_stm32f4_i2c.c, tm_stm32f4_i2c.h, tm_stm32f4_mpu6050.c, tm_stm32f4_mpu6050.h&apos; to &apos;IMU&apos;" description="Move 4 resources to &apos;IMU&apos;" destination="IMU" element1="src/tm_stm32f4_i2c.c" element2="src/tm_stm32f4_i2c.h" element3="src/tm_stm32f4_mpu6050.c" element4="src/tm_stm32f4_mpu6050.h" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="4" stamp="1562990685660" updateReferences="true"/>
+</session>
