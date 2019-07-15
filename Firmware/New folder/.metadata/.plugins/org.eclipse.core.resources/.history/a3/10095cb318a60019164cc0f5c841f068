@@ -97,7 +97,7 @@ AD0			-			If pin is low, I2C address is 0xD0, if pin is high, the address is 0xD
 
 /* Default I2C clock */
 #ifndef MPU6050_I2C_CLOCK
-#define MPU6050_I2C_CLOCK			50000
+#define MPU6050_I2C_CLOCK			100000
 #endif
 
 /* Default I2C address */

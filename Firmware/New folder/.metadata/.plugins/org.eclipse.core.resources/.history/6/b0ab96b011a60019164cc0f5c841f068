@@ -19,7 +19,7 @@
 #define Sample_PSC  65535
 #define Sample_Size 2400
 
-#define USE_EXT_IMU
+//#define USE_EXT_IMU
 #define USE_INT_IMU
 
 #ifdef USE_EXT_IMU
