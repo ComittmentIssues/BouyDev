@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">
-<refactoring comment="Move &apos;FATFS&apos; to &apos;Libraries&apos;" description="Move &apos;FATFS&apos; to &apos;Libraries&apos;" destination="Libraries" element1="FATFS" flags="7" id="org.eclipse.ltk.core.refactoring.move.resources" resources="1" stamp="1560093283734" updateReferences="true"/>
-</session>

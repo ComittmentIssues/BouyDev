@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1564238149 source:c:\users\user\documents\c++\packet_decoder\main.c
+	<stdlib.h>
+	<stdio.h>
+	<stdint.h>
+	<string.h>
+	<math.h>
+
+1564408455 source:c:\users\user\documents\github\bouydev\tests\transmission tests\packet_decoder\main.c
+	<stdlib.h>
+	<stdio.h>
+	<stdint.h>
+	<string.h>
+	<math.h>
+	<memory.h>
+
