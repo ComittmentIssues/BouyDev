@@ -321,3 +321,433 @@ java.io.FileNotFoundException: C:\Users\user\Documents\GitHub\BouyDev\Firmware\.
 	at org.eclipse.osgi.container.SystemModule.stop(SystemModule.java:202)
 	at org.eclipse.osgi.internal.framework.EquinoxBundle$SystemBundle$EquinoxSystemModule$1.run(EquinoxBundle.java:165)
 	at java.lang.Thread.run(Thread.java:745)
+!SESSION 2019-08-28 11:31:21.902 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_181
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_ZA
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2019-08-28 11:32:40.801
+!MESSAGE Loading product manager
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2019-08-28 11:32:40.810
+!MESSAGE OS info: Windows 10, 10.0, x86
+
+!ENTRY TrueSTUDIO 1 0 2019-08-28 11:32:42.055
+!MESSAGE Target: STM32, Version: 9.3.0, Build date: 20190212-0734, Installation dir: /C:/Program Files (x86)/Atollic/TrueSTUDIO for STM32 9.3.0/ide/
+
+!ENTRY TrueSTUDIO 1 0 2019-08-28 11:32:42.057
+!MESSAGE Workspace: C:\Users\jamie\OneDrive\Documents\GitHub\BouyDev\Firmware
+
+!ENTRY org.eclipse.jface 2 0 2019-08-28 11:32:43.767
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2019-08-28 11:32:43.767
+!MESSAGE A conflict occurred for ALT+CTRL+T:
+Binding(ALT+CTRL+T,
+	ParameterizedCommand(Command(org.eclipse.team.svn.ui.command.EditPropertiesCommand,Show Properties,
+		,
+		Category(org.eclipse.team.svn.ui.command.category,SVN,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@13eaf5d,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+CTRL+T,
+	ParameterizedCommand(Command(org.eclipse.tm.terminal.connector.local.command.launch,Open Local Terminal on Selection,
+		,
+		Category(org.eclipse.tm.terminal.view.ui.commands.category,Terminal Commands,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@28af44,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY com.atollic.truestudio.integration.processorexpert 0 0 2019-08-28 11:32:50.255
+!MESSAGE Atollic TrueSTUDIO Processor Expert integration is up.
+
+!ENTRY edu.hawaii.ics.csdl.jupiter 1 0 2019-08-28 11:32:50.289
+!MESSAGE Code Review is up.
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-08-28 11:32:50.527
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\jamie'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-08-28 11:32:51.954
+!MESSAGE Removing part descriptor with the 'com.arm.cmsis.pack.refclient.ui.PackView' id and the 'Installed CMSIS Packs (Sample view)' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-08-28 11:32:51.961
+!MESSAGE Removing part descriptor with the 'com.arm.cmsis.pack.refclient.ui.DeviceTreeView' id and the 'Installed CMSIS devices  (Sample view)' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-08-28 11:32:51.961
+!MESSAGE Removing part descriptor with the 'com.arm.cmsis.pack.refclient.ui.ConfigView' id and the 'Active RTE Configuration (Sample view)' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY org.eclipse.e4.ui.workbench 2 0 2019-08-28 11:32:51.970
+!MESSAGE Removing part descriptor with the 'com.atollic.truestudio.rtos.mqx.tasks' id and the 'MQX Task Summary' description. Points to the invalid 'bundleclass://org.eclipse.ui.workbench/org.eclipse.ui.internal.e4.compatibility.CompatibilityView' class.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 11:33:51.768
+!MESSAGE BUOY_FiRMWARE_F4 needs property 'com.atollic.truestudio.general.runtimelib.1811993564' fixed. Fixing to 'com.atollic.truestudio.ld.general.clib.standard'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 11:33:52.321
+!MESSAGE BUOY_FiRMWARE_F4 needs property 'com.atollic.truestudio.general.runtimelib.864428932' fixed. Fixing to 'com.atollic.truestudio.ld.general.clib.standard'.
+
+!ENTRY org.eclipse.cdt.core 1 0 2019-08-28 11:34:05.210
+!MESSAGE Indexed 'BUOY_FiRMWARE_F4' (53 sources, 109 headers) in 6,47 sec: 11 672 declarations; 40 959 references; 0 unresolved inclusions; 1 syntax errors; 0 unresolved names (0%)
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-08-28 11:36:53.828
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-08-28 11:36:56.566
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-08-28 11:37:01.601
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-08-28 11:37:07.766
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-08-28 11:37:09.022
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-08-28 11:37:11.109
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-08-28 11:37:12.479
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2019-08-28 11:39:33.439
+!MESSAGE Unloading product manager
+!SESSION 2019-08-28 14:14:35.696 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=1.8.0_181
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86, WS=win32, NL=en_ZA
+Command-line arguments:  -os win32 -ws win32 -arch x86
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2019-08-28 14:14:45.639
+!MESSAGE Loading product manager
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2019-08-28 14:14:45.986
+!MESSAGE OS info: Windows 10, 10.0, x86
+
+!ENTRY TrueSTUDIO 1 0 2019-08-28 14:14:51.192
+!MESSAGE Target: STM32, Version: 9.3.0, Build date: 20190212-0734, Installation dir: /C:/Program Files (x86)/Atollic/TrueSTUDIO for STM32 9.3.0/ide/
+
+!ENTRY TrueSTUDIO 1 0 2019-08-28 14:14:51.192
+!MESSAGE Workspace: C:\Users\jamie\OneDrive\Documents\GitHub\BouyDev\Firmware
+
+!ENTRY org.eclipse.jface 2 0 2019-08-28 14:15:00.727
+!MESSAGE Keybinding conflicts occurred.  They may interfere with normal accelerator operation.
+!SUBENTRY 1 org.eclipse.jface 2 0 2019-08-28 14:15:00.727
+!MESSAGE A conflict occurred for ALT+CTRL+T:
+Binding(ALT+CTRL+T,
+	ParameterizedCommand(Command(org.eclipse.team.svn.ui.command.EditPropertiesCommand,Show Properties,
+		,
+		Category(org.eclipse.team.svn.ui.command.category,SVN,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@8c84eb,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+Binding(ALT+CTRL+T,
+	ParameterizedCommand(Command(org.eclipse.tm.terminal.connector.local.command.launch,Open Local Terminal on Selection,
+		,
+		Category(org.eclipse.tm.terminal.view.ui.commands.category,Terminal Commands,null,true),
+		org.eclipse.ui.internal.WorkbenchHandlerServiceHandler@144d033,
+		,,true),null),
+	org.eclipse.ui.defaultAcceleratorConfiguration,
+	org.eclipse.ui.contexts.window,,,system)
+
+!ENTRY com.atollic.truestudio.integration.processorexpert 0 0 2019-08-28 14:15:12.205
+!MESSAGE Atollic TrueSTUDIO Processor Expert integration is up.
+
+!ENTRY org.eclipse.egit.ui 2 0 2019-08-28 14:15:12.356
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\jamie'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY edu.hawaii.ics.csdl.jupiter 1 0 2019-08-28 14:15:13.066
+!MESSAGE Code Review is up.
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-08-28 14:21:51.851
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-08-28 14:21:56.328
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-08-28 14:22:03.853
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:22:25.089
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:22:25.091
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:22:25.095
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:22:25.096
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:22:25.164
+!MESSAGE Test_Nucleo needs property 'com.atollic.truestudio.general.runtimelib.1884862586' fixed. Fixing to 'com.atollic.truestudio.ld.general.clib.small'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:22:25.165
+!MESSAGE Failed to get device info (Debug) for project Test_Nucleo
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:22:25.166
+!MESSAGE Failed to get device info (Debug) for project Test_Nucleo
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:22:25.166
+!MESSAGE Failed to get device info (Debug) for project Test_Nucleo
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:22:25.168
+!MESSAGE Test_Nucleo needs property 'com.atollic.truestudio.general.runtimelib.1158398957' fixed. Fixing to 'com.atollic.truestudio.ld.general.clib.small'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:22:25.169
+!MESSAGE Failed to get device info (Release) for project Test_Nucleo
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:22:25.169
+!MESSAGE Failed to get device info (Release) for project Test_Nucleo
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:22:25.170
+!MESSAGE Failed to get device info (Release) for project Test_Nucleo
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:22:25.199
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:22:25.201
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:22:25.206
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:22:25.207
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:22:25.258
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:22:25.259
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:22:28.175
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:22:29.009
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:22:29.768
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:22:29.874
+!MESSAGE Failed to find device info
+
+!ENTRY org.eclipse.cdt.core 1 0 2019-08-28 14:22:41.381
+!MESSAGE Indexed 'Test_Nucleo' (2 sources, 55 headers) in 3,06 sec: 12 268 declarations; 17 631 references; 0 unresolved inclusions; 40 syntax errors; 60 unresolved names (0,2%)
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-08-28 14:31:42.080
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-08-28 14:31:44.606
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-08-28 14:31:44.606
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.common.wizards 4 0 2019-08-28 14:31:50.836
+!MESSAGE Failed to find the correct FPU ABI, falling back to Soft. Value: 
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:32:09.334
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:32:09.334
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:32:09.334
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:32:09.334
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:32:09.377
+!MESSAGE Test_Nucleo needs property 'com.atollic.truestudio.general.runtimelib.1796975823' fixed. Fixing to 'com.atollic.truestudio.ld.general.clib.small'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:32:09.377
+!MESSAGE Failed to get device info (Debug) for project Test_Nucleo
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:32:09.377
+!MESSAGE Failed to get device info (Debug) for project Test_Nucleo
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:32:09.377
+!MESSAGE Failed to get device info (Debug) for project Test_Nucleo
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:32:09.393
+!MESSAGE Test_Nucleo needs property 'com.atollic.truestudio.general.runtimelib.1799286498' fixed. Fixing to 'com.atollic.truestudio.ld.general.clib.small'.
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:32:09.393
+!MESSAGE Failed to get device info (Release) for project Test_Nucleo
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:32:09.393
+!MESSAGE Failed to get device info (Release) for project Test_Nucleo
+
+!ENTRY com.atollic.truestudio.mbs 2 0 2019-08-28 14:32:09.393
+!MESSAGE Failed to get device info (Release) for project Test_Nucleo
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:32:09.409
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:32:09.409
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:32:09.424
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:32:09.424
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:32:09.456
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:32:09.456
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:32:12.213
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:32:12.685
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:32:13.122
+!MESSAGE Failed to find device info
+
+!ENTRY com.atollic.truestudio.mbs 4 0 2019-08-28 14:32:13.247
+!MESSAGE Failed to find device info
+
+!ENTRY org.eclipse.cdt.core 1 0 2019-08-28 14:32:20.662
+!MESSAGE Indexed 'Test_Nucleo' (2 sources, 55 headers) in 2,96 sec: 12 268 declarations; 17 631 references; 0 unresolved inclusions; 40 syntax errors; 60 unresolved names (0,2%)
+
+!ENTRY org.eclipse.ui 4 0 2019-08-28 15:29:18.187
+!MESSAGE Unhandled event loop exception
+!STACK 0
+java.lang.IllegalArgumentException: Argument not valid
+	at org.eclipse.swt.SWT.error(SWT.java:4514)
+	at org.eclipse.swt.SWT.error(SWT.java:4448)
+	at org.eclipse.swt.SWT.error(SWT.java:4419)
+	at org.eclipse.swt.custom.StyledText.setStyleRanges(StyledText.java:9952)
+	at org.eclipse.swt.custom.StyledText.setStyleRange(StyledText.java:9834)
+	at org.eclipse.cdt.internal.ui.text.c.hover.AnnotationExpansionControl.resetViewerBackground(AnnotationExpansionControl.java:897)
+	at org.eclipse.cdt.internal.ui.text.c.hover.AnnotationExpansionControl.access$8(AnnotationExpansionControl.java:883)
+	at org.eclipse.cdt.internal.ui.text.c.hover.AnnotationExpansionControl$Item.deselect(AnnotationExpansionControl.java:164)
+	at org.eclipse.cdt.internal.ui.text.c.hover.AnnotationExpansionControl$MyDisposeListener.widgetDisposed(AnnotationExpansionControl.java:186)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:124)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4410)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1079)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1103)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1084)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:836)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:949)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:839)
+	at org.eclipse.swt.widgets.Composite.releaseChildren(Composite.java:949)
+	at org.eclipse.swt.widgets.Canvas.releaseChildren(Canvas.java:171)
+	at org.eclipse.swt.widgets.Decorations.releaseChildren(Decorations.java:807)
+	at org.eclipse.swt.widgets.Shell.releaseChildren(Shell.java:1368)
+	at org.eclipse.swt.widgets.Widget.release(Widget.java:839)
+	at org.eclipse.swt.widgets.Widget.dispose(Widget.java:460)
+	at org.eclipse.swt.widgets.Decorations.dispose(Decorations.java:459)
+	at org.eclipse.swt.widgets.Shell.dispose(Shell.java:737)
+	at org.eclipse.cdt.internal.ui.text.c.hover.AnnotationExpansionControl.dispose(AnnotationExpansionControl.java:697)
+	at org.eclipse.cdt.internal.ui.text.c.hover.AnnotationExpansionControl$1.viewportChanged(AnnotationExpansionControl.java:495)
+	at org.eclipse.jface.text.TextViewer.updateViewportListeners(TextViewer.java:2977)
+	at org.eclipse.jface.text.TextViewer$ViewportGuard.keyReleased(TextViewer.java:290)
+	at org.eclipse.swt.widgets.TypedListener.handleEvent(TypedListener.java:175)
+	at org.eclipse.swt.widgets.EventTable.sendEvent(EventTable.java:84)
+	at org.eclipse.swt.widgets.Display.sendEvent(Display.java:4410)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1079)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1103)
+	at org.eclipse.swt.widgets.Widget.sendEvent(Widget.java:1088)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1130)
+	at org.eclipse.swt.widgets.Widget.sendKeyEvent(Widget.java:1126)
+	at org.eclipse.swt.widgets.Widget.wmKeyUp(Widget.java:1949)
+	at org.eclipse.swt.widgets.Control.WM_KEYUP(Control.java:5168)
+	at org.eclipse.swt.widgets.Control.windowProc(Control.java:4824)
+	at org.eclipse.swt.widgets.Canvas.windowProc(Canvas.java:359)
+	at org.eclipse.swt.widgets.Display.windowProc(Display.java:5115)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessageW(Native Method)
+	at org.eclipse.swt.internal.win32.OS.DispatchMessage(OS.java:2552)
+	at org.eclipse.swt.widgets.Display.readAndDispatch(Display.java:3814)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine$4.run(PartRenderingEngine.java:1121)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.e4.ui.internal.workbench.swt.PartRenderingEngine.run(PartRenderingEngine.java:1022)
+	at org.eclipse.e4.ui.internal.workbench.E4Workbench.createAndRunUI(E4Workbench.java:150)
+	at org.eclipse.ui.internal.Workbench$5.run(Workbench.java:687)
+	at org.eclipse.core.databinding.observable.Realm.runWithDefault(Realm.java:336)
+	at org.eclipse.ui.internal.Workbench.createAndRunWorkbench(Workbench.java:604)
+	at org.eclipse.ui.PlatformUI.createAndRunWorkbench(PlatformUI.java:148)
+	at org.eclipse.ui.internal.ide.application.IDEApplication.start(IDEApplication.java:143)
+	at org.eclipse.equinox.internal.app.EclipseAppHandle.run(EclipseAppHandle.java:196)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.runApplication(EclipseAppLauncher.java:134)
+	at org.eclipse.core.runtime.internal.adaptor.EclipseAppLauncher.start(EclipseAppLauncher.java:104)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:388)
+	at org.eclipse.core.runtime.adaptor.EclipseStarter.run(EclipseStarter.java:243)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.eclipse.equinox.launcher.Main.invokeFramework(Main.java:673)
+	at org.eclipse.equinox.launcher.Main.basicRun(Main.java:610)
+	at org.eclipse.equinox.launcher.Main.run(Main.java:1519)
+
+!ENTRY TrueSTUDIO 4 0 2019-08-28 15:29:42.195
+!MESSAGE ST-LINK GDB server failed to start (exit code = 6)
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 5012 2019-08-28 15:29:42.251
+!MESSAGE Error in initializing ST-Link device.
+Reason: (6) ST-Link firmware upgrade required.
+Please upgrade the ST-Link firmware using the upgrade tool. Reconnect ST-LINK and click OK
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-08-28 15:35:55.405
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-08-28 15:36:04.485
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-08-28 15:36:12.786
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-08-28 15:36:15.837
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-08-28 15:36:17.311
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-08-28 15:36:18.428
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-08-28 15:36:20.298
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-08-28 15:36:21.747
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-08-28 15:36:24.074
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-08-28 15:36:27.314
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-08-28 15:36:28.392
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-08-28 15:36:29.311
+!MESSAGE Endianness was never initialized!
+
+!ENTRY org.eclipse.cdt.dsf.gdb 4 0 2019-08-28 15:36:45.677
+!MESSAGE Endianness was never initialized!
+
+!ENTRY com.atollic.truestudio.productmanager 1 0 2019-08-28 15:51:10.776
+!MESSAGE Unloading product manager

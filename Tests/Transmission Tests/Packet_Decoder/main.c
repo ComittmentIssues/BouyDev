@@ -4,6 +4,8 @@
 #include <string.h>
 #include <math.h>
 #include <memory.h>
+#include <time.h>
+
 typedef struct
 {
     uint8_t ID;
@@ -16,7 +18,7 @@ typedef struct
 
 }Packet;
 char* data;
-char* dirpath = "C:\\Users\\user\\Documents\\GitHub\\BouyDev\\Tests\\Transmission Tests\\Data\\";
+char* dirpath = "C:\\Users\\jamie\\OneDrive\\Documents\\GitHub\\BouyDev\\Tests\\Transmission Tests\\Data\\";
 char data_buffer[1024];
 uint8_t getByte(char* msg);
 void decode_Message(char* payload);
@@ -52,7 +54,7 @@ int main()
         }else
         {
             fclose(writefilepointer);
-            printf("File Exists. Appending To file");
+            printf("File Exists. Appending To file\n");
             writefilepointer = fopen(writepath,"a");
         }
         filepointer = fopen((char*)path,"rt");
@@ -97,14 +99,22 @@ void decode_Message(char* payload)
     packet.ID = getByte(payload);
     payload+=2;
     /* Epoch Time */
-    uint32_t time = 0;
+    uint32_t Epoch_time = 0;
     for (int i = 0; i < 4; ++i)
     {
        uint8_t byte= getByte(payload);
-       time |= byte<<8*(3-i);
+       Epoch_time |= byte<<8*(3-i);
        payload+=2;
     }
-    packet.Etime = time;
+    //format time
+    time_t string_time = Epoch_time;
+    char buffer[26];
+    struct tm* tm_info;
+
+    time(&string_time);
+    tm_info = localtime(&string_time);
+
+    strftime(buffer,sizeof(buffer)/sizeof(buffer[0]),"%Y/%m/%d,%H:%M:%S",tm_info);
     /* Coordinates*/
     unsigned char byte[4];
     for (int k = 0; k < 2; ++k)
@@ -136,7 +146,7 @@ void decode_Message(char* payload)
     uint8_t TL = getByte(payload);
     uint16_t T_temp = (TH<<8)|TL;
     sprintf(packet.temp,"%d.%d",t,T_temp);
-    sprintf(data_buffer,"GPS,%d,%d,%f,%f,%0.2f,%0.2f,%0.2f,%d,%d,%s\n",packet.ID,packet.Etime,packet.coord[0],packet.coord[1],packet.dop[0],packet.dop[1],packet.dop[2],packet.signal_type,packet.num_sats,packet.temp);
+    sprintf(data_buffer,"GPS,%d,%s,%f,%f,%0.2f,%0.2f,%0.2f,%d,%d,%s\n",packet.ID,buffer,packet.coord[0],packet.coord[1],packet.dop[0],packet.dop[1],packet.dop[2],packet.signal_type,packet.num_sats,packet.temp);
 }
 uint8_t getByte(char* msg)
 {

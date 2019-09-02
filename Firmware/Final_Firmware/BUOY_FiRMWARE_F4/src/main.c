@@ -29,7 +29,6 @@ SOFTWARE.
 
 /* Includes */
 #include "stm32f4xx.h"
-#include "stm32f4_discovery.h"
 #include "../My_Libs/RTC.h"
 #include "../My_Libs/eeprom.h"
 #include "../My_Libs/Delay.h"
@@ -108,11 +107,7 @@ int main(void)
 	/*
 	 * NOTE: DELETE BEFORE Deployment
 	 */
-	STM_EVAL_LEDInit(LED3);
-	STM_EVAL_LEDInit(LED4);
-	STM_EVAL_LEDInit(LED5);
-	STM_EVAL_LEDInit(LED6);
-  /********************** Base Initializations *****************************/
+    /********************** Base Initializations *****************************/
   init_RCC_Clock();
   init_RTC();
   init_Delay();
@@ -353,7 +348,7 @@ if(log_State)
 	/* SHUT DOWN ROUTINE */
 	RTC_alarma.RTC_AlarmMask = RTC_AlarmMask_All;//&(~RTC_AlarmMask_Minutes);
 	RTC_GetTime(RTC_Format_BIN,&rtc_time);
-	rtc_time.RTC_Minutes = 30;
+	rtc_time.RTC_Minutes = 1;
 	set_RTCAlarm_A(&rtc_time,&RTC_alarma);
 
 	/* Main Function, enter standby mode untill wake up*/
