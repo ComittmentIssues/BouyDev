@@ -1,0 +1,10 @@
+ds18s20.c:68:14:PingOneWireNetwork	16	static
+ds18s20.c:90:14:StartConversion	8	static
+ds18s20.c:100:14:ReportTemperature	32	static
+ds18s20.c:125:14:ReportROM	24	static
+ds18s20.c:142:14:ReportScratchpad	24	static
+ds18s20.c:158:14:SendInitialization	8	static
+ds18s20.c:173:14:SendByte	24	static
+ds18s20.c:192:18:ReadByte	16	static
+ds18s20.c:219:14:OneWire_Init	16	static
+ds18s20.c:234:14:delay_usecs	24	static

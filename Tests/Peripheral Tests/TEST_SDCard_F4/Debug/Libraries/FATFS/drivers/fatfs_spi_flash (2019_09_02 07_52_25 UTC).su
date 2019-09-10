@@ -1,0 +1,5 @@
+fatfs_spi_flash.c:24:9:TM_FATFS_SPI_FLASH_disk_initialize	4	static
+fatfs_spi_flash.c:32:9:TM_FATFS_SPI_FLASH_disk_status	4	static
+fatfs_spi_flash.c:37:9:TM_FATFS_SPI_FLASH_disk_ioctl	16	static
+fatfs_spi_flash.c:57:9:TM_FATFS_SPI_FLASH_disk_read	24	static
+fatfs_spi_flash.c:62:9:TM_FATFS_SPI_FLASH_disk_write	24	static

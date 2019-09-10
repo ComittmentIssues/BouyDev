@@ -1,0 +1,4 @@
+memory.c:12:6:timer_initialize	24	static
+memory.c:40:6:TIM2_IRQHandler	8	static
+memory.c:51:6:check_memory	32	static
+memory.c:78:6:write_to_memory	32	static

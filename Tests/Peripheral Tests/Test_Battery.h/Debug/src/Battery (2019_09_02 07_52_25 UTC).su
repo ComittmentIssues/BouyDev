@@ -1,0 +1,4 @@
+Battery.c:13:6:init_Battery_Control	16	static
+Battery.c:23:9:init_Battery_ADC	40	static
+Battery.c:54:6:deinit_Battery_ADC	16	static
+Battery.c:65:9:Sample_ADC	8	static

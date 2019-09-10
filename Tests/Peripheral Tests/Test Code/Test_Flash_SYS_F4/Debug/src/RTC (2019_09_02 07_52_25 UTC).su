@@ -1,0 +1,9 @@
+core_cm4.h:1452:22:NVIC_EnableIRQ	16	static
+RTC.c:16:6:init_RTC	32	static
+RTC.c:43:6:init_RTC_LSI	8	static
+RTC.c:54:6:set_RTCAlarm_A	48	static
+RTC.c:109:6:init_AutoWakeUp	16	static
+RTC.c:142:6:set_StdBy_Mode	8	static
+RTC.c:159:6:TIM2_IRQHandler	4	static
+RTC.c:163:6:RTC_Alarm_IRQHandler	8	static
+RTC.c:171:6:RTC_WKUP_IRQHandler	4	static

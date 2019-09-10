@@ -1,0 +1,8 @@
+DS18B20.h:32:22:DWT_delay_us	24	static
+DS18B20.c:15:13:init_OneWire_GPIO	16	static
+DS18B20.c:27:10:reset_OneWire	8	static
+DS18B20.c:45:13:SWI_sendBit	16	static
+DS18B20.c:62:6:SWI_sendByte	24	static
+DS18B20.c:71:9:SWI_readByte	24	static
+DS18B20.c:87:9:init_OneWire	8	static
+DS18B20.c:112:10:DWT_Delay_init	4	static

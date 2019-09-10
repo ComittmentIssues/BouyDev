@@ -1,0 +1,12 @@
+tm_stm32f4_spi.h:454:25:TM_SPI_Send	16	static
+tm_stm32f4_lis302dl_lis3dsh.c:35:30:TM_LIS302DL_LIS3DSH_Detect	16	static
+tm_stm32f4_lis302dl_lis3dsh.c:60:30:TM_LIS302DL_LIS3DSH_Init	16	static
+tm_stm32f4_lis302dl_lis3dsh.c:84:30:TM_LIS302DL_LIS3DSH_ReadAxes	16	static
+tm_stm32f4_lis302dl_lis3dsh.c:101:6:TM_LIS302DL_LIS3DSH_INT_InitPins	16	static
+tm_stm32f4_lis302dl_lis3dsh.c:129:6:TM_LIS302DL_LIS3DSH_INT_WriteSPI	16	static
+tm_stm32f4_lis302dl_lis3dsh.c:148:6:TM_LIS302DL_LIS3DSH_INT_ReadSPI	16	static
+tm_stm32f4_lis302dl_lis3dsh.c:169:6:TM_LIS302DL_LIS3DSH_INT_InitLIS3DSH	24	static
+tm_stm32f4_lis302dl_lis3dsh.c:223:6:TM_LIS302DL_LIS3DSH_INT_InitLIS302DL	24	static
+tm_stm32f4_lis302dl_lis3dsh.c:266:6:TM_LIS3DSH_INT_ReadAxes	24	static
+tm_stm32f4_lis302dl_lis3dsh.c:282:6:TM_LIS302DL_INT_ReadAxes	24	static
+tm_stm32f4_lis302dl_lis3dsh.c:300:6:TM_LIS302DL_LIS3DSH_INT_Delay	16	static
