@@ -1,3 +1,51 @@
+/*
+    SHARC BUOY V1 Packet Decoder
+
+    Author: Jamie Jacobson
+    For   : University of Cape Town
+    Date  : 22 August 2020
+
+    This project is designed to decompress incoming Iridium Data packets from
+    SHARC BUOY Version 1. Each incoming transmission consists of a payload which
+    contains 4 sets of data packets. The Buoy creates 4 sample points in a sample
+    window and compresses the data into a single payload. Each sample point consists
+    of an ID, GPS Coordinates, Epoch Time, Diagnostic information, Temperature and Battery
+    Voltage (For this version, Battery Voltage detection is depreciated and does not work)
+    Each Packet consists of 24 bytes starting with a packet ID number and ending with a delimiter (\r)
+
+    A full overview of the packet structure is provided in the file "Sharc Buoy V1 Packet Structure.pdf"
+
+    Data:
+
+    Name...........Type.............Description
+    ID.............uint8_t..........packet identifier
+    Epoch Time.....uint32_t.........Time and Date information represented in Epoch Time
+    Latitude.......float............Float representing the GPS Latitude coordinates in DDMM.mmmm format
+    Longitude......float............Float representing the GPS Longitude coordinates in DDMM.mmmm format
+    HDOP...........float............Float representing the Horizontal Dilation of Precision
+    PDOP...........float............Float representing the Positional Dilation of Precision
+    VDOP...........float............Float representing the Vertical Dilation of Precision
+    NumSats........uint8_t..........Number of satelites used to acquire the fix
+    Fix_Type.......uint8_t..........How the measurement was obtained (2D,3D, No Fix, Dead Reckoning)
+    Temperature....float............Ambient Temperature measurement
+    Voltage........float............Battery Voltage
+
+    Program Structure
+
+    The program starts by taking in an input file. The program will check to see if the file exists
+    If not, it will fail. The file must be in .csv format and formated in the same way the ROCKBLOCK logs are formated.
+    Then, It will split the payload up into packets and decompress each packet storing the data in a new .csv File
+
+
+    How To use:
+
+    Step 1: set the variable dir_path to the folder your log is stored in
+    Step 2: set the variable filename to the input file name
+    Step 3: set the variable write_file to the desired output file name
+    Step 4: Run the program
+*/
+
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdint.h>
@@ -17,8 +65,10 @@ typedef struct
     char temp[10];
 
 }Packet;
+
+//global variables
 char* data;
-char* dirpath = "C:\\Users\\jamie\\OneDrive\\Documents\\GitHub\\BouyDev\\Tests\\Transmission Tests\\Data\\";
+char* dirpath = "C:\\Users\\jamie\\OneDrive\\Documents\\GitHub\\BuoyDev_v1\\Tests\\Transmission Tests\\Data\\";
 char data_buffer[1024];
 uint8_t getByte(char* msg);
 void decode_Message(char* payload);
@@ -26,6 +76,8 @@ float get_float(unsigned char* bytestring);
 void float_to_hex(float f,unsigned char* hexstring);
 float IEEE754_Convert(uint32_t sign, uint32_t exp, uint32_t mant);
 Packet packet;
+
+//Main Program
 int main()
 {
         FILE* filepointer;
@@ -106,25 +158,22 @@ void decode_Message(char* payload)
        Epoch_time |= byte<<8*(3-i);
        payload+=2;
     }
-    //format time
-    time_t string_time = Epoch_time;
-    char buffer[26];
-    struct tm* tm_info;
-
-    time(&string_time);
-    tm_info = localtime(&string_time);
-
-    strftime(buffer,sizeof(buffer)/sizeof(buffer[0]),"%Y/%m/%d,%H:%M:%S",tm_info);
+    //Convert uint32_t Epoch time to UTC Date Time
+   time_t rawtime = Epoch_time;
+   struct tm *info;
+   info = localtime( &rawtime );
+   char buffer[500];
+   strftime(buffer,sizeof(buffer)/sizeof(buffer[0]),"%Y/%m/%d,%H:%M:%S",info);
     /* Coordinates*/
-    unsigned char byte[4];
+    unsigned char byte_arr[4] = {0};
     for (int k = 0; k < 2; ++k)
     {
         for (int j = 0; j < 4; ++j)
         {
-            byte[j] = getByte(payload);
+            byte_arr[j] = getByte(payload);
             payload+=2;
         }
-        packet.coord[k] = get_float(byte);
+        packet.coord[k] = get_float(byte_arr);
     }
     /* Dilation of Precision*/
 
@@ -206,6 +255,6 @@ float IEEE754_Convert(uint32_t sign, uint32_t exp, uint32_t mant)
        temp += ((float)bit)*(powf(2,-(i+1)));
     }
     float s = 1-2*((float) sign);
-    float e = powf(2,exp-127);
+    float e = powf(2,(int)(exp-127));
     return s*e*temp;
 }
