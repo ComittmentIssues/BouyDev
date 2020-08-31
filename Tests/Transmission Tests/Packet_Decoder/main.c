@@ -83,8 +83,8 @@ int main()
         FILE* filepointer;
         FILE* writefilepointer;
         //open file in read mode
-        char* filename = "Log_1.csv"; //file to read from
-        char* write_file = "Data.csv"; //file to write to
+        char* filename = "SB_03.csv"; //file to read from
+        char* write_file = "SB_03_Data_LOG_270719_080819.csv"; //file to write to
         int flen = strlen(filename);
         int dirlen = strlen(dirpath);
         int wflen = strlen(write_file);
@@ -100,7 +100,7 @@ int main()
             printf("Write file does not exist, creating file...\n");
             writefilepointer = fopen(writepath,"w");
             char headings[1000];
-            sprintf(headings,"Packet Type,Packet Number,Time,Latitude,Longitude,HDOP,VDOP,PDOP,Signal Type,Num Satelites,Temperature\n");
+            sprintf(headings,"Packet Type,Packet Number,Date,Time,Latitude,Longitude,HDOP,VDOP,PDOP,Signal Type,Num Satelites,Temperature\n");
             fputs((char*)headings,writefilepointer);
 
         }else
